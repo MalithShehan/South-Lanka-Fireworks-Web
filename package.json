@@ -12,6 +12,7 @@
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
+    "blueimp-md5": "^2.19.0",
     "firebase": "^11.6.0",
     "framer-motion": "^12.5.0",
     "react": "^19.0.0",

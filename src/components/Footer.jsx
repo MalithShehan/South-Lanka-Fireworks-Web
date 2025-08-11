@@ -4,7 +4,7 @@ function Footer() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center ">
                         <p className="text-sm text-xl">
-                            &copy; {new Date().getFullYear()} <span className="font-semibold items-center">Malith Shehan</span><br/> All rights reserved.
+                            &copy; {new Date().getFullYear()} <span className="font-semibold items-center">South Lanka Fireworks</span><br/> All rights reserved.
                         </p>
                     </div>
             </div>

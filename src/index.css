@@ -1,24 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: radial-gradient(
-        circle at 30% 20%, rgba(128, 0, 128, 0.15) 0%, transparent 40%
+        circle at 30% 20%, rgba(236, 72, 153, 0.15) 0%, transparent 40%
       ),
       radial-gradient(
-        circle at 70% 80%, rgba(0, 128, 255, 0.15) 0%, transparent 50%
+        circle at 70% 80%, rgba(56, 189, 248, 0.15) 0%, transparent 50%
       ),
-      linear-gradient(to right, #0e2a3e, #150535);
-    color: #ffffff;
+      linear-gradient(to bottom right, #ffffff, #fdf2f8, #eff6ff);
+    color: #1f2937; /* Neutral dark gray for professional text */
     margin: 0;
     padding: 0;
     min-height: 100vh;
     background-attachment: fixed;
     background-size: cover;
 }
+
 
 /* Typography */
 h2 {
@@ -30,7 +31,7 @@ p {
 }
 
 span {
-    @apply text-purple-600;
+    @apply text-yellow-400;
 }
 
 /* Utility Classes */
@@ -39,21 +40,20 @@ span {
     border-radius: 50%;
     pointer-events: none;
     z-index: 1;
-    background: radial-gradient(circle, rgba(178, 19, 202, 0.2), transparent 70%);
+    background: radial-gradient(circle, rgba(255, 105, 180, 0.25), transparent 70%);
 }
 
 .bg-primary-color {
-    @apply bg-purple-600;
+    @apply bg-gradient-to-r from-yellow-400 via-pink-500 to-red-500;
 }
 
 .timeline-line::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(to bottom, #7c3aed, #3b82f6); /* purple to blue */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, #ff0000, #ffff00, #00ffff); /* Red → Yellow → Cyan */
 }
-
