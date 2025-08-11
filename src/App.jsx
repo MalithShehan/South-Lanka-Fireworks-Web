@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Navbar from "./components/NavBar.jsx";
 import About from "./components/About.jsx";
 import Footer from "./components/Footer.jsx";
@@ -23,20 +22,4 @@ export default function App(){
             <Footer />
         </>
     )
-=======
-import Navbar from "./components/NavBar.jsx";
-import Hero from "./components/Hero.jsx";
-import Footer from "./components/Footer.jsx";
-import BackgroundSlider from "./components/BackgroundSlider.jsx";
-
-export default function App(){
-    return (
-        <>
-            <Navbar />
-            <BackgroundSlider />
-            <Hero />
-            <Footer />
-        </>
-    )
->>>>>>> 6076645b755100eade58f34e12966fe775c4ac6f
-}
+};

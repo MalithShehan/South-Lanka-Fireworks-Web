@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 const productVariants = {
@@ -11,6 +11,7 @@ const items = [
     id: 1,
     name: "Red Color Shell",
     image: "/assets/RedShell.jpg",
+    video: "/assets/RedShellVideo.mp4", // Add your video path here
     description:
       "A dazzling red aerial burst that lights up the night sky — perfect for grand finales and festive highlights.",
     sizes: [
@@ -23,6 +24,7 @@ const items = [
     id: 2,
     name: "Crackling Gold Shell",
     image: "/assets/CracklingShell.jpg",
+    video: "/assets/CracklingShell.mp4",
     description:
       "Ignites the sky with golden crackles and a shimmering rain effect — perfect for adding dramatic flair to any show.",
     sizes: [{ size: "Large", price: 2400 }],
@@ -32,6 +34,7 @@ const items = [
     id: 3,
     name: "Gold Shell",
     image: "/assets/GoldShell.jpg",
+    video: "/assets/GoldShell.mp4",
     description: "Classic golden bloom with a smooth, quiet finish.",
     sizes: [{ size: "Large", price: 2400 }],
     hoverColor: "hover:shadow-amber-400/70",
@@ -40,6 +43,7 @@ const items = [
     id: 4,
     name: "Purple Shell",
     image: "/assets/PurpleShell.jpg",
+    video: "/assets/PurpleShell.mp4",
     description: "Soft purple bursts with a graceful bloom effect.",
     sizes: [{ size: "Large", price: 2400 }],
     hoverColor: "hover:shadow-purple-400/70",
@@ -48,6 +52,7 @@ const items = [
     id: 5,
     name: "Green Shell",
     image: "/assets/GreenShell.jpg",
+    video: "/assets/GreenShell.mp4",
     description: "Bright green bursts with a vibrant, lively effect.",
     sizes: [
       { size: "Medium", price: 1500 },
@@ -59,6 +64,7 @@ const items = [
     id: 6,
     name: "Silver Shell",
     image: "/assets/SilverShell.jpg",
+    video: "/assets/CracklingShellVideo.mp4",
     description: "Elegant silver bursts with a sparkling finish.",
     sizes: [{ size: "Medium", price: 1500 }],
     hoverColor: "hover:shadow-gray-400/70",
@@ -67,6 +73,7 @@ const items = [
     id: 7,
     name: "Water Fall",
     image: "/assets/WaterFall.jpg",
+    video: "/assets/CracklingShellVideo.mp4",
     description: "A beautiful silver cascade combo ideal for weddings.",
     sizes: [{ size: "Free Size", price: 2500 }],
     hoverColor: "hover:shadow-sky-400/70",
@@ -75,6 +82,7 @@ const items = [
     id: 8,
     name: "Coconut Tree",
     image: "/assets/CoconutTree.jpg",
+    video: "/assets/CracklingShellVideo.mp4",
     description: "Festive palm bursts and brilliant red shells.",
     sizes: [{ size: "Free Size", price: 900 }],
     hoverColor: "hover:shadow-orange-400/70",
@@ -83,6 +91,7 @@ const items = [
     id: 9,
     name: "Festival Mega Pack",
     image: "/assets/FestivalPack.jpg",
+    video: "/assets/CracklingShellVideo.mp4",
     description: "A vibrant selection of shells and fountaining effects.",
     sizes: [{ size: "Free Size", price: 2400 }],
     hoverColor: "hover:shadow-pink-400/70",
@@ -136,7 +145,7 @@ const renderPackageCard = (pack) => {
   return (
     <motion.div
       key={pack.id}
-      className={`bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 shadow-lg transition duration-300 cursor-pointer ${pack.hoverColor}`}
+      className={`bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-black/10 shadow-lg transition duration-300 cursor-pointer ${pack.hoverColor}`}
       variants={productVariants}
       initial="hidden"
       whileInView="visible"
@@ -190,13 +199,16 @@ const Packages = () => {
     0
   );
 
+  // We'll store hovered id in state to know which item is hovered
+  const [hoveredId, setHoveredId] = useState(null);
+
   return (
-    <section className="text-white py-16 px-6 md:px-12 min-h-screen">
+    <section className="text-black py-16 px-6 md:px-12 min-h-screen">
       <div className="max-w-6xl mx-auto text-center mb-12">
-        <h2 className="text-4xl font-bold text-black mb-4">
+        <h2 className="text-4xl font-bold text-black   mb-4">
           Individual Fireworks & Firework Packages
         </h2>
-        <p className="text-gray-500 max-w-3xl mx-auto">
+        <p className="text-gray-400 max-w-3xl mx-auto">
           Explore our exclusive firework package deals and individual fireworks.
         </p>
       </div>
@@ -215,12 +227,27 @@ const Packages = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
+              onMouseEnter={() => setHoveredId(item.id)}
+              onMouseLeave={() => setHoveredId(null)}
             >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-48 object-cover rounded-md mb-4 border border-white/10"
-              />
+              <div className="relative w-full h-48 mb-4 border border-white/10 rounded-md overflow-hidden">
+                {hoveredId === item.id && item.video ? (
+                  <video
+                    src={item.video}
+                    autoPlay
+                    loop
+                    muted
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+              </div>
+
               <h3 className="text-xl font-semibold mb-2 text-gray-600">
                 {item.name}
               </h3>
