@@ -142,7 +142,7 @@ const renderPackageCard = (pack) => {
       whileInView="visible"
       viewport={{ once: true }}
     >
-      <h3 className="text-xl font-semibold mb-2 text-yellow-300">{pack.name}</h3>
+      <h3 className="text-xl font-semibold mb-2 text-black">{pack.name}</h3>
       <p className="text-gray-300 mb-4 text-sm">{pack.description}</p>
 
       <p className="text-indigo-400 font-semibold mb-2">Includes:</p>
