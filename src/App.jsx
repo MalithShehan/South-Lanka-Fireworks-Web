@@ -7,6 +7,7 @@ import HeroSection from "./components/HeroSection.jsx";
 import Services from "./components/Services.jsx";
 import Products from "./components/Products.jsx";
 import Portfolio from "./components/Portfolio.jsx";
+import Contact from "./components/Contact.jsx";
 
 export default function App(){
     return (
@@ -18,7 +19,8 @@ export default function App(){
             <Services />
             <Products />
             <Portfolio />
-            <FeedbackForm />
+            <Contact />
+            {/* <FeedbackForm /> */}
             <Footer />
         </>
     )
