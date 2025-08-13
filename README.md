@@ -1,12 +1,54 @@
-# React + Vite
+# 🎆 South Lanka Fireworks Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **modern, fully responsive web application** designed to showcase the vibrant fireworks products and custom packages offered by **South Lanka Fireworks**.  
+Built with **React, Vite, and Tailwind CSS**, the platform delivers a fast, interactive, and visually engaging experience.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- **Dynamic Product Showcase** – Display fireworks with images, descriptions, and video previews.
+- **Custom Package Builder** – Select items, sizes, quantities, and view calculated totals.
+- **Responsive Design** – Optimized for mobile, tablet, and desktop devices.
+- **Category-Based Organization** – Products grouped into well-structured categories.
+- **Smooth Animations** – Enhanced interactivity using Framer Motion for engaging visuals.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React + Vite
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Code Quality:** ESLint configuration included
+- **Deployment Ready For:** GitHub Pages, Netlify, Vercel
+
+---
+
+## 📦 Installation & Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/MalithShehan/South-Lanka-Fireworks-Web.git
+
+# Navigate into the project directory
+cd South-Lanka-Fireworks-Web
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build locally
+npm run preview
+🎯 Purpose
+This project serves as both a product marketing website and a customer engagement tool,
+highlighting the artistry of fireworks while enabling customers to create personalized purchase packages with ease.
+
+🌐 Live Demo
+Coming Soon – Will be deployed using GitHub Pages or Netlify.
+
