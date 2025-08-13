@@ -1,26 +1,24 @@
 import Navbar from "./components/NavBar.jsx";
 import About from "./components/About.jsx";
 import Footer from "./components/Footer.jsx";
-import BackgroundSlider from "./components/BackgroundSlider.jsx";
-import FeedbackForm from "./components/FeedBackPage.jsx";
-import HeroSection from "./components/HeroSection.jsx";
+import Home from "./components/Home.jsx";
 import Services from "./components/Services.jsx";
 import Products from "./components/Products.jsx";
 import Portfolio from "./components/Portfolio.jsx";
 import Contact from "./components/Contact.jsx";
+import Blog from "./components/Blog.jsx";
 
 export default function App(){
     return (
         <>
             <Navbar />
-            <BackgroundSlider />
-            {/* <HeroSection /> */}
+            <Home />
             <About />
             <Services />
             <Products />
             <Portfolio />
+            <Blog />
             <Contact />
-            {/* <FeedbackForm /> */}
             <Footer />
         </>
     )

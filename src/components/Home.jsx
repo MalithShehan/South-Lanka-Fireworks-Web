@@ -7,9 +7,9 @@ import {
   AiOutlineLinkedin,
 } from "react-icons/ai";
 
-const BackgroundSlider = () => {
+const Home = () => {
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div id="home" className="relative h-screen w-full overflow-hidden">
       {/* 🔥 Background Video */}
       <video
         autoPlay
@@ -81,5 +81,5 @@ const BackgroundSlider = () => {
   );
 };
 
-export default BackgroundSlider;
+export default Home;
 

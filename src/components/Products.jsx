@@ -244,7 +244,7 @@ const Packages = () => {
   const [hoveredId, setHoveredId] = useState(null);
 
   return (
-    <section className="text-black py-16 px-6 md:px-12 min-h-screen">
+    <section id="products" className="text-black py-16 px-6 md:px-12 min-h-screen">
       <div className="max-w-6xl mx-auto text-center mb-12">
         <h2 className="text-4xl font-bold text-black   mb-4">
           Individual Fireworks & Firework Packages
@@ -259,11 +259,11 @@ const Packages = () => {
         <h3 className="text-2xl font-semibold text-pink-400 mb-6 text-center">
           🎆 Individual Fireworks
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {items.map((item) => (
             <motion.div
               key={item.id}
-              className={`bg-gradient-to-r from-yellow-100/50 via-red-200/50 to-green-50-300/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 shadow-lg transition duration-300 cursor-pointer ${item.hoverColor}`}
+              className={`bg-white/50 backdrop-blur-sm rounded-xl p-5 border border-black/10 shadow-lg transition duration-300 cursor-pointer ${item.hoverColor}`}
               variants={productVariants}
               initial="hidden"
               whileInView="visible"
@@ -311,7 +311,7 @@ const Packages = () => {
         <h3 className="text-2xl font-semibold text-pink-400 mb-6 text-center">
           🎁 Firework Packages
         </h3> 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 ">
           {packages.map((pack) => renderPackageCard(pack))}
         </div>
 

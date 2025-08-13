@@ -50,7 +50,7 @@ const Portfolio = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+      <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
         {portfolioItems.map((item, index) => (
           <motion.div
             key={item.id}
@@ -58,11 +58,11 @@ const Portfolio = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.2 }}
-            className="rounded-xl overflow-hidden shadow-lg hover:shadow-yellow-500/50 transition-shadow"
+            className="bg-white/50 rounded-xl overflow-hidden shadow-lg hover:shadow-red-500/50 transition-shadow"
             onMouseEnter={() => setHoveredId(item.id)}
             onMouseLeave={() => setHoveredId(null)}
           >
-            <div className="h-64 w-full">
+            <div className="h-64 w-full ">
               {hoveredId === item.id ? (
                 <video
                   src={item.video}

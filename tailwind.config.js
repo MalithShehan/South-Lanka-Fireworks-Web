@@ -13,6 +13,14 @@ module.exports = {
         caveat: ['Caveat', 'cursive'],
         Kaushan: ['Kaushan Script', 'cursive'],
       },
+      screens: {
+        // Change default breakpoints or add custom ones
+        sm: '480px',   // default 640px
+        md: '768px',   // default 768px
+        lg: '1024px',  // default 1024px
+        xl: '1280px',  // default 1280px
+        '2xl': '1536px' // default 1536px
+      },  
     },
   },
   plugins: [],

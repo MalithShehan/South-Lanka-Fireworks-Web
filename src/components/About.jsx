@@ -1,10 +1,15 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { AiFillFacebook, AiFillInstagram, AiFillTwitterCircle, AiFillLinkedin } from "react-icons/ai";
+import {
+  AiFillFacebook,
+  AiFillInstagram,
+  AiFillLinkedin,
+} from "react-icons/ai";
+import { SiTiktok } from "react-icons/si";  // <-- Import TikTok icon
 
 const About = () => {
   return (
-    <section className="min-h-[75vh] text-white px-4 py-8 flex justify-center items-center">
+    <section id="about" className="min-h-[75vh] text-white px-4 py-8 flex justify-center items-center">
       <div className="max-w-4xl mx-auto text-center">
         {/* Section Title */}
         <motion.h2
@@ -66,13 +71,13 @@ const About = () => {
             <AiFillInstagram />
           </a>
           <a
-            href="https://twitter.com/SouthLankaFW"
+            href="https://www.tiktok.com/@SouthLankaFireworks"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Twitter"
-            className="hover:text-blue-400 transition-colors duration-300"
+            aria-label="TikTok"
+            className="hover:text-black transition-colors duration-300"
           >
-            <AiFillTwitterCircle />
+            <SiTiktok />
           </a>
           <a
             href="https://www.linkedin.com/company/southlankafireworks"

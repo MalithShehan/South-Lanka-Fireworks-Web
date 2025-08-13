@@ -10,7 +10,7 @@ const services = [
     description:
       "Tailored fireworks shows designed to fit any event, theme, or budget with spectacular effects.",
     link: "/services/custom-displays",
-    bgColor: "bg-yellow-200",
+    bgColor: "bg-yellow-300/50",
     hoverColor: "hover:shadow-yellow-500/70",
   },
   {
@@ -20,7 +20,7 @@ const services = [
     description:
       "Enhance weddings, festivals, and corporate events with synchronized special effects.",
     link: "/services/special-effects",
-    bgColor: "bg-pink-200",
+    bgColor: "bg-pink-300/50",
     hoverColor: "hover:shadow-pink-500/70",
   },
   {
@@ -30,7 +30,7 @@ const services = [
     description:
       "Professional advice and licensing support ensuring your event meets all safety standards.",
     link: "/services/safety-consulting",
-    bgColor: "bg-blue-200",
+    bgColor: "bg-blue-300/50",
     hoverColor: "hover:shadow-blue-500/70",
   },
   {
@@ -40,7 +40,7 @@ const services = [
     description:
       "Comprehensive logistics service delivering and setting up fireworks anywhere in Sri Lanka.",
     link: "/services/delivery-setup",
-    bgColor: "bg-indigo-200",
+    bgColor: "bg-indigo-300/50",
     hoverColor: "hover:shadow-indigo-500/70",
   },
 ];
@@ -65,7 +65,7 @@ const Services = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 max-w-6xl mx-auto">
         {services.map((service, index) => (
           <motion.div
             key={service.id}
