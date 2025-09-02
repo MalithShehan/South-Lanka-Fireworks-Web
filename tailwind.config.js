@@ -12,6 +12,7 @@ module.exports = {
       fontFamily: {
         caveat: ['Caveat', 'cursive'],
         Kaushan: ['Kaushan Script', 'cursive'],
+        Eater: ['Eater', 'cursive'],
       },
       screens: {
         // Change default breakpoints or add custom ones

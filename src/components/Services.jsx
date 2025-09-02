@@ -5,42 +5,42 @@ import { FaFire, FaStar, FaRocket, FaGlobe } from "react-icons/fa";
 const services = [
   {
     id: 1,
-    icon: <FaFire className="text-yellow-400" size={40} />,
+    icon: <FaFire className="text-yellow-100" size={40} />,
     title: "Custom Fireworks Displays",
     description:
       "Tailored fireworks shows designed to fit any event, theme, or budget with spectacular effects.",
     link: "/services/custom-displays",
-    bgColor: "bg-yellow-300/50",
+    bgColor: "bg-yellow-300",
     hoverColor: "hover:shadow-yellow-500/70",
   },
   {
     id: 2,
-    icon: <FaStar className="text-pink-400" size={40} />,
+    icon: <FaStar className="text-pink-100" size={40} />,
     title: "Event Special Effects",
     description:
       "Enhance weddings, festivals, and corporate events with synchronized special effects.",
     link: "/services/special-effects",
-    bgColor: "bg-pink-300/50",
+    bgColor: "bg-pink-300",
     hoverColor: "hover:shadow-pink-500/70",
   },
   {
     id: 3,
-    icon: <FaRocket className="text-blue-400" size={40} />,
+    icon: <FaRocket className="text-blue-100" size={40} />,
     title: "Safety Consulting & Licensing",
     description:
       "Professional advice and licensing support ensuring your event meets all safety standards.",
     link: "/services/safety-consulting",
-    bgColor: "bg-blue-300/50",
+    bgColor: "bg-blue-300",
     hoverColor: "hover:shadow-blue-500/70",
   },
   {
     id: 4,
-    icon: <FaGlobe className="text-indigo-400" size={40} />,
+    icon: <FaGlobe className="text-indigo-100" size={40} />,
     title: "Nationwide Delivery & Setup",
     description:
       "Comprehensive logistics service delivering and setting up fireworks anywhere in Sri Lanka.",
     link: "/services/delivery-setup",
-    bgColor: "bg-indigo-300/50",
+    bgColor: "bg-indigo-300",
     hoverColor: "hover:shadow-indigo-500/70",
   },
 ];
@@ -81,9 +81,9 @@ const Services = () => {
             <div className="mb-4">{service.icon}</div>
             <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
             <p className="text-sm opacity-90">{service.description}</p>
-            <span className="mt-4 inline-block underline underline-offset-2">
+            {/* <span className="mt-4 text-white inline-block underline underline-offset-2">
               Learn More &rarr;
-            </span>
+            </span> */}
           </motion.div>
         ))}
       </div>
