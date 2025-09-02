@@ -1,6 +1,8 @@
 import { useState } from "react";
 import emailjs from "emailjs-com";
 import { MapPin, Phone, Mail } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -20,12 +22,7 @@ const Contact = () => {
     e.preventDefault();
 
     emailjs
-      .send(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
-        formData,
-        "YOUR_USER_ID"
-      )
+      .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData, "YOUR_USER_ID")
       .then(
         () => {
           setSubmitted(true);
@@ -38,6 +35,33 @@ const Contact = () => {
       );
   };
 
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", "f414ed45-f1d0-4522-a132-2604d0dd27ec");
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: json,
+    }).then((res) => res.json());
+
+    if (res.success) {
+      Swal.fire({
+        title: "Sent!",
+        text: "Your message has been sent successfully!",
+        icon: "success",
+      });
+    }
+  };
+
   return (
     <section id="contact" className="py-20 px-6">
       <div className="max-w-6xl mx-auto text-center mb-12">
@@ -45,14 +69,17 @@ const Contact = () => {
           📩 Contact Us
         </h2>
         <p className="text-lg text-gray-600">
-          We'd love to hear from you — whether it’s for orders, inquiries, or custom fireworks packages.
+          We'd love to hear from you — whether it’s for orders, inquiries, or
+          custom fireworks packages.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
         {/* Contact Info */}
         <div className="bg-white/50 p-8 rounded-2xl shadow-lg flex flex-col justify-center">
-          <h3 className="text-2xl font-semibold mb-6 text-gray-600">Our Location & Details</h3>
+          <h3 className="text-2xl font-semibold mb-6 text-gray-600">
+            Our Location & Details
+          </h3>
           <div className="space-y-4 text-gray-700">
             <div className="flex items-center gap-3">
               <MapPin className="text-red-500" />
@@ -63,24 +90,60 @@ const Contact = () => {
               <p>+94 77 713 5516</p>
             </div>
             <div className="flex items-center gap-3">
-              <Mail className="text-orange-500" />
-              <p>southlankafireworks@gmail.com</p>
+              <Mail className="text-orange-500 w-5 h-5 flex-shrink-0" />
+              <p className="break-all sm:break-normal">
+                southlankafireworks@gmail.com
+              </p>
+            </div>
+            {/* WhatsApp Link */}
+            <div className="flex items-center gap-3">
+              <a
+                href="https://wa.me/+94777135516?text=Hello%20South%20Lanka%20Fireworks!%20I%20would%20like%20to%20know%20more%20about%20your%20products."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-green-600 hover:text-green-700 transition-colors"
+              >
+                <FaWhatsapp size={26} className="text-green-500" />
+                <span className="break-all sm:break-normal ">
+                  +94 77 713 5516
+                </span>
+              </a>
+            </div>
+            <div className="flex items-center gap-3">
+              <p className="text-gray-500">Follow us on:</p>
+              <a
+                href="https://www.facebook.com/share/1CEsjdTcV4/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:text-blue-600 transition-colors"
+              >
+                Facebook
+              </a>
+              <span> | </span>
+              <a
+                href="https://www.tiktok.com/@southlankafireworks?_t=ZS-8ysCsrhOBOx&_r=1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-pink-500 hover:text-pink-600 transition-colors"
+              >
+                TikTok
+              </a>
             </div>
           </div>
         </div>
 
         {/* Contact Form */}
         <div className="bg-white/50 p-8 rounded-2xl shadow-lg">
-          <h3 className="text-2xl font-semibold mb-6 text-gray-700">Send Us a Message</h3>
+          <h3 className="text-2xl font-semibold mb-6 text-gray-700">
+            Send Us a Message
+          </h3>
           {submitted && (
             <p className="mb-4 text-green-600 font-semibold">
               ✅ Thank you! We will get back to you soon.
             </p>
           )}
-          {error && (
-            <p className="mb-4 text-red-600 font-semibold">{error}</p>
-          )}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          {error && <p className="mb-4 text-red-600 font-semibold">{error}</p>}
+          <form onSubmit={onSubmit} className="space-y-4">
             <input
               type="text"
               name="name"
