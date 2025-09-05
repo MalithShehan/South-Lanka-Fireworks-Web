@@ -462,7 +462,7 @@ const Products = () => {
 
       {/* Standard Packages */}
       <div className="max-w-7xl mx-auto mb-20 px-4">
-        <h3 className="text-3xl md:text-4xl font-bold text-center mb-10 bg-gradient-to-r from-pink-500 to-yellow-500 bg-clip-text text-transparent">
+        <h3 className="text-2xl md:text-3xl font-semibold text-pink-400 mb-6 text-center">
           🎆 Firework Packages
         </h3>
 
