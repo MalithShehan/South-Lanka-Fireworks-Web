@@ -1,10 +1,44 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   return (
     <div id="home" className="relative min-h-screen w-full overflow-hidden">
+      <Helmet>
+        <title>South Lanka Fireworks - Home</title>
+        <meta charSet="UTF-8" />
+        <meta
+          name="description"
+          content="South Lanka Fireworks delivers unforgettable fireworks shows for weddings, festivals, and corporate events across Sri Lanka."
+        />
+        <meta
+          name="keywords"
+          content="Fireworks, Pyrotechnics, Firework Shows, Event Fireworks, Wedding Fireworks, Festival Fireworks, Corporate Event Fireworks, Sri Lanka Fireworks"
+        />
+        <meta name="author" content="South Lanka Fireworks" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#000000" />
+
+        {/* Open Graph for social media */}
+        <meta property="og:title" content="South Lanka Fireworks - Home" />
+        <meta
+          property="og:description"
+          content="South Lanka Fireworks delivers unforgettable fireworks shows for weddings, festivals, and corporate events across Sri Lanka."
+        />
+        <meta property="og:image" content="/assets/SouthLankaFireworks.png" />
+        <meta property="og:url" content="https://slfireworks.com" />
+        <meta property="og:type" content="website" />
+
+        {/* Icons */}
+        <link rel="icon" href="/assets/SouthLankaFireworks.png" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/assets/SouthLankaFireworks.png"
+        />
+      </Helmet>
       {/* 🔥 Background Video */}
       <video
         autoPlay
