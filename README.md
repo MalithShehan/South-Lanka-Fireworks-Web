@@ -50,5 +50,5 @@ This project serves as both a product marketing website and a customer engagemen
 highlighting the artistry of fireworks while enabling customers to create personalized purchase packages with ease.
 
 🌐 Live Demo
-Coming Soon – Will be deployed using GitHub Pages or Netlify.
+https://slfireworks.com/
 
