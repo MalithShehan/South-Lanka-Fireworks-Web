@@ -5,23 +5,28 @@ Built with **React, Vite, and Tailwind CSS**, the platform delivers a fast, inte
 
 ---
 
+## 🌐 Live Demo  
+👉 [Visit Website](https://slfireworks.com/)
+
+---
+
 ## 🚀 Features
 
-- **Dynamic Product Showcase** – Display fireworks with images, descriptions, and video previews.
-- **Custom Package Builder** – Select items, sizes, quantities, and view calculated totals.
-- **Responsive Design** – Optimized for mobile, tablet, and desktop devices.
-- **Category-Based Organization** – Products grouped into well-structured categories.
-- **Smooth Animations** – Enhanced interactivity using Framer Motion for engaging visuals.
+- 🎇 **Dynamic Product Showcase** – Display fireworks with images, descriptions, and video previews.  
+- 🎁 **Custom Package Builder** – Select items, sizes, and quantities with automatic total calculation.  
+- 📱 **Responsive Design** – Optimized for mobile, tablet, and desktop devices.  
+- 🗂️ **Category-Based Organization** – Products grouped into clear, structured categories.  
+- ✨ **Smooth Animations** – Enhanced interactivity using Framer Motion.  
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** React + Vite
-- **Styling:** Tailwind CSS
-- **Animations:** Framer Motion
-- **Code Quality:** ESLint configuration included
-- **Deployment Ready For:** GitHub Pages, Netlify, Vercel
+- **Frontend:** React + Vite  
+- **Styling:** Tailwind CSS  
+- **Animations:** Framer Motion  
+- **Code Quality:** ESLint  
+- **Deployment:** GitHub Pages, Netlify, Vercel  
 
 ---
 
@@ -45,10 +50,3 @@ npm run build
 
 # Preview production build locally
 npm run preview
-🎯 Purpose
-This project serves as both a product marketing website and a customer engagement tool,
-highlighting the artistry of fireworks while enabling customers to create personalized purchase packages with ease.
-
-🌐 Live Demo
-Coming Soon – Will be deployed using GitHub Pages or Netlify.
-
