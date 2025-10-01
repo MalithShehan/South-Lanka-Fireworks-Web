@@ -5,6 +5,7 @@ import jsPDF from "jspdf";
 import { ShoppingCart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const productVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -62,6 +63,54 @@ const packages = [
     bgColor: "bg-red-200/50",
     hoverColor: "hover:shadow-pink-400/50",
   },
+  {
+    id: 104,
+    name: "🎆 Festival Blast Package",
+    description: "The ultimate package for large festivals and public displays.",
+    items: [
+      { name: "Shells (4 inch)", price: 2400, quantity: 70 },
+      { name: "Silver Rocket Battery", price: 1800, quantity: 8 },
+      { name: "Star Shell Battery", price: 5000, quantity: 8 },
+      { name: "Coconut Tree", price: 900, quantity: 6 },
+      { name: "Name & Logo", price: 14000, quantity: 1 },
+      { name: "Water Fall (100feet)", price: 15000, quantity: 1 },
+    ],
+    discount: 6800,
+    bgColor: "bg-green-200/50",
+    hoverColor: "hover:shadow-emerald-400/50",
+  },
+  {
+    id: 105,
+    name: "🎆 Grand Celebration Package",
+    description: "A premium package for grand events, weddings, and large-scale celebrations. Includes a spectacular variety of fireworks for an unforgettable show.",
+    items: [
+      { name: "Shells (4 inch)", price: 2400, quantity: 100 },
+      { name: "Silver Rocket Battery", price: 1800, quantity: 10 },
+      { name: "Star Shell Battery", price: 5000, quantity: 12 },
+      { name: "Coconut Tree", price: 900, quantity: 8 },
+      { name: "Name & Logo", price: 14000, quantity: 1 },
+      { name: "Water Fall (100feet)", price: 15000, quantity: 1 },
+    ],
+    discount: 4200,
+    bgColor: "bg-pink-200/50",
+    hoverColor: "hover:shadow-rose-400/50",
+  },
+  {
+    id: 106,
+    name: "🎆 Ultimate Spectacle Package",
+    description: "The ultimate package for the most spectacular events and grand celebrations. This package offers an extensive array of fireworks to create a breathtaking display that will leave a lasting impression on your guests.",
+    items: [
+      { name: "Shells (4 inch)", price: 2400, quantity: 140 },
+      { name: "Silver Rocket Battery", price: 1800, quantity: 20 },
+      { name: "Star Shell Battery", price: 5000, quantity: 19 },
+      { name: "Coconut Tree", price: 900, quantity: 15 },
+      { name: "Name & Logo", price: 14000, quantity: 1 },
+      { name: "Water Fall (100feet)", price: 15000, quantity: 1 },
+    ],
+    discount: 9500,
+    bgColor: "bg-purple-200/50",
+    hoverColor: "hover:shadow-violet-400/50",
+  }
 ];
 
 const Products = () => {
@@ -143,7 +192,7 @@ const Products = () => {
     const pageWidth = doc.internal.pageSize.getWidth();
 
     // Add Logo
-    const logo = "/public/assets/SouthLankaFireworks.png";
+    const logo = "/assets/SouthLankaFireworks.png";
     const img = new Image();
     img.src = logo;
 
@@ -231,6 +280,44 @@ const Products = () => {
       className="text-black py-12 px-4 md:px-12 min-h-screen bg-gradient-to-b"
       id="products"
     >
+      <Helmet>
+        <title>South Lanka Fireworks - Products & Packages</title>
+        <meta
+          name="description"
+          content="Explore South Lanka Fireworks' individual fireworks and exclusive packages for weddings, festivals, and corporate events in Sri Lanka."
+        />
+        <meta
+          name="keywords"
+          content="Fireworks, Firework Packages, Individual Fireworks, Wedding Fireworks, Festival Fireworks, Corporate Fireworks, Sri Lanka"
+        />
+        <meta name="author" content="South Lanka Fireworks" />
+
+        {/* Open Graph */}
+        <meta
+          property="og:title"
+          content="South Lanka Fireworks - Products & Packages"
+        />
+        <meta
+          property="og:description"
+          content="Explore South Lanka Fireworks' individual fireworks and exclusive packages for weddings, festivals, and corporate events in Sri Lanka."
+        />
+        <meta property="og:image" content="/assets/SouthLankaFireworks.png" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://slfireworks.com/products" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="South Lanka Fireworks - Products & Packages"
+        />
+        <meta
+          name="twitter:description"
+          content="Explore South Lanka Fireworks' individual fireworks and exclusive packages for weddings, festivals, and corporate events in Sri Lanka."
+        />
+        <meta name="twitter:image" content="/assets/SouthLankaFireworks.png" />
+      </Helmet>
+
       {/* Floating Cart */}
       {cartCount > 0 && (
         <div

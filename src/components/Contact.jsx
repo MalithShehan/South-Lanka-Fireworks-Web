@@ -3,6 +3,7 @@ import emailjs from "emailjs-com";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -64,6 +65,28 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-20 px-6">
+      <Helmet>
+        <title>South Lanka Fireworks</title>
+        <meta
+          name="description"
+          content="Get in touch with South Lanka Fireworks. Contact us for wedding fireworks, festival shows, corporate events, or custom fireworks packages across Sri Lanka."
+        />
+        <meta
+          name="keywords"
+          content="Contact South Lanka Fireworks, Wedding Fireworks Sri Lanka, Fireworks for Events, Festival Fireworks Sri Lanka, Corporate Fireworks Sri Lanka"
+        />
+        <meta name="author" content="South Lanka Fireworks" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Contact South Lanka Fireworks" />
+        <meta
+          property="og:description"
+          content="Reach out to South Lanka Fireworks for unforgettable firework shows in Sri Lanka. Book for weddings, corporate events, and festivals."
+        />
+        <meta property="og:image" content="/assets/SouthLankaFireworks.png" />
+        <meta property="og:url" content="https://slfireworks.com/contact" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <div className="max-w-6xl mx-auto text-center mb-12">
         <h2 className="text-4xl font-extrabold text-black mb-4">
           📩 Contact Us

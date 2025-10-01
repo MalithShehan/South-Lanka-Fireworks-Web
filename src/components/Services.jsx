@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaFire, FaStar, FaRocket, FaGlobe } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const services = [
   {
@@ -57,11 +58,22 @@ const cardVariants = {
 const Services = () => {
   return (
     <section id="services" className="text-black py-16 px-6 md:px-12">
+      <Helmet>
+        <title>South Lanka Fireworks - Services</title>
+        <meta
+          name="description"
+          content="Discover our fireworks services: custom displays, special effects, safety consulting, and nationwide delivery & setup."
+        />
+        <meta
+          name="keywords"
+          content="fireworks, pyrotechnics, Sri Lanka, events, displays"
+        />
+      </Helmet>
       <div className="max-w-6xl mx-auto text-center mb-12">
         <h2 className="text-4xl font-bold text-black mb-4">Our Services</h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Discover the wide range of fireworks and pyrotechnic services we
-          offer to light up your special occasions.
+          Discover the wide range of fireworks and pyrotechnic services we offer
+          to light up your special occasions.
         </p>
       </div>
 
@@ -76,14 +88,11 @@ const Services = () => {
             variants={cardVariants}
             className={`${service.bgColor} rounded-xl p-6 
               shadow-lg transition duration-300 cursor-pointer ${service.hoverColor}`}
-            onClick={() => (window.location.href = service.link)}
           >
             <div className="mb-4">{service.icon}</div>
             <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
             <p className="text-sm opacity-90">{service.description}</p>
-            {/* <span className="mt-4 text-white inline-block underline underline-offset-2">
-              Learn More &rarr;
-            </span> */}
+
           </motion.div>
         ))}
       </div>

@@ -5,7 +5,8 @@ import {
   AiFillInstagram,
   AiFillLinkedin,
 } from "react-icons/ai";
-import { SiTiktok } from "react-icons/si"; // <-- Import TikTok icon
+import { SiTiktok } from "react-icons/si"; 
+import { Helmet } from "react-helmet-async";
 
 const About = () => {
   return (
@@ -13,6 +14,29 @@ const About = () => {
       id="about"
       className="min-h-[75vh] text-white px-4 py-8 flex justify-center items-center"
     >
+      <Helmet>
+        <title>About Us - South Lanka Fireworks</title>
+        <meta
+          name="description"
+          content="Learn about South Lanka Fireworks, Sri Lanka’s trusted fireworks experts with over a decade of experience creating unforgettable wedding, festival, and corporate firework displays."
+        />
+        <meta
+          name="keywords"
+          content="About South Lanka Fireworks, Sri Lanka Fireworks Company, Wedding Fireworks Sri Lanka, Festival Fireworks Sri Lanka, Corporate Fireworks Events"
+        />
+        <meta name="author" content="South Lanka Fireworks" />
+
+        {/* Open Graph (for social media sharing) */}
+        <meta property="og:title" content="About South Lanka Fireworks" />
+        <meta
+          property="og:description"
+          content="Discover the story of South Lanka Fireworks and how we bring magic to weddings, festivals, and corporate events in Sri Lanka."
+        />
+        <meta property="og:image" content="/assets/SouthLankaFireworks.png" />
+        <meta property="og:url" content="https://slfireworks.com/about" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       <div className="max-w-4xl mx-auto text-center">
         {/* Section Title */}
         <motion.h2
