@@ -86,7 +86,7 @@ const About = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            className="hover:text-blue-500 transition-colors duration-300"
+            className="hover:text-blue-500 duration-300 hover:scale-110 transition-transform"
           >
             <AiFillFacebook />
           </a>
@@ -95,7 +95,7 @@ const About = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="TikTok"
-            className="hover:text-black transition-colors duration-300"
+            className="hover:text-black duration-300 hover:scale-110 transition-transform"
           >
             <SiTiktok />
           </a>
@@ -104,7 +104,7 @@ const About = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            className="hover:text-pink-500 transition-colors duration-300"
+            className="hover:text-pink-500 duration-300 hover:scale-110 transition-transform"
           >
             <AiFillInstagram />
           </a>

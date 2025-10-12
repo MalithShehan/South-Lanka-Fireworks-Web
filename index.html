@@ -2,36 +2,37 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/assets/SouthLankaFireworks.png"
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>South Lanka Fireworks</title>
-    <title>South Lanka Fireworks | Best Fireworks in Sri Lanka</title>
     <meta
       name="description"
-      content="South Lanka Fireworks offers spectacular fireworks shows for weddings, parties, and corporate events in Sri Lanka."
+      content="South Lanka Fireworks — Sri Lanka’s premier fireworks company offering breathtaking displays for weddings, festivals, and corporate events."
     />
     <meta
       name="keywords"
-      content="fireworks Sri Lanka, wedding fireworks, South Lanka Fireworks, pyrotechnics, firework shows"
+      content="South Lanka Fireworks, fireworks Sri Lanka, wedding fireworks, pyrotechnics, event fireworks, Galle fireworks, festival fireworks"
     />
     <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://slfireworks.com/" />
 
-    <!-- Open Graph -->
+    <title>South Lanka Fireworks | Spectacular Fireworks in Sri Lanka</title>
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="public/assets/MainLogo.jpg"
+      sizes="512x512"
+    />
+
+    <!-- Open Graph / Facebook -->
     <meta
       property="og:title"
-      content="South Lanka Fireworks | Best Fireworks in Sri Lanka"
+      content="South Lanka Fireworks | Spectacular Fireworks in Sri Lanka"
     />
     <meta
       property="og:description"
-      content="Unforgettable fireworks for weddings, festivals, and events across Sri Lanka."
+      content="Create unforgettable moments with South Lanka Fireworks — breathtaking fireworks for weddings, parties, and events across Sri Lanka."
     />
-    <meta property="og:image" content="/assets/SouthLankaFireworks.png" />
+    <meta property="og:image" content="https://slfireworks.com/public/assets/MainLogo.jpg" />
     <meta property="og:url" content="https://slfireworks.com/" />
     <meta property="og:type" content="website" />
 
@@ -39,53 +40,27 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="South Lanka Fireworks | Best Fireworks in Sri Lanka"
+      content="South Lanka Fireworks | Spectacular Fireworks in Sri Lanka"
     />
     <meta
       name="twitter:description"
       content="Unforgettable fireworks for weddings, festivals, and events across Sri Lanka."
     />
-    <meta name="twitter:image" content="/assets/SouthLankaFireworks.png" />
+    <meta name="twitter:image" content="https://slfireworks.com/public/assets/MainLogo.jpg" />
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Add this inside <head> -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@400;500;700&family=Roboto+Mono:wght@300;700&display=swap"
       rel="stylesheet"
     />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&family=Rubik:wght@800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Eater&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Kaushan+Script&display=swap"
-      rel="stylesheet"
-    />
-
-    <title>South Lanka Fireworks</title>
+    <!-- Firebase -->
     <script type="module">
-      // Import the functions you need from the SDKs you need
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
       import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
 
-      // Your web app's Firebase configuration
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
       const firebaseConfig = {
         apiKey: "AIzaSyDok_805_R54D6TvfQnrhk5XLaEbJ41hec",
         authDomain: "my-portfolio-64146.firebaseapp.com",
@@ -96,21 +71,20 @@
         measurementId: "G-QMR2FHNGJE",
       };
 
-      // Initialize Firebase
       const app = initializeApp(firebaseConfig);
       const analytics = getAnalytics(app);
     </script>
-  </head>
-  <body>
-    <div id="root"></div>
+
+    <!-- Structured Data (JSON-LD for Local Business) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "South Lanka Fireworks",
-        "image": "https://slfireworks.com/assets/SouthLankaFireworks.png",
+        "image": "https://slfireworks.com/public/assets/MainLogo.jpg",
         "url": "https://slfireworks.com",
         "telephone": "+94-77-7135516",
+        "priceRange": "$$",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Dadalle Cross Road",
@@ -126,8 +100,19 @@
         ]
       }
     </script>
+  </head>
 
+  <body>
+    <noscript
+      >You need to enable JavaScript to view the full experience of South Lanka
+      Fireworks.</noscript
+    >
+    <div id="root"></div>
+
+    <!-- jQuery (if used anywhere in the project) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- React App Entry -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
