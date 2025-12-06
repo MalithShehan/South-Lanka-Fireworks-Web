@@ -3,7 +3,7 @@ const items = [
     id: 1,
     name: "Red Color Shell",
     image: "/assets/RedShell.jpg",
-    video: "/assets/RedShellVideo.mp4", // Add your video path here
+    video: "/assets/RedShellVideo.mp4",
     description:
       "A dazzling red aerial burst that lights up the night sky — perfect for grand finales and festive highlights.",
     sizes: [
@@ -14,34 +14,20 @@ const items = [
   },
   {
     id: 2,
-    name: "Crackling Gold Shell",
-    image: "/assets/CracklingShell.jpg",
-    video: "/assets/CracklingShell.mp4",
+    name: "Yellow Color Shell",
+    image: "/assets/YellowShell.jpg",
+    video: "/assets/YellowShell.mp4",
     description:
-      "Ignites the sky with golden crackles and a shimmering rain effect — perfect for adding dramatic flair to any show.",
-    sizes: [{ size: "4 inch", price: 2400 }],
+      "A bright yellow aerial shell that bursts into a stunning display — perfect for celebrations and festive occasions.",
+    sizes: [
+      { size: "3 inch", price: 1500 },
+      { size: "4 inch", price: 2400 },
+    ],
     hoverColor: "hover:shadow-yellow-400/70",
   },
+  
   {
     id: 3,
-    name: "Gold Shell",
-    image: "/assets/GoldShell.jpg",
-    video: "/assets/GoldShell.mp4",
-    description: "Classic golden bloom with a smooth, quiet finish.",
-    sizes: [{ size: "4 inch", price: 2400 }],
-    hoverColor: "hover:shadow-amber-400/70",
-  },
-  {
-    id: 4,
-    name: "Purple Shell",
-    image: "/assets/PurpleShell.jpg",
-    video: "/assets/PurpleShell.mp4",
-    description: "Soft purple bursts with a graceful bloom effect.",
-    sizes: [{ size: "4 inch", price: 2400 }],
-    hoverColor: "hover:shadow-purple-400/70",
-  },
-  {
-    id: 5,
     name: "Green Shell",
     image: "/assets/GreenShell.jpg",
     video: "/assets/GreenShell.mp4",
@@ -53,7 +39,35 @@ const items = [
     hoverColor: "hover:shadow-green-400/70",
   },
   {
+    id: 4,
+    name: "Gold Shell",
+    image: "/assets/GoldShell.jpg",
+    video: "/assets/GoldShell.mp4",
+    description: "Classic golden bloom with a smooth, quiet finish.",
+    sizes: [{ size: "4 inch", price: 2400 }],
+    hoverColor: "hover:shadow-amber-400/70",
+  },
+  {
+    id: 5,
+    name: "Purple Shell",
+    image: "/assets/PurpleShell.jpg",
+    video: "/assets/PurpleShell.mp4",
+    description: "Soft purple bursts with a graceful bloom effect.",
+    sizes: [{ size: "4 inch", price: 2400 }],
+    hoverColor: "hover:shadow-purple-400/70",
+  },
+  {
     id: 6,
+    name: "Crackling Gold Shell",
+    image: "/assets/CracklingShell.jpg",
+    video: "/assets/CracklingShell.mp4",
+    description:
+      "Ignites the sky with golden crackles and a shimmering rain effect — perfect for adding dramatic flair to any show.",
+    sizes: [{ size: "4 inch", price: 2400 }],
+    hoverColor: "hover:shadow-yellow-400/70",
+  },
+  {
+    id: 7,
     name: "White Shell",
     image: "/assets/WhiteShell.jpg",
     video: "/assets/WhiteShell.mp4",
@@ -62,7 +76,7 @@ const items = [
     hoverColor: "hover:shadow-gray-500/70",
   },
   {
-    id: 7,
+    id: 8,
     name: "Blue Shell",
     image: "/assets/BlueShell.jpg",
     video: "/assets/BlueShell.mp4",
@@ -71,7 +85,7 @@ const items = [
     hoverColor: "hover:shadow-blue-400/70",
   },
   {
-    id: 8,
+    id: 9,
     name: "Silver Shell",
     image: "/assets/SilverShell.jpg",
     video: "/assets/SilverShell.mp4",
@@ -80,7 +94,7 @@ const items = [
     hoverColor: "hover:shadow-gray-400/70",
   },
   {
-    id: 9,
+    id: 10,
     name: "Star Shell Battery",
     image: "/assets/MultiColorShell.jpg",
     video: "/assets/MultiColorShell.mp4",
@@ -90,16 +104,17 @@ const items = [
     hoverColor: "hover:shadow-pink-400/70",
   },
   {
-    id: 10,
+    id: 11,
     name: "Water Fall",
     image: "/assets/WaterFall.jpg",
     video: "/assets/WaterFall.mp4",
-    description: "A beautiful silver cascade combo ideal for weddings and special events.",
+    description:
+      "A beautiful silver cascade combo ideal for weddings and special events.",
     sizes: [{ size: "Free Size", price: 2500 }],
     hoverColor: "hover:shadow-sky-400/70",
   },
   {
-    id: 11,
+    id: 12,
     name: "Silver Rocket Battery",
     image: "/assets/SilverRocketBattery.jpg",
     video: "/assets/SilverRocketBattery.mp4",
@@ -109,16 +124,17 @@ const items = [
     hoverColor: "hover:shadow-gray-300/70",
   },
   {
-    id: 12,
+    id: 13,
     name: "Coconut Tree",
     image: "/assets/CoconutTree.jpg",
     video: "/assets/CoconutTree.mp4",
-    description: "Coconut Magic Blossom — a beautiful coconut tree effect in a single brilliant color.",
+    description:
+      "Coconut Magic Blossom — a beautiful coconut tree effect in a single brilliant color.",
     sizes: [{ size: "Free Size", price: 900 }],
     hoverColor: "hover:shadow-orange-400/70",
   },
   {
-    id: 13,
+    id: 14,
     name: "Name & Logo",
     image: "/assets/NameLogo.jpg",
     video: "/assets/NameLogo.mp4",

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { FaPlay, FaExternalLinkAlt } from "react-icons/fa";
 
 const portfolioItems = [
   {
@@ -22,7 +23,8 @@ const portfolioItems = [
     video: "/assets/StAloysiusVideo.mp4",
     client: "St. Aloysius College Galle",
     date: "02th May 2025",
-    fullVideoUrl: "https://www.facebook.com/share/v/1FMqmjvR4H/?mibextid=wwXIfr",
+    fullVideoUrl:
+      "https://www.facebook.com/share/v/1FMqmjvR4H/?mibextid=wwXIfr",
   },
   {
     id: 3,
@@ -37,20 +39,60 @@ const portfolioItems = [
   },
 ];
 
+const highlightStats = [
+  {
+    label: "Shows Delivered",
+    value: "1000+",
+    helper: "Across Sri Lanka",
+  },
+  {
+    label: "Peak Audience",
+    value: "10K+",
+    helper: "Per flagship event",
+  },
+  {
+    label: "Safety Record",
+    value: "100%",
+    helper: "Certified crew",
+  },
+];
+
 const Portfolio = () => {
   const [hoveredId, setHoveredId] = useState(null);
 
   return (
-    <section className="py-16 px-4 text-white" id="portfolio">
-      <div className="max-w-7xl mx-auto text-center mb-12">
-        <h2 className="text-4xl font-bold text-black">Featured Work</h2>
-        <p className="text-gray-500 mt-2">
-          Showcasing our premium fireworks displays for prestigious events
-          across Sri Lanka.
+    <section
+      className="py-20 px-4 md:px-10 bg-gradient-to-b    to-gray-50 text-gray-900"
+      id="portfolio"
+    >
+      <div className="max-w-6xl mx-auto text-center mb-16">
+        <p className="uppercase tracking-[0.3em] text-pink-500 text-xs mb-4">
+          Signature Displays
+        </p>
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          Featured Firework Experiences
+        </h2>
+        <p className="text-gray-600 mt-3 max-w-3xl mx-auto">
+          From waterfront countdowns to proud heritage celebrations, every
+          production blends choreography, safety, and storytelling to frame
+          unforgettable finales.
         </p>
       </div>
 
-      <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 mb-14">
+        {highlightStats.map((stat) => (
+          <div
+            key={stat.label}
+            className="bg-white/60 border border-white/70 rounded-2xl px-4 py-3 shadow-lg backdrop-blur-md text-center sm:text-left"
+          >
+            <p className="text-sm text-gray-500">{stat.label}</p>
+            <p className="text-3xl font-bold text-gray-900 mt-1">{stat.value}</p>
+            <p className="text-xs text-gray-400 mt-1">{stat.helper}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
         {portfolioItems.map((item, index) => (
           <motion.div
             key={item.id}
@@ -58,47 +100,72 @@ const Portfolio = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.2 }}
-            className="bg-white/50 rounded-xl overflow-hidden shadow-lg hover:shadow-red-500/50 transition-shadow"
+            className="group bg-white/55 border border-white/70 rounded-3xl overflow-hidden shadow-xl hover:shadow-pink-200 transition-all backdrop-blur-lg"
             onMouseEnter={() => setHoveredId(item.id)}
             onMouseLeave={() => setHoveredId(null)}
           >
-            <div className="h-64 w-full ">
+            <div className="relative h-64 w-full overflow-hidden">
               {hoveredId === item.id ? (
                 <video
                   src={item.video}
                   autoPlay
                   loop
                   muted
+                  preload="metadata"
                   className="w-full h-full object-cover"
                 />
               ) : (
                 <img
                   src={item.image}
                   alt={item.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
               )}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 opacity-0 group-hover:opacity-100 transition" />
+              <div className="absolute bottom-4 left-4 flex items-center gap-2 text-white text-xs uppercase tracking-[0.3em]">
+                <div className="h-8 w-8 rounded-full bg-white/30 flex items-center justify-center">
+                  <FaPlay size={12} />
+                </div>
+                <span>Live Preview</span>
+              </div>
             </div>
 
-            <div className="p-5 text-left ">
-              <h3 className="text-xl font-semibold text-black">{item.title}</h3>
-              <p className="text-gray-400 text-sm mt-2">{item.description}</p>
-              <div className="text-gray-500 text-xs mt-4">
-                <p>
-                  <strong>Client:</strong> {item.client}
-                </p>
-                <p>
-                  <strong>Date:</strong> {item.date}
-                </p>
+            <div className="p-6 text-center sm:text-left">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-center sm:text-left">
+                <span className="text-[11px] uppercase tracking-[0.4em] text-pink-500">
+                  {item.client}
+                </span>
+                <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full self-center sm:self-auto">
+                  {item.date}
+                </span>
               </div>
-              <a
-                href={item.fullVideoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-              >
-                Watch Full Video
-              </a>
+
+              <h3 className="text-xl font-semibold text-gray-900 mt-3">
+                {item.title}
+              </h3>
+              <p className="text-gray-600 text-sm mt-3 leading-relaxed">
+                {item.description}
+              </p>
+
+              <div className="mt-5 flex flex-wrap justify-center sm:justify-start gap-3">
+                <a
+                  href={item.fullVideoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full bg-pink-500 text-white hover:bg-pink-600 transition"
+                >
+                  <FaPlay size={14} /> Watch Full Video
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setHoveredId(item.id)}
+                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full border border-gray-200 text-gray-600 hover:text-gray-900"
+                >
+                  <FaExternalLinkAlt size={12} /> Replay Preview
+                </button>
+              </div>
             </div>
           </motion.div>
         ))}

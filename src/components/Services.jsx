@@ -6,43 +6,51 @@ import { Helmet } from "react-helmet-async";
 const services = [
   {
     id: 1,
-    icon: <FaFire className="text-yellow-100" size={40} />,
     title: "Custom Fireworks Displays",
     description:
       "Tailored fireworks shows designed to fit any event, theme, or budget with spectacular effects.",
     link: "/services/custom-displays",
-    bgColor: "bg-yellow-300",
-    hoverColor: "hover:shadow-yellow-500/70",
+    tag: "Signature Shows",
+    Icon: FaFire,
+    gradient: "from-amber-200/70 via-transparent to-rose-100/60",
+    iconBg: "bg-amber-50",
+    iconColor: "text-amber-500",
   },
   {
     id: 2,
-    icon: <FaStar className="text-pink-100" size={40} />,
     title: "Event Special Effects",
     description:
       "Enhance weddings, festivals, and corporate events with synchronized special effects.",
     link: "/services/special-effects",
-    bgColor: "bg-pink-300",
-    hoverColor: "hover:shadow-pink-500/70",
+    tag: "Atmosphere FX",
+    Icon: FaStar,
+    gradient: "from-pink-200/70 via-transparent to-amber-100/50",
+    iconBg: "bg-pink-50",
+    iconColor: "text-pink-500",
   },
   {
     id: 3,
-    icon: <FaRocket className="text-blue-100" size={40} />,
     title: "Safety Consulting & Licensing",
     description:
       "Professional advice and licensing support ensuring your event meets all safety standards.",
     link: "/services/safety-consulting",
-    bgColor: "bg-blue-300",
-    hoverColor: "hover:shadow-blue-500/70",
+    tag: "Trusted Guidance",
+    Icon: FaRocket,
+    gradient: "from-blue-200/70 via-transparent to-cyan-100/50",
+    iconBg: "bg-blue-50",
+    iconColor: "text-blue-500",
   },
   {
     id: 4,
-    icon: <FaGlobe className="text-indigo-100" size={40} />,
     title: "Nationwide Delivery & Setup",
     description:
       "Comprehensive logistics service delivering and setting up fireworks anywhere in Sri Lanka.",
     link: "/services/delivery-setup",
-    bgColor: "bg-indigo-300",
-    hoverColor: "hover:shadow-indigo-500/70",
+    tag: "End-to-End",
+    Icon: FaGlobe,
+    gradient: "from-indigo-200/70 via-transparent to-slate-100/60",
+    iconBg: "bg-indigo-50",
+    iconColor: "text-indigo-500",
   },
 ];
 
@@ -57,7 +65,15 @@ const cardVariants = {
 
 const Services = () => {
   return (
-    <section id="services" className="text-black py-16 px-6 md:px-12">
+    <section
+      id="services"
+      className="relative text-black py-24 px-6 md:px-12 overflow-hidden"
+    >
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-4 right-12 h-44 w-44 bg-pink-200/30 blur-3xl" />
+        <div className="absolute -bottom-10 left-16 h-56 w-56 bg-amber-100/40 blur-[120px]" />
+      </div>
+      <div className="relative">
       <Helmet>
         <title>South Lanka Fireworks - Services</title>
         <meta
@@ -69,12 +85,27 @@ const Services = () => {
           content="fireworks, pyrotechnics, Sri Lanka, events, displays"
         />
       </Helmet>
-      <div className="max-w-6xl mx-auto text-center mb-12">
-        <h2 className="text-4xl font-bold text-black mb-4">Our Services</h2>
+      <div className="max-w-5xl mx-auto text-center mb-12">
+        <p className="text-xs uppercase tracking-[0.4em] text-pink-500 mb-3">
+          Expertise & Craft
+        </p>
+        <h2 className="text-4xl font-bold text-black mb-3">Our Services</h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
           Discover the wide range of fireworks and pyrotechnic services we offer
           to light up your special occasions.
         </p>
+      </div>
+
+      <div className="flex flex-wrap items-center justify-center gap-3 mb-16 text-xs font-semibold uppercase tracking-[0.3em] text-gray-500">
+        <span className="px-4 py-2 rounded-full border border-gray-200 bg-white/80 backdrop-blur">
+          ISO-Certified Team
+        </span>
+        <span className="px-4 py-2 rounded-full border border-gray-200 bg-white/80 backdrop-blur">
+          24/7 Support
+        </span>
+        <span className="px-4 py-2 rounded-full border border-gray-200 bg-white/80 backdrop-blur">
+          Nationwide Reach
+        </span>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 max-w-6xl mx-auto">
@@ -86,15 +117,32 @@ const Services = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={cardVariants}
-            className={`${service.bgColor} rounded-xl p-6 
-              shadow-lg transition duration-300 cursor-pointer ${service.hoverColor}`}
+            className="relative group"
           >
-            <div className="mb-4">{service.icon}</div>
-            <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-            <p className="text-sm opacity-90">{service.description}</p>
-
+            <div
+              className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${service.gradient} opacity-0 group-hover:opacity-100 transition duration-300 blur-xl`}
+            />
+            <div className="relative h-full bg-white/55 border border-white/60 rounded-3xl p-7 shadow-lg transition duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl backdrop-blur-xl">
+              <div className="mb-5 flex items-center justify-between">
+                <div className={`h-12 w-12 rounded-2xl flex items-center justify-center shadow-sm ${service.iconBg}`}>
+                  <service.Icon size={26} className={service.iconColor} />
+                </div>
+                <span className="text-xs uppercase tracking-[0.3em] text-gray-400">
+                  #{String(service.id).padStart(2, "0")}
+                </span>
+              </div>
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 mb-4">
+                <span className="h-1.5 w-1.5 rounded-full bg-pink-400" />
+                {service.tag}
+              </span>
+              <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                {service.description}
+              </p>
+            </div>
           </motion.div>
         ))}
+      </div>
       </div>
     </section>
   );

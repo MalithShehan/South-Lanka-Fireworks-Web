@@ -92,3 +92,27 @@ span {
 .animate-slide-in {
   animation: slide-in 0.5s cubic-bezier(0.25, 1.2, 0.5, 1) forwards;
 }
+
+/* --- Custom hero visuals --- */
+/* Animated gradient used for heading text */
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Small bouncing dot for scroll hint */
+.animate-bounceDown {
+  animation: bounceDown 1.6s infinite cubic-bezier(.19,.57,.3,1);
+}
+
+@keyframes bounceDown {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.9; }
+  100% { transform: translateY(0); opacity: 1; }
+}
