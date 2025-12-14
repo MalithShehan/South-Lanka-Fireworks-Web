@@ -5,48 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="South Lanka Fireworks — Sri Lanka’s premier fireworks company offering breathtaking displays for weddings, festivals, and corporate events."
+      content="South Lanka Fireworks delivers premium pyrotechnic shows for weddings, festivals, and corporate events throughout Sri Lanka. Book your next display today."
     />
     <meta
       name="keywords"
       content="South Lanka Fireworks, fireworks Sri Lanka, wedding fireworks, pyrotechnics, event fireworks, Galle fireworks, festival fireworks"
     />
+    <meta name="author" content="South Lanka Fireworks" />
+    <meta name="application-name" content="South Lanka Fireworks" />
+    <meta name="theme-color" content="#050409" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="format-detection" content="telephone=no" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://slfireworks.com/" />
 
-    <title>South Lanka Fireworks | Spectacular Fireworks in Sri Lanka</title>
+    <title>South Lanka Fireworks | Sri Lanka Shows</title>
 
     <link
       rel="icon"
       type="image/png"
-      href="public/assets/MainLogo.jpg"
+      href="/assets/MainLogo.jpg"
       sizes="512x512"
+    />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/MainLogo.jpg" />
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/SouthLankaFireworks.webp"
+      fetchpriority="high"
     />
 
     <!-- Open Graph / Facebook -->
     <meta
       property="og:title"
-      content="South Lanka Fireworks | Spectacular Fireworks in Sri Lanka"
+      content="South Lanka Fireworks | Sri Lanka Shows"
     />
     <meta
       property="og:description"
-      content="Create unforgettable moments with South Lanka Fireworks — breathtaking fireworks for weddings, parties, and events across Sri Lanka."
+      content="Book dazzling pyrotechnic shows with South Lanka Fireworks for weddings, festivals, and corporate celebrations across Sri Lanka."
     />
     <meta property="og:image" content="https://slfireworks.com/public/assets/MainLogo.jpg" />
     <meta property="og:url" content="https://slfireworks.com/" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="South Lanka Fireworks" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="South Lanka Fireworks | Spectacular Fireworks in Sri Lanka"
+      content="South Lanka Fireworks | Sri Lanka Shows"
     />
     <meta
       name="twitter:description"
-      content="Unforgettable fireworks for weddings, festivals, and events across Sri Lanka."
+      content="Premium fireworks for weddings, festivals, and events anywhere in Sri Lanka."
     />
     <meta name="twitter:image" content="https://slfireworks.com/public/assets/MainLogo.jpg" />
+    <meta name="twitter:site" content="@SouthLankaFireworks" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -100,6 +114,29 @@
         ]
       }
     </script>
+
+    <!-- Structured Data (JSON-LD for corporate website) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "South Lanka Fireworks",
+        "url": "https://slfireworks.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://slfireworks.com/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "South Lanka Fireworks",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://slfireworks.com/public/assets/MainLogo.jpg"
+          }
+        }
+      }
+    </script>
   </head>
 
   <body>
@@ -108,9 +145,6 @@
       Fireworks.</noscript
     >
     <div id="root"></div>
-
-    <!-- jQuery (if used anywhere in the project) -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <!-- React App Entry -->
     <script type="module" src="/src/main.jsx"></script>
