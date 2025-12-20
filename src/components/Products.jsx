@@ -942,7 +942,7 @@ const Products = () => {
                               parseInt(e.target.value)
                             )
                           }
-                          className="w-16 border rounded p-1 text-center"
+                          className="w-16 border border-gray-200 rounded-md p-1 text-center bg-white text-gray-800 shadow-inner focus:outline-none focus:ring-1 focus:ring-pink-300"
                         />
                       </td>
                       <td className="p-2 font-semibold text-red-500">

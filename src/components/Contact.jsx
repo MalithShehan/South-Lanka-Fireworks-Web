@@ -181,7 +181,7 @@ const Contact = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400"
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 bg-white text-gray-900 placeholder:text-gray-400 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-300"
             />
             <input
               type="email"
@@ -190,7 +190,7 @@ const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-400"
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 bg-white text-gray-900 placeholder:text-gray-400 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-300"
             />
             <textarea
               name="message"
@@ -199,7 +199,7 @@ const Contact = () => {
               value={formData.message}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-pink-400"
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 resize-none bg-white text-gray-900 placeholder:text-gray-400 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-300"
             />
             <button
               type="submit"
