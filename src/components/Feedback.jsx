@@ -91,7 +91,7 @@ const Feedback = () => {
         createdAt: serverTimestamp(),
       });
       setFormData({ name: "", email: "", message: "", rating: "5" });
-    } catch (error) {
+    } catch (_error) {
       setFeedbackError("We couldn't save that feedback. Please try again.");
     } finally {
       setSubmitting(false);
@@ -103,17 +103,17 @@ const Feedback = () => {
   return (
     <section
       id="feedback"
-      className="relative py-20 px-4 md:px-10 text-gray-900"
+      className="relative py-20 px-4 md:px-10 text-gray-100"
     >
       <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <p className="uppercase text-xs tracking-[0.35em] text-pink-500">
             Customer Voices
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
             What Sri Lanka Says About Us
           </h2>
-          <p className="text-sm md:text-base text-gray-600 mt-3 max-w-2xl mx-auto">
+          <p className="text-sm md:text-base text-gray-400 mt-3 max-w-2xl mx-auto">
             Real feedback from couples, corporate teams, and festival committees who trusted South Lanka Fireworks with their milestones.
           </p>
         </div>
@@ -122,13 +122,13 @@ const Feedback = () => {
           {statHighlights.map((stat) => (
             <div
               key={stat.label}
-              className="rounded-2xl border border-white/60 bg-white/90 p-5 text-center shadow-lg"
+              className="rounded-2xl border border-white/10 bg-white/5 p-5 text-center shadow-lg"
             >
               <p className="text-sm uppercase tracking-[0.35em] text-pink-500">
                 {stat.label}
               </p>
-              <p className="text-3xl font-bold text-gray-900 mt-2">{stat.value}</p>
-              <p className="text-xs text-gray-500 mt-2">{stat.helper}</p>
+              <p className="text-3xl font-bold text-white mt-2">{stat.value}</p>
+              <p className="text-xs text-gray-400 mt-2">{stat.helper}</p>
             </div>
           ))}
         </div>
@@ -139,12 +139,12 @@ const Feedback = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="rounded-3xl border border-white/60 bg-white/95 p-6 shadow-2xl"
+            className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 shadow-2xl"
           >
-            <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+            <h3 className="text-2xl font-semibold text-white mb-4">
               Share Your Experience
             </h3>
-            <p className="text-sm text-gray-600 mb-6">
+            <p className="text-sm text-gray-400 mb-6">
               We read every message. Your note helps event planners see what it is like to work with us.
             </p>
             <form className="space-y-4" onSubmit={handleSubmit}>
@@ -158,7 +158,7 @@ const Feedback = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="mt-1 w-full rounded-xl border border-white/30 bg-white text-gray-900 placeholder:text-gray-400 px-4 py-3 shadow-inner focus:ring-2 focus:ring-pink-300 focus:outline-none"
+                  className="mt-1 w-full rounded-xl border border-white/15 bg-white/5 text-gray-100 placeholder:text-gray-500 px-4 py-3 shadow-inner focus:ring-2 focus:ring-pink-400 focus:outline-none"
                   placeholder="Your name"
                 />
               </div>
@@ -172,7 +172,7 @@ const Feedback = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="mt-1 w-full rounded-xl border border-white/30 bg-white text-gray-900 placeholder:text-gray-400 px-4 py-3 shadow-inner focus:ring-2 focus:ring-pink-300 focus:outline-none"
+                  className="mt-1 w-full rounded-xl border border-white/15 bg-white/5 text-gray-100 placeholder:text-gray-500 px-4 py-3 shadow-inner focus:ring-2 focus:ring-pink-400 focus:outline-none"
                   placeholder="you@email.com"
                 />
               </div>
@@ -183,7 +183,7 @@ const Feedback = () => {
                   onChange={handleChange}
                   required
                   rows="4"
-                  className="rounded-xl border border-white/30 bg-white text-gray-900 placeholder:text-gray-400 px-4 py-3 shadow-inner focus:ring-2 focus:ring-pink-300 focus:outline-none"
+                  className="rounded-xl border border-white/15 bg-white/5 text-gray-100 placeholder:text-gray-500 px-4 py-3 shadow-inner focus:ring-2 focus:ring-pink-400 focus:outline-none"
                   placeholder="Tell us what stood out."
                 />
                 <div>
@@ -194,7 +194,7 @@ const Feedback = () => {
                     name="rating"
                     value={formData.rating}
                     onChange={handleChange}
-                    className="mt-1 w-full rounded-xl border border-white/30 bg-white text-gray-900 px-3 py-3 shadow-inner focus:ring-2 focus:ring-pink-300 focus:outline-none"
+                    className="mt-1 w-full rounded-xl border border-white/15 bg-white/5 text-gray-100 px-3 py-3 shadow-inner focus:ring-2 focus:ring-pink-400 focus:outline-none"
                   >
                     {[5, 4, 3, 2, 1].map((value) => (
                       <option key={value} value={value}>
@@ -207,7 +207,7 @@ const Feedback = () => {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full rounded-2xl bg-gradient-to-r from-pink-500 via-orange-400 to-yellow-300 py-3 text-center font-semibold text-black shadow-lg shadow-pink-500/40 hover:scale-[1.01] transition disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full rounded-2xl bg-gradient-to-r from-pink-500 via-orange-400 to-yellow-300 py-3 text-center font-semibold text-white shadow-lg shadow-pink-500/40 hover:scale-[1.01] transition disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {submitting ? "Sending…" : "Submit Feedback"}
               </button>
@@ -225,13 +225,13 @@ const Feedback = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="rounded-2xl border border-white/60 bg-white/95 p-5 shadow-xl"
+                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 shadow-xl"
               >
                 <FaQuoteLeft className="text-pink-500 text-2xl mb-3" />
-                <p className="text-gray-700 leading-relaxed">{testimonial.quote}</p>
+                <p className="text-gray-300 leading-relaxed">{testimonial.quote}</p>
                 <div className="mt-4 flex items-center justify-between">
                   <div>
-                    <p className="font-semibold text-gray-900">{testimonial.name}</p>
+                    <p className="font-semibold text-white">{testimonial.name}</p>
                     <p className="text-xs uppercase tracking-[0.3em] text-pink-500">
                       {testimonial.event}
                     </p>

@@ -1,6 +1,9 @@
 import { Suspense, lazy, useEffect } from "react";
 import Navbar from "./components/NavBar.jsx";
 import Home from "./components/Home.jsx";
+import FloatingButtons from "./components/FloatingButtons.jsx";
+import LoadingSpinner from "./components/LoadingSpinner.jsx";
+import TrustBadges from "./components/TrustBadges.jsx";
 
 const About = lazy(() => import("./components/About.jsx"));
 const Services = lazy(() => import("./components/Services.jsx"));
@@ -8,6 +11,7 @@ const Products = lazy(() => import("./components/Products.jsx"));
 const Feedback = lazy(() => import("./components/Feedback.jsx"));
 const Portfolio = lazy(() => import("./components/Portfolio.jsx"));
 const Contact = lazy(() => import("./components/Contact.jsx"));
+const FAQ = lazy(() => import("./components/FAQ.jsx"));
 const Footer = lazy(() => import("./components/Footer.jsx"));
 
 export default function App() {
@@ -68,14 +72,18 @@ export default function App() {
         <>
             <Navbar />
             <Home />
-            <Suspense fallback={<div className="text-center text-white py-10">Loading experience…</div>}>
+            <TrustBadges />
+            <Suspense fallback={<LoadingSpinner />}>
                 <About />
                 <Services />
                 <Products />
                 <Portfolio />
+                <Feedback />
+                <FAQ />
                 <Contact />
                 <Footer />
             </Suspense>
+            <FloatingButtons />
         </>
     );
 }

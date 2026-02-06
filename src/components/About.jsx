@@ -11,18 +11,19 @@ import { Helmet } from "react-helmet-async";
 const About = () => {
   const highlights = [
     { label: "Shows Delivered", value: "1000+", detail: "Island-wide" },
-    { label: "Years Experience", value: "25", detail: "Licensed team" },
+    { label: "Years Experience", value: "20+", detail: "Since 2005" },
     { label: "Safety Record", value: "100%", detail: "Certified crew" },
+    { label: "Repeat Clients", value: "85%", detail: "Trusted partner" },
   ];
 
   return (
     <section
       id="about"
-      className="relative py-20 px-4 md:px-10 text-gray-900 overflow-hidden"
+      className="relative py-20 px-4 md:px-10 text-gray-100 overflow-hidden"
     >
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 left-10 h-48 w-48 bg-pink-200/40 blur-3xl" />
-        <div className="absolute bottom-0 right-10 h-64 w-64 bg-amber-100/40 blur-[140px]" />
+        <div className="absolute top-10 left-10 h-48 w-48 bg-pink-500/15 blur-3xl" />
+        <div className="absolute bottom-0 right-10 h-64 w-64 bg-amber-500/15 blur-[140px]" />
       </div>
       <div className="relative max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
       <Helmet>
@@ -61,7 +62,7 @@ const About = () => {
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-4xl md:text-5xl font-semibold text-gray-900"
+          className="text-4xl md:text-5xl font-semibold text-white"
         >
           We craft moments that linger long after the finale
         </motion.h2>
@@ -69,7 +70,7 @@ const About = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-lg text-gray-700 leading-relaxed"
+          className="text-lg text-gray-300 leading-relaxed"
         >
           For more than a decade, our licensed pyrotechnicians have orchestrated
           tailored spectacles across Sri Lanka—from coastal weddings and
@@ -81,7 +82,7 @@ const About = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-base text-gray-600"
+          className="text-base text-gray-400"
         >
           We partner with you on creative direction, safety licensing, and
           logistics so your guests experience wonder without compromise.
@@ -90,7 +91,7 @@ const About = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-wrap gap-4 text-3xl text-gray-500"
+          className="flex flex-wrap gap-4 text-3xl text-gray-400"
         >
           <a
             href="https://www.facebook.com/share/1CEsjdTcV4/?mibextid=wwXIfr"
@@ -106,7 +107,7 @@ const About = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="TikTok"
-            className="hover:text-black duration-300 hover:-translate-y-1"
+            className="hover:text-pink-400 duration-300 hover:-translate-y-1"
           >
             <SiTiktok />
           </a>
@@ -127,12 +128,12 @@ const About = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-white/70 border border-white/80 rounded-3xl p-6 shadow-xl backdrop-blur"
+          className="bg-white/5 border border-white/10 rounded-3xl p-6 shadow-xl backdrop-blur"
         >
-          <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+          <h3 className="text-2xl font-semibold text-white mb-3">
             Why partners choose us?
           </h3>
-          <p className="text-gray-600 text-sm leading-relaxed">
+          <p className="text-gray-400 text-sm leading-relaxed">
             Dedicated safety officers, ISO-grade inventory, on-site
             choreography, and end-to-end coordination mean your show runs to the
             minute—rain or shine.
@@ -142,18 +143,18 @@ const About = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+          className="grid grid-cols-2 sm:grid-cols-4 gap-4"
         >
           {highlights.map((item) => (
             <div
               key={item.label}
-              className="bg-white/60 border border-white/70 rounded-2xl p-4 text-center shadow-lg backdrop-blur"
+              className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center shadow-lg backdrop-blur"
             >
               <p className="text-sm uppercase tracking-[0.2em] text-pink-500 mb-2">
                 {item.label}
               </p>
-              <p className="text-2xl font-bold text-gray-900">{item.value}</p>
-              <p className="text-xs text-gray-500 mt-1">{item.detail}</p>
+              <p className="text-2xl font-bold text-white">{item.value}</p>
+              <p className="text-xs text-gray-400 mt-1">{item.detail}</p>
             </div>
           ))}
         </motion.div>

@@ -138,6 +138,14 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
+            <a
+              href="https://wa.me/94777135516?text=Hello%20South%20Lanka%20Fireworks!%20I%20would%20like%20to%20get%20a%20quote%20for%20my%20event."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-amber-400 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-pink-500/25 hover:scale-105 transition-transform whitespace-nowrap"
+            >
+              Get a Quote
+            </a>
           </div>
 
           {/* Mobile Toggle */}

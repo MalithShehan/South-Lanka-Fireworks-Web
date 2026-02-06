@@ -67,11 +67,11 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="relative text-black py-24 px-6 md:px-12 overflow-hidden"
+      className="relative text-gray-100 py-24 px-6 md:px-12 overflow-hidden"
     >
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-4 right-12 h-44 w-44 bg-pink-200/30 blur-3xl" />
-        <div className="absolute -bottom-10 left-16 h-56 w-56 bg-amber-100/40 blur-[120px]" />
+        <div className="absolute top-4 right-12 h-44 w-44 bg-pink-500/15 blur-3xl" />
+        <div className="absolute -bottom-10 left-16 h-56 w-56 bg-amber-500/15 blur-[120px]" />
       </div>
       <div className="relative">
       <Helmet>
@@ -89,21 +89,21 @@ const Services = () => {
         <p className="text-xs uppercase tracking-[0.4em] text-pink-500 mb-3">
           Expertise & Craft
         </p>
-        <h2 className="text-4xl font-bold text-black mb-3">Our Services</h2>
-        <p className="text-gray-600 max-w-2xl mx-auto">
+        <h2 className="text-4xl font-bold text-white mb-3">Our Services</h2>
+        <p className="text-gray-400 max-w-2xl mx-auto">
           Discover the wide range of fireworks and pyrotechnic services we offer
           to light up your special occasions.
         </p>
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-3 mb-16 text-xs font-semibold uppercase tracking-[0.3em] text-gray-500">
-        <span className="px-4 py-2 rounded-full border border-gray-200 bg-white/80 backdrop-blur">
+      <div className="flex flex-wrap items-center justify-center gap-3 mb-16 text-xs font-semibold uppercase tracking-[0.3em] text-gray-400">
+        <span className="px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur">
           ISO-Certified Team
         </span>
-        <span className="px-4 py-2 rounded-full border border-gray-200 bg-white/80 backdrop-blur">
+        <span className="px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur">
           24/7 Support
         </span>
-        <span className="px-4 py-2 rounded-full border border-gray-200 bg-white/80 backdrop-blur">
+        <span className="px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur">
           Nationwide Reach
         </span>
       </div>
@@ -122,7 +122,7 @@ const Services = () => {
             <div
               className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${service.gradient} opacity-0 group-hover:opacity-100 transition duration-300 blur-xl`}
             />
-            <div className="relative h-full bg-white/55 border border-white/60 rounded-3xl p-7 shadow-lg transition duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl backdrop-blur-xl">
+            <div className="relative h-full bg-white/5 border border-white/10 rounded-3xl p-7 shadow-lg transition duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl backdrop-blur-xl">
               <div className="mb-5 flex items-center justify-between">
                 <div className={`h-12 w-12 rounded-2xl flex items-center justify-center shadow-sm ${service.iconBg}`}>
                   <service.Icon size={26} className={service.iconColor} />
@@ -131,12 +131,12 @@ const Services = () => {
                   #{String(service.id).padStart(2, "0")}
                 </span>
               </div>
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 mb-4">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-gray-300 mb-4">
                 <span className="h-1.5 w-1.5 rounded-full bg-pink-400" />
                 {service.tag}
               </span>
               <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-gray-400 leading-relaxed">
                 {service.description}
               </p>
             </div>

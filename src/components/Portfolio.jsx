@@ -81,17 +81,17 @@ const Portfolio = () => {
 
   return (
     <section
-      className="py-20 px-4 md:px-10 bg-gradient-to-b    to-gray-50 text-gray-900"
+      className="py-20 px-4 md:px-10 text-gray-100"
       id="portfolio"
     >
       <div className="max-w-6xl mx-auto text-center mb-16">
         <p className="uppercase tracking-[0.3em] text-pink-500 text-xs mb-4">
           Signature Displays
         </p>
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+        <h2 className="text-3xl md:text-4xl font-bold text-white">
           Featured Firework Experiences
         </h2>
-        <p className="text-gray-600 mt-3 max-w-3xl mx-auto">
+        <p className="text-gray-400 mt-3 max-w-3xl mx-auto">
           From waterfront countdowns to proud heritage celebrations, every
           production blends choreography, safety, and storytelling to frame
           unforgettable finales.
@@ -102,11 +102,11 @@ const Portfolio = () => {
         {highlightStats.map((stat) => (
           <div
             key={stat.label}
-            className="bg-white/60 border border-white/70 rounded-2xl px-4 py-3 shadow-lg backdrop-blur-md text-center sm:text-left"
+            className="bg-white/5 border border-white/10 rounded-2xl px-4 py-3 shadow-lg backdrop-blur-md text-center sm:text-left"
           >
-            <p className="text-sm text-gray-500">{stat.label}</p>
-            <p className="text-3xl font-bold text-gray-900 mt-1">{stat.value}</p>
-            <p className="text-xs text-gray-400 mt-1">{stat.helper}</p>
+            <p className="text-sm text-gray-400">{stat.label}</p>
+            <p className="text-3xl font-bold text-white mt-1">{stat.value}</p>
+            <p className="text-xs text-gray-500 mt-1">{stat.helper}</p>
           </div>
         ))}
       </div>
@@ -119,7 +119,7 @@ const Portfolio = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.2 }}
-            className="group bg-white/55 border border-white/70 rounded-3xl overflow-hidden shadow-xl hover:shadow-pink-200 transition-all backdrop-blur-lg"
+            className="group bg-white/5 border border-white/10 rounded-3xl overflow-hidden shadow-xl hover:shadow-pink-500/20 transition-all backdrop-blur-sm"
             onMouseEnter={() => setHoveredId(item.id)}
             onMouseLeave={() => setHoveredId(null)}
           >
@@ -156,15 +156,15 @@ const Portfolio = () => {
                 <span className="text-[11px] uppercase tracking-[0.4em] text-pink-500">
                   {item.client}
                 </span>
-                <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full self-center sm:self-auto">
+                <span className="text-xs text-gray-400 bg-white/10 px-2 py-1 rounded-full self-center sm:self-auto">
                   {item.date}
                 </span>
               </div>
 
-              <h3 className="text-xl font-semibold text-gray-900 mt-3">
+              <h3 className="text-xl font-semibold text-white mt-3">
                 {item.title}
               </h3>
-              <p className="text-gray-600 text-sm mt-3 leading-relaxed">
+              <p className="text-gray-400 text-sm mt-3 leading-relaxed">
                 {item.description}
               </p>
 
@@ -180,7 +180,7 @@ const Portfolio = () => {
                 <button
                   type="button"
                   onClick={() => setHoveredId(item.id)}
-                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full border border-gray-200 text-gray-600 hover:text-gray-900"
+                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full border border-white/15 text-gray-300 hover:text-white"
                 >
                   <FaExternalLinkAlt size={12} /> Replay Preview
                 </button>
@@ -196,7 +196,7 @@ const Portfolio = () => {
             type="button"
             onClick={() => setIsExpanded((prev) => !prev)}
             aria-expanded={isExpanded}
-            className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-pink-200 text-pink-600 font-semibold hover:bg-pink-50 transition"
+            className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-pink-500/30 text-pink-400 font-semibold hover:bg-pink-500/10 transition"
           >
             {isExpanded ? "Show Fewer Shows" : "See More Shows"}
             <FaExternalLinkAlt size={13} />

@@ -160,7 +160,7 @@ const Products = () => {
     : 0;
   const formatCurrency = (value) => `Rs. ${value.toLocaleString()}`;
 
-  const stats = [
+  const _stats = [
     {
       label: "Individual Fireworks",
       value: `${items.length}+`,
@@ -370,8 +370,8 @@ const Products = () => {
         loadCompressedImage("/assets/icon-web.png"),
       ]);
 
-    const uniqueItems = customPackageItems.length;
-    const totalQuantity = customPackageItems.reduce(
+    const _uniqueItems = customPackageItems.length;
+    const _totalQuantity = customPackageItems.reduce(
       (sum, item) => sum + item.quantity,
       0
     );
@@ -584,12 +584,12 @@ const Products = () => {
     });
   return (
     <section
-      className="relative text-black py-16 px-4 md:px-12 min-h-screen bg-gradient-to-b  overflow-hidden"
+      className="relative text-gray-100 py-16 px-4 md:px-12 min-h-screen overflow-hidden"
       id="products"
     >
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 h-64 w-64 bg-pink-200/40 blur-3xl" />
-        <div className="absolute -bottom-10 left-8 h-72 w-72 bg-amber-100/40 blur-[160px]" />
+        <div className="absolute top-0 right-0 h-64 w-64 bg-pink-500/15 blur-3xl" />
+        <div className="absolute -bottom-10 left-8 h-72 w-72 bg-amber-500/15 blur-[160px]" />
       </div>
       <div className="relative">
       <Helmet>
@@ -669,15 +669,15 @@ const Products = () => {
 
       {/* Hero */}
       <div className="max-w-6xl mx-auto mb-16">
-        <div className="relative overflow-hidden rounded-[32px] border border-white/70 bg-white/80 px-8 py-10 shadow-2xl">
+        <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/5 backdrop-blur-sm px-8 py-10 shadow-2xl">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-pink-500 mb-4">
             <Sparkles size={14} />
             <span>Signature product desk</span>
           </div>
-          <h1 className="text-3xl md:text-[2.6rem] font-semibold leading-tight text-slate-900">
+          <h1 className="text-3xl md:text-[2.6rem] font-semibold leading-tight text-white">
             Precision Fireworks Catalogue
           </h1>
-          <p className="text-sm md:text-base text-slate-500 mt-4 max-w-2xl">
+          <p className="text-sm md:text-base text-gray-400 mt-4 max-w-2xl">
             Discover certified shells, specialty effects, and field-tested packages designed for weddings, festivals, and televised broadcasts. Everything is engineered to meet safety regulations while keeping the spectacle intact.
           </p>
           <div className="flex flex-wrap gap-3 mt-6">
@@ -689,7 +689,7 @@ const Products = () => {
             </a>
             <a
               href="#custom-package"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-600 hover:border-pink-300 hover:text-pink-600"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-gray-300 hover:border-pink-400 hover:text-pink-400"
             >
               Build Custom Plan
             </a>
@@ -698,14 +698,14 @@ const Products = () => {
             {heroHighlights.map(({ label, value, helper, Icon }) => (
               <div
                 key={label}
-                className="rounded-2xl border border-slate-100 bg-slate-50/70 px-4 py-4 shadow-inner"
+                className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 shadow-inner"
               >
-                <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-slate-400">
+                <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-gray-400">
                   <Icon size={16} className="text-pink-500" />
                   {label}
                 </div>
-                <div className="text-2xl font-semibold text-slate-900">{value}</div>
-                <p className="text-xs text-slate-500 mt-1">{helper}</p>
+                <div className="text-2xl font-semibold text-white">{value}</div>
+                <p className="text-xs text-gray-400 mt-1">{helper}</p>
               </div>
             ))}
           </div>
@@ -721,14 +721,14 @@ const Products = () => {
             <p className="text-[11px] uppercase tracking-[0.35em] text-pink-500 mb-2">
               Individual Catalogue
             </p>
-            <h3 className="text-2xl md:text-3xl font-semibold text-slate-900">
+            <h3 className="text-2xl md:text-3xl font-semibold text-white">
               Firework Effects & Specialty Shots
             </h3>
-            <p className="text-sm text-slate-500 mt-2 max-w-2xl">
+            <p className="text-sm text-gray-400 mt-2 max-w-2xl">
               Filter by technique or special effect, preview the footage, and add the exact calibers you need into the custom package builder.
             </p>
           </div>
-          <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-slate-400">
+          <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-gray-400">
             <Filter size={16} /> Filters Active
           </div>
         </div>
@@ -743,7 +743,7 @@ const Products = () => {
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
                   isActive
                     ? "bg-slate-900 text-white border-slate-900 shadow-lg"
-                    : "bg-white/80 text-gray-600 border-gray-200 hover:border-pink-300"
+                    : "bg-white/5 text-gray-300 border-white/10 hover:border-pink-400"
                 }`}
               >
                 <Icon size={16} />
@@ -758,7 +758,7 @@ const Products = () => {
             return (
               <motion.div
                 key={item.id}
-                className={`group relative overflow-hidden rounded-2xl border border-slate-100 bg-white/90 p-5 shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl ${
+                className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl ${
                   item.hoverColor || ""
                 }`}
                 variants={productVariants}
@@ -768,7 +768,7 @@ const Products = () => {
                 onMouseEnter={() => setHoveredId(item.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
-                <div className="relative w-full aspect-[4/3] mb-4 rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
+                <div className="relative w-full aspect-[4/3] mb-4 rounded-xl overflow-hidden border border-white/10 bg-slate-900/50">
                   {hoveredId === item.id && item.video ? (
                     <video
                       src={item.video}
@@ -790,7 +790,7 @@ const Products = () => {
                   <div className="absolute top-4 left-4 text-[11px] uppercase tracking-[0.3em] text-white/80">
                     Live Preview
                   </div>
-                  <div className="absolute top-4 right-4 rounded-full bg-white/80 px-3 py-1 text-[11px] font-semibold text-slate-700">
+                  <div className="absolute top-4 right-4 rounded-full bg-black/60 px-3 py-1 text-[11px] font-semibold text-gray-200">
                     4K Footage
                   </div>
                 </div>
@@ -799,26 +799,26 @@ const Products = () => {
                   <span className="text-[11px] uppercase tracking-[0.3em] text-pink-500">
                     {item.category}
                   </span>
-                  <span className="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2 py-1 rounded-full">
+                  <span className="text-[11px] font-semibold text-gray-400 bg-white/10 px-2 py-1 rounded-full">
                     Crowd Favorite
                   </span>
                 </div>
 
                 {priceRange && (
-                  <div className="flex items-center justify-between text-xs text-slate-500 mb-2">
+                  <div className="flex items-center justify-between text-xs text-gray-400 mb-2">
                     <span>From {formatCurrency(priceRange.min)}</span>
                     <span>Up to {formatCurrency(priceRange.max)}</span>
                   </div>
                 )}
 
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">{item.name}</h3>
-                <p className="text-sm text-slate-500 mb-4 leading-relaxed">{item.description}</p>
+                <h3 className="text-lg font-semibold text-white mb-2">{item.name}</h3>
+                <p className="text-sm text-gray-400 mb-4 leading-relaxed">{item.description}</p>
 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {item.sizes.map(({ size, price }) => (
                     <span
                       key={size}
-                      className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600"
+                      className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-gray-300"
                     >
                       {size} · {formatCurrency(price)}
                     </span>
@@ -845,7 +845,7 @@ const Products = () => {
 
       {/* Custom Package */}
       <div
-        className="max-w-6xl mx-auto mb-16 rounded-[32px] border border-white/70 bg-white/90 p-6 md:p-8 shadow-2xl"
+        className="max-w-6xl mx-auto mb-16 rounded-[32px] border border-white/10 bg-white/5 backdrop-blur-sm p-6 md:p-8 shadow-2xl"
         id="custom-package"
       >
         <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
@@ -853,39 +853,39 @@ const Products = () => {
             <p className="text-[11px] uppercase tracking-[0.35em] text-pink-500 mb-2">
               Bespoke Builder
             </p>
-            <h3 className="text-2xl md:text-3xl font-semibold text-slate-900">
+            <h3 className="text-2xl md:text-3xl font-semibold text-white">
               Your Custom Package
             </h3>
           </div>
-          <div className="text-sm text-slate-500">
+          <div className="text-sm text-gray-400">
             {cartCount} total shots / {formatCurrency(customPackageTotal)} estimate
           </div>
         </div>
         {customPackageItems.length === 0 ? (
-          <p className="rounded-2xl border border-dashed border-pink-200 bg-pink-50 px-4 py-6 text-center text-sm text-slate-500">
+          <p className="rounded-2xl border border-dashed border-pink-500/30 bg-pink-500/10 px-4 py-6 text-center text-sm text-gray-400">
             Start adding fireworks to see your bespoke build take shape.
           </p>
         ) : (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-              <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-4">
-                <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Unique SKUs</p>
-                <p className="text-2xl font-semibold text-slate-900">{uniqueSkuCount}</p>
+              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+                <p className="text-xs uppercase tracking-[0.35em] text-gray-400">Unique SKUs</p>
+                <p className="text-2xl font-semibold text-white">{uniqueSkuCount}</p>
               </div>
-              <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-4">
-                <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Total Shots</p>
-                <p className="text-2xl font-semibold text-slate-900">{cartCount}</p>
+              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+                <p className="text-xs uppercase tracking-[0.35em] text-gray-400">Total Shots</p>
+                <p className="text-2xl font-semibold text-white">{cartCount}</p>
               </div>
-              <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-4">
-                <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Estimate</p>
-                <p className="text-2xl font-semibold text-slate-900">{formatCurrency(customPackageTotal)}</p>
+              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+                <p className="text-xs uppercase tracking-[0.35em] text-gray-400">Estimate</p>
+                <p className="text-2xl font-semibold text-white">{formatCurrency(customPackageTotal)}</p>
               </div>
             </div>
 
             <div className="overflow-x-auto mb-6">
-              <table className="w-full table-auto text-xs md:text-sm border border-slate-100 rounded-2xl overflow-hidden">
+              <table className="w-full table-auto text-xs md:text-sm border border-white/10 rounded-2xl overflow-hidden">
                 <thead>
-                  <tr className="bg-slate-50 text-slate-500">
+                  <tr className="bg-white/5 text-gray-400">
                     <th className="p-3 text-left">Item</th>
                     <th className="p-3 text-left">Size</th>
                     <th className="p-3 text-right">Price</th>
@@ -896,10 +896,10 @@ const Products = () => {
                 </thead>
                 <tbody>
                   {customPackageItems.map((item, idx) => (
-                    <tr key={idx} className="border-t border-slate-100">
-                      <td className="p-3 font-semibold text-slate-700">{item.name}</td>
-                      <td className="p-3 text-slate-500">{item.size}</td>
-                      <td className="p-3 text-right text-slate-600">{formatCurrency(item.price)}</td>
+                    <tr key={idx} className="border-t border-white/10">
+                      <td className="p-3 font-semibold text-gray-200">{item.name}</td>
+                      <td className="p-3 text-gray-400">{item.size}</td>
+                      <td className="p-3 text-right text-gray-300">{formatCurrency(item.price)}</td>
                       <td className="p-3 text-center">
                         <input
                           type="number"
@@ -911,7 +911,7 @@ const Products = () => {
                               parseInt(e.target.value, 10)
                             )
                           }
-                          className="w-16 rounded-lg border border-slate-200 bg-white p-1 text-center text-slate-700 focus:outline-none focus:ring-1 focus:ring-pink-300"
+                          className="w-16 rounded-lg border border-white/15 bg-white/5 p-1 text-center text-gray-200 focus:outline-none focus:ring-1 focus:ring-pink-400"
                         />
                       </td>
                       <td className="p-3 text-right font-semibold text-pink-500">
@@ -933,8 +933,8 @@ const Products = () => {
 
             <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
               <div>
-                <p className="text-sm text-slate-500">Download a branded proposal or share it directly with your client.</p>
-                <p className="text-2xl font-semibold text-slate-900 mt-1">{formatCurrency(customPackageTotal)}</p>
+                <p className="text-sm text-gray-400">Download a branded proposal or share it directly with your client.</p>
+                <p className="text-2xl font-semibold text-white mt-1">{formatCurrency(customPackageTotal)}</p>
               </div>
               <div className="flex flex-wrap gap-3 w-full lg:w-auto justify-center">
                 <button
@@ -946,7 +946,7 @@ const Products = () => {
                 <button
                   type="button"
                   onClick={shareInvoiceViaWhatsApp}
-                  className="inline-flex items-center gap-2 rounded-full border border-emerald-300 px-6 py-3 text-sm font-semibold text-emerald-600 hover:bg-emerald-50"
+                  className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 px-6 py-3 text-sm font-semibold text-emerald-400 hover:bg-emerald-500/10"
                 >
                   <FaWhatsapp className="text-lg" /> Share via WhatsApp
                 </button>
@@ -962,10 +962,10 @@ const Products = () => {
           <p className="text-xs uppercase tracking-[0.35em] text-pink-500 mb-2">
             Signature Collections
           </p>
-          <h3 className="text-3xl md:text-4xl font-semibold text-slate-900 mb-3">
+          <h3 className="text-3xl md:text-4xl font-semibold text-white mb-3">
             Professionally Curated Firework Packages
           </h3>
-          <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto">
+          <p className="text-sm md:text-base text-gray-400 max-w-3xl mx-auto">
             Compare transparent pricing, guaranteed savings, and precisely what is included in each experience. Every package is engineered by our pyro specialists for effortless booking and guest-safe execution.
           </p>
         </div>
@@ -984,14 +984,14 @@ const Products = () => {
             return (
               <motion.div
                 key={pack.id}
-                className={`relative overflow-hidden rounded-2xl shadow-xl border border-gray-200 hover:shadow-2xl transition-all duration-300 ${pack.bgColor}`}
+                className={`relative overflow-hidden rounded-2xl shadow-xl border border-white/10 hover:shadow-2xl transition-all duration-300 ${pack.bgColor}`}
                 variants={productVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
               >
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-transparent pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent pointer-events-none"></div>
                 {highlightLabel && (
                   <span className="absolute top-4 right-4 bg-pink-500 text-white text-xs font-semibold tracking-wide px-3 py-1 rounded-full shadow-lg">
                     {highlightLabel}
@@ -1000,25 +1000,25 @@ const Products = () => {
 
                 {/* Card Content */}
                 <div className="relative p-6 flex flex-col h-full">
-                  <div className="flex items-center justify-between mb-3 text-[11px] uppercase tracking-[0.35em] text-gray-500">
+                  <div className="flex items-center justify-between mb-3 text-[11px] uppercase tracking-[0.35em] text-gray-300">
                     <span>{pack.items.length} line items</span>
                     
                   </div>
-                  <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-2">
+                  <h3 className="text-lg md:text-xl font-semibold text-white mb-2">
                     {pack.name}
                   </h3>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                  <p className="text-gray-300 mb-4 text-sm leading-relaxed">
                     {pack.description}
                   </p>
 
                   <p className="text-indigo-600 font-semibold mb-2 text-sm">
                     Includes
                   </p>
-                  <ul className="space-y-1 mb-4 text-sm text-gray-700">
+                  <ul className="space-y-1 mb-4 text-sm text-gray-300">
                     {pack.items.map((i, idx) => (
                       <li
                         key={idx}
-                        className="flex justify-between items-center border-b border-gray-100 pb-1"
+                        className="flex justify-between items-center border-b border-white/10 pb-1"
                       >
                         <span>
                           {i.name} × {i.quantity}
@@ -1030,7 +1030,7 @@ const Products = () => {
                     ))}
                   </ul>
 
-                  <div className="mt-auto space-y-2 text-sm text-gray-700">
+                  <div className="mt-auto space-y-2 text-sm text-gray-300">
                     <div className="flex justify-between">
                       <span className="font-medium">Subtotal</span>
                       <span className="text-blue-600 font-bold">
@@ -1043,13 +1043,13 @@ const Products = () => {
                         − {formatCurrency(pack.discount)}
                       </span>
                     </div>
-                    <div className="flex justify-between text-base font-semibold border-t border-gray-200 pt-2">
+                    <div className="flex justify-between text-base font-semibold border-t border-white/15 pt-2">
                       <span>Total investment</span>
                       <span className="text-red-600">
                         {formatCurrency(total)}
                       </span>
                     </div>
-                    <p className="text-xs text-gray-500 text-right">
+                    <p className="text-xs text-gray-400 text-right">
                       Includes on-site safety briefing & operator crew.
                     </p>
                   </div>
@@ -1059,7 +1059,7 @@ const Products = () => {
                       href={whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 w-full border border-emerald-400 text-emerald-600 text-sm font-semibold py-2 rounded-lg hover:bg-emerald-50 transition"
+                      className="flex items-center justify-center gap-2 w-full border border-emerald-400/40 text-emerald-400 text-sm font-semibold py-2 rounded-lg hover:bg-emerald-500/10 transition"
                     >
                       <FaWhatsapp /> Book via WhatsApp
                     </a>

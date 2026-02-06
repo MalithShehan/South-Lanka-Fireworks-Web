@@ -4,7 +4,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #fff9f4;
+  background-color: #0c0a1a;
   /* background-image:
     radial-gradient(circle at 12% 20%, rgba(255, 182, 193, 0.55), rgba(255, 182, 193, 0) 52%),
     radial-gradient(circle at 78% 12%, rgba(135, 180, 255, 0.45), rgba(135, 180, 255, 0) 55%),
@@ -51,7 +51,7 @@ body {
   }
 
   body {
-    background-image: linear-gradient(125deg, #fff1f2 0%, #fff6e7 32%, #eef4ff 68%, #f7ecff 100%);
+    background-image: linear-gradient(125deg, #0c0a1a 0%, #110e24 32%, #0e0b1e 68%, #12101f 100%);
   }
 }
 
@@ -81,15 +81,15 @@ body {
   pointer-events: none;
   z-index: -2;
   background-image:
-    radial-gradient(circle, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 60%),
-    radial-gradient(circle, rgba(255, 182, 193, 0.65) 0%, rgba(255, 182, 193, 0) 60%),
-    radial-gradient(circle, rgba(129, 212, 250, 0.5) 0%, rgba(129, 212, 250, 0) 60%),
-    radial-gradient(circle, rgba(248, 113, 113, 0.55) 0%, rgba(248, 113, 113, 0) 60%);
+    radial-gradient(circle, rgba(255, 200, 50, 0.45) 0%, rgba(255, 200, 50, 0) 60%),
+    radial-gradient(circle, rgba(255, 80, 120, 0.55) 0%, rgba(255, 80, 120, 0) 60%),
+    radial-gradient(circle, rgba(100, 180, 255, 0.4) 0%, rgba(100, 180, 255, 0) 60%),
+    radial-gradient(circle, rgba(255, 140, 50, 0.5) 0%, rgba(255, 140, 50, 0) 60%);
   background-repeat: no-repeat;
   background-size: 0 0, 0 0, 0 0, 0 0;
   background-position: 18% 32%, 72% 22%, 32% 78%, 80% 68%;
   mix-blend-mode: screen;
-  filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.55));
+  filter: drop-shadow(0 0 30px rgba(255, 180, 60, 0.5));
   animation: fireworkBurst 16s linear infinite;
 }
 
@@ -105,20 +105,20 @@ body::after {
 
 body::before {
   background-image:
-    radial-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
-    radial-gradient(rgba(255, 180, 122, 0.25) 1px, transparent 1px);
-  background-size: 120px 120px, 200px 200px;
-  background-position: 0 0, 60px 60px;
-  opacity: 0.4;
+    radial-gradient(rgba(255, 220, 100, 0.3) 1px, transparent 1px),
+    radial-gradient(rgba(255, 120, 80, 0.2) 1px, transparent 1px);
+  background-size: 140px 140px, 220px 220px;
+  background-position: 0 0, 70px 70px;
+  opacity: 0.5;
   mix-blend-mode: screen;
   animation: sparkleDrift 12s linear infinite;
 }
 
 body::after {
-  background: radial-gradient(circle at 70% 20%, rgba(59, 130, 246, 0.3), transparent 60%),
-    radial-gradient(circle at 25% 75%, rgba(249, 115, 22, 0.25), transparent 55%);
-  filter: blur(70px);
-  opacity: 0.7;
+  background: radial-gradient(circle at 70% 20%, rgba(180, 80, 255, 0.2), transparent 60%),
+    radial-gradient(circle at 25% 75%, rgba(255, 100, 50, 0.2), transparent 55%);
+  filter: blur(80px);
+  opacity: 0.6;
   animation: auroraFlow 18s ease-in-out infinite alternate;
 }
 
@@ -143,16 +143,14 @@ body::after {
 
 
 h1, h2, h3, h4, h5, h6 {
-    @apply font-bold text-gray-800;
+    @apply font-bold text-white;
 }
 
 p {
-    @apply text-base md:text-lg tracking-tight leading-relaxed;
+    @apply text-base md:text-lg tracking-tight leading-relaxed text-gray-300;
 }
 
-span {
-    @apply text-blue-400;
-}
+/* Removed global span blue color — it was overriding all span text colors site-wide */
 
 /* Utility Classes */
 .shine-effect {
@@ -160,7 +158,7 @@ span {
     border-radius: 50%;
     pointer-events: none;
     z-index: 1;
-    background: radial-gradient(circle, rgba(5, 48, 139, 0.25), transparent 70%);
+    background: radial-gradient(circle, rgba(255, 180, 60, 0.2), transparent 70%);
 }
 
 .bg-primary-color {
@@ -175,7 +173,7 @@ span {
     transform: translateX(-50%);
     width: 1px;
     height: 100%;
-    background: linear-gradient(to bottom, #ff0000, #ffff00, #00ffff); /* Red → Yellow → Cyan */
+    background: linear-gradient(to bottom, #ff4444, #ffaa00, #ff6699);
 }
 
 @keyframes slide-in {
