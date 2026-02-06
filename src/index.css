@@ -44,10 +44,19 @@ body {
 }
 
 @media (max-width: 640px) {
-  #root::before,
-  body::before,
+  #root::before {
+    opacity: 0.5;
+    animation-duration: 24s;
+  }
+
+  body::before {
+    opacity: 0.3;
+    animation-duration: 18s;
+  }
+
   body::after {
-    display: none;
+    opacity: 0.4;
+    filter: blur(100px);
   }
 
   body {
