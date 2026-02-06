@@ -9,10 +9,10 @@ const portfolioItems = [
     description:
       "A grand fireworks spectacle at Port City to welcome the New Year. Thousands gathered to witness a synchronized pyrotechnic show lighting up the skyline.",
     image: "/assets/PortCity.jpg",
-    video: "/assets/PortCityVideo.mp4",
+    video: "/assets/PortCityVideo2025.mp4",
     client: "Port City Colombo",
-    date: "31st December 2024",
-    fullVideoUrl: "https://vt.tiktok.com/ZSS7SjwEe/",
+    date: "31st December 2025",
+    fullVideoUrl: "https://www.tiktok.com/@southlankafireworks/video/7590400823612509448?is_from_webapp=1&sender_device=pc&web_id=7597102042049644050",
   },
   {
     id: 2,
@@ -37,6 +37,17 @@ const portfolioItems = [
     date: "17th Mar 2025",
     fullVideoUrl: "https://vt.tiktok.com/ZSS7S3B3H/",
   },
+  {
+    id: 4,
+    title: "The Food Harbour Grand Opening Fireworks Show",
+    description:
+      "A spectacular fireworks display to celebrate the grand opening of The Food Harbour. The event featured a dazzling array of pyrotechnics that captivated the audience and marked the beginning of a new culinary destination.",
+    image: "/assets/FoodHarbour.jpg",
+    video: "/assets/FoodHarbourVideo.mp4",
+    client: "The Food Harbour",
+    date: "17th Jan 2026",
+    fullVideoUrl: "https://www.tiktok.com/@southlankafireworks/video/7596250070283013396?is_from_webapp=1&sender_device=pc&web_id=7597102042049644050",
+  }
 ];
 
 const highlightStats = [
@@ -57,8 +68,16 @@ const highlightStats = [
   },
 ];
 
+const INITIAL_VISIBLE_ITEMS = 3;
+
 const Portfolio = () => {
   const [hoveredId, setHoveredId] = useState(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const displayedItems = isExpanded
+    ? portfolioItems
+    : portfolioItems.slice(0, INITIAL_VISIBLE_ITEMS);
+  const hasHiddenItems = portfolioItems.length > INITIAL_VISIBLE_ITEMS;
 
   return (
     <section
@@ -93,7 +112,7 @@ const Portfolio = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-        {portfolioItems.map((item, index) => (
+        {displayedItems.map((item, index) => (
           <motion.div
             key={item.id}
             initial={{ opacity: 0, y: 30 }}
@@ -170,6 +189,20 @@ const Portfolio = () => {
           </motion.div>
         ))}
       </div>
+
+      {hasHiddenItems && (
+        <div className="mt-12 text-center">
+          <button
+            type="button"
+            onClick={() => setIsExpanded((prev) => !prev)}
+            aria-expanded={isExpanded}
+            className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-pink-200 text-pink-600 font-semibold hover:bg-pink-50 transition"
+          >
+            {isExpanded ? "Show Fewer Shows" : "See More Shows"}
+            <FaExternalLinkAlt size={13} />
+          </button>
+        </div>
+      )}
     </section>
   );
 };

@@ -1,30 +1,65 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { FiPhoneCall, FiMessageCircle } from "react-icons/fi";
 import { Link } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
+
+const MENU_ITEMS = [
+  { name: "Home", to: "home", helper: "Signature hero + CTA" },
+  { name: "About Us", to: "about", helper: "Licensed crew & mission" },
+  { name: "Service", to: "services", helper: "Firework services lineup" },
+  { name: "Items", to: "products", helper: "Individual shells & effects" },
+  { name: "Packages", to: "packages", helper: "Pre-built show templates" },
+  { name: "Portfolio", to: "portfolio", helper: "Recent launches & reels" },
+  { name: "Contact Us", to: "contact", helper: "Quotes + dispatch" },
+];
+
+const QUICK_ACTIONS = [
+  {
+    label: "Call",
+    helper: "Contact",
+    href: "tel:+94777135516",
+    Icon: FiPhoneCall,
+  },
+  {
+    label: "WhatsApp ",
+    helper: "Message",
+    href: "https://wa.me/94777135516",
+    Icon: FiMessageCircle,
+  },
+];
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const sidebarRef = useRef(null);
+  const lastScrollYRef = useRef(0);
 
   const toggleNav = () => setNavOpen((prev) => !prev);
   const closeNav = () => setNavOpen(false);
+  const updateHash = (target) => {
+    if (typeof window === "undefined") return;
+    window.history.replaceState(null, "", `#${target}`);
+  };
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.scrollTo({ top: 0, behavior: "instant" });
+    window.history.replaceState(null, "", "#home");
+  }, []);
 
   // Hide/show navbar on scroll
   useEffect(() => {
+    if (typeof window === "undefined") return undefined;
     const handleScroll = () => {
-      if (window.scrollY > lastScrollY && window.scrollY > 80) {
-        setShowNavbar(false);
-      } else {
-        setShowNavbar(true);
-      }
-      setLastScrollY(window.scrollY);
+      const currentY = window.scrollY;
+      const shouldShow = currentY <= lastScrollYRef.current || currentY < 80;
+      setShowNavbar(shouldShow);
+      lastScrollYRef.current = currentY;
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -44,15 +79,6 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [navOpen]);
 
-  const menuItems = [
-    { name: "Home", to: "home" },
-    { name: "About Us", to: "about" },
-    { name: "Service", to: "services" },
-    { name: "Products & packages", to: "products" },
-    { name: "Portfolio", to: "portfolio" },
-    { name: "Contact Us", to: "contact" },
-  ];
-
   return (
     <motion.nav
       initial={{ y: -80 }}
@@ -69,6 +95,7 @@ const Navbar = () => {
             smooth
             offset={-80}
             duration={500}
+            onClick={() => updateHash("home")}
         className="group flex min-w-0 items-center gap-3 text-xl sm:text-2xl font-bold tracking-wide cursor-pointer"
           >
             <div className="relative">
@@ -77,6 +104,9 @@ const Navbar = () => {
                 src="/assets/SouthLankaFireworks.png"
                 alt="Logo"
                 className="relative h-10 w-10 sm:h-12 sm:w-12 object-contain drop-shadow-lg"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
               />
             </div>
             <div className="flex flex-col">
@@ -92,13 +122,14 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
             <ul className="flex gap-5 text-sm font-semibold font-montserrat whitespace-nowrap">
-              {menuItems.map(({ name, to }) => (
+              {MENU_ITEMS.map(({ name, to }) => (
                 <li key={to}>
                   <Link
                     to={to}
                     smooth
                     offset={-80}
                     duration={500}
+                    onClick={() => updateHash(to)}
                     className="group relative px-2 py-1 tracking-[0.08em] text-white hover:text-white transition"
                   >
                     <span className="relative z-10">{name}</span>
@@ -151,13 +182,18 @@ const Navbar = () => {
                   smooth
                   offset={-80}
                   duration={500}
-                  onClick={closeNav}
+                  onClick={() => {
+                    updateHash("home");
+                    closeNav();
+                  }}
                   className="flex items-center gap-3 cursor-pointer"
                 >
                   <img
                     src="/assets/SouthLankaFireworks.png"
                     alt="Logo"
                     className="h-10 w-10 object-contain drop-shadow-md"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <span
                     className="bg-gradient-to-r from-yellow-300 via-pink-400 to-red-500
@@ -175,9 +211,34 @@ const Navbar = () => {
                 </button>
               </div>
 
+              <div className="p-6 border-b border-white/5 bg-white/5">
+                <p className="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">
+                  Rapid Response
+                </p>
+                <div className="grid grid-cols-1 gap-3">
+                  {QUICK_ACTIONS.map(({ label, helper, href, Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/90 hover:bg-white/10 transition"
+                    >
+                      <div>
+                        <p className="font-semibold">{label}</p>
+                        <p className="text-xs text-white/60">{helper}</p>
+                      </div>
+                      <span className="h-10 w-10 rounded-2xl bg-gradient-to-br from-yellow-300/40 to-pink-400/40 grid place-items-center">
+                        <Icon size={18} />
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
               {/* Links with staggered animation */}
               <ul className="flex flex-col p-6 space-y-3 overflow-y-auto font-montserrat">
-                {menuItems.map(({ name, to }, index) => (
+                {MENU_ITEMS.map(({ name, to, helper }, index) => (
                   <motion.li
                     key={to}
                     initial={{ opacity: 0, x: -30 }}
@@ -190,16 +251,22 @@ const Navbar = () => {
                   >
                     <Link
                       to={to}
-                      onClick={closeNav}
+                      onClick={() => {
+                        updateHash(to);
+                        closeNav();
+                      }}
                       smooth
                       offset={-80}
                       duration={500}
-                      className="block py-3 px-4 rounded-lg text-white
-                                 hover:bg-gradient-to-r hover:from-yellow-400 hover:to-red-500
-                                 hover:text-black transition-all duration-300
-                                 text-lg tracking-wide"
+                      className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/0 px-4 py-4 text-white transition-all duration-300 hover:border-pink-200 hover:bg-white/10"
                     >
-                      {name}
+                      <span className="text-xs font-semibold tracking-[0.4em] text-white/50">{String(index + 1).padStart(2, "0")}</span>
+                      <div>
+                        <p className="text-base font-semibold">{name}</p>
+                        {helper && (
+                          <p className="text-xs text-white/60">{helper}</p>
+                        )}
+                      </div>
                     </Link>
                   </motion.li>
                 ))}
@@ -210,25 +277,8 @@ const Navbar = () => {
       </AnimatePresence>
 
       {/* Global Fonts */}
-      <style jsx global>{`
-        @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Kaushan+Script&display=swap");
-
-        .font-montserrat {
-          font-family: "Montserrat", sans-serif;
-        }
-        .font-kaushan {
-          font-family: "Kaushan Script", cursive;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </motion.nav>
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

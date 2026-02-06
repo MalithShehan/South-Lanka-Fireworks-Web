@@ -2,7 +2,16 @@
 import React, { useState } from "react";
 import items from "./Items"; // Your fireworks data
 import jsPDF from "jspdf";
-import { ShoppingCart, Sparkles, Boxes, BadgePercent, Trash2 } from "lucide-react";
+import {
+  ShoppingCart,
+  Sparkles,
+  Boxes,
+  BadgePercent,
+  Trash2,
+  Filter,
+  Flame,
+  Package,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
@@ -149,6 +158,8 @@ const Products = () => {
   const avgDiscount = packages.length
     ? Math.round(totalDiscount / packages.length)
     : 0;
+  const formatCurrency = (value) => `Rs. ${value.toLocaleString()}`;
+
   const stats = [
     {
       label: "Individual Fireworks",
@@ -163,14 +174,51 @@ const Products = () => {
       Icon: Boxes,
     },
     {
-      label: "Avg. Savings",
-      value: `Rs. ${avgDiscount.toLocaleString()}`,
-      helper: "Package discounts",
+      label: "Average Savings",
+      value: formatCurrency(avgDiscount),
+      helper: "Locked into bundles",
       Icon: BadgePercent,
     },
   ];
 
-  const formatCurrency = (value) => `Rs. ${value.toLocaleString()}`;
+  const heroHighlights = [
+    {
+      label: "Inventory",
+      value: `${items.length}+ SKUs`,
+      helper: "Ready to deploy across Sri Lanka",
+      Icon: Sparkles,
+    },
+    {
+      label: "Crew",
+      value: "Certified",
+      helper: "PF-01 & PF-02 licensed team",
+      Icon: Flame,
+    },
+    {
+      label: "Packages",
+      value: `${packages.length} tiers`,
+      helper: "From private shows to festivals",
+      Icon: Package,
+    },
+  ];
+
+  const categoryIconMap = {
+    All: Filter,
+    Shells: Flame,
+    "Aerial Effects": Sparkles,
+    "Special FX": Boxes,
+    "Custom Shows": BadgePercent,
+    Highlights: Sparkles,
+  };
+
+  const getPriceRange = (sizes = []) => {
+    if (!sizes.length) return null;
+    const values = sizes.map((entry) => entry.price);
+    return {
+      min: Math.min(...values),
+      max: Math.max(...values),
+    };
+  };
 
   const calculatePackageTotals = (pack) => {
     const subtotal = pack.items.reduce(
@@ -180,6 +228,7 @@ const Products = () => {
     const total = subtotal - pack.discount;
     return { subtotal, total };
   };
+
 
   const buildPackageSummaryMessage = (pack) => {
     const { subtotal, total } = calculatePackageTotals(pack);
@@ -208,149 +257,6 @@ const Products = () => {
     return `https://wa.me/+94777135516?text=${encodeURIComponent(message)}`;
   };
 
-  const createPackagePdfDoc = (pack) => {
-    const { subtotal, total } = calculatePackageTotals(pack);
-    const summaryLines = buildPackageSummaryMessage(pack).split("\n");
-    const doc = new jsPDF({
-      orientation: "p",
-      unit: "mm",
-      format: "a4",
-      compress: true,
-    });
-
-    doc.setFillColor(5, 10, 30);
-    doc.rect(0, 0, 210, 30, "F");
-    doc.setTextColor(255, 255, 255);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(18);
-    doc.text("South Lanka Fireworks", 105, 18, { align: "center" });
-
-    doc.setTextColor(0, 0, 0);
-    doc.setFontSize(16);
-    doc.text(pack.name, 105, 42, { align: "center" });
-
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(11);
-    doc.text(pack.description, 20, 52, { maxWidth: 170 });
-
-    let y = 70;
-    doc.setFont("helvetica", "bold");
-    doc.text("Includes", 20, y);
-    y += 8;
-    doc.setFont("helvetica", "normal");
-
-    pack.items.forEach((item, idx) => {
-      if (y > 260) {
-        doc.addPage();
-        y = 20;
-      }
-      doc.text(`${idx + 1}. ${item.name} x${item.quantity}`, 20, y);
-      doc.text(formatCurrency(item.price * item.quantity), 190, y, {
-        align: "right",
-      });
-      y += 7;
-    });
-
-    y += 5;
-    doc.setLineWidth(0.4);
-    doc.line(20, y, 190, y);
-    y += 10;
-    doc.setFont("helvetica", "bold");
-    doc.text(`Subtotal: ${formatCurrency(subtotal)}`, 20, y);
-    y += 7;
-    doc.text(`Discount: ${formatCurrency(pack.discount)}`, 20, y);
-    y += 7;
-    doc.text(`Total: ${formatCurrency(total)}`, 20, y);
-
-    y += 12;
-
-    // Inject the same WhatsApp summary text inside the PDF for quick sharing
-    const summaryLineHeight = 6;
-    const blankLineHeight = 3;
-    const summaryHeight =
-      summaryLines.reduce(
-        (acc, line) =>
-          acc + (line.trim().length === 0 ? blankLineHeight : summaryLineHeight),
-        0
-      ) + 20;
-
-    if (y + summaryHeight > 285) {
-      doc.addPage();
-      y = 20;
-    }
-
-    doc.setDrawColor(209, 213, 219);
-    doc.setFillColor(245, 247, 255);
-    doc.roundedRect(18, y, 174, summaryHeight, 4, 4, "FD");
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(12);
-    doc.setTextColor(5, 10, 30);
-    doc.text("WhatsApp Share Summary", 24, y + 8);
-
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(10);
-    doc.setTextColor(55, 65, 81);
-    let summaryY = y + 16;
-    summaryLines.forEach((line) => {
-      if (line.trim().length === 0) {
-        summaryY += blankLineHeight;
-      } else {
-        doc.text(line, 24, summaryY, { maxWidth: 160 });
-        summaryY += summaryLineHeight;
-      }
-    });
-
-    y = summaryY + 8;
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(10);
-    doc.setTextColor(80, 80, 80);
-    doc.text(
-      "Share this PDF on WhatsApp or email to confirm your booking.",
-      20,
-      y,
-      { maxWidth: 170 }
-    );
-
-    return doc;
-  };
-
-  const downloadPackagePdf = (pack) => {
-    const doc = createPackagePdfDoc(pack);
-    const safeName = pack.name.replace(/[^a-z0-9]+/gi, "_");
-    doc.save(`${safeName}_SouthLankaFireworks.pdf`);
-  };
-
-  const sharePackageViaWhatsApp = async (pack) => {
-    if (typeof window === "undefined" || typeof navigator === "undefined") {
-      alert("Sharing is not supported in this environment.");
-      return;
-    }
-
-    try {
-      const doc = createPackagePdfDoc(pack);
-      const blob = doc.output("blob");
-      const safeName = pack.name.replace(/[^a-z0-9]+/gi, "_");
-      const file = new File([blob], `${safeName}_SouthLankaFireworks.pdf`, {
-        type: "application/pdf",
-        lastModified: Date.now(),
-      });
-
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({
-          files: [file],
-          title: pack.name,
-          text: `Check out this fireworks package: ${pack.name}`,
-        });
-      } else {
-        alert(
-          "Your device/browser cannot attach files directly to WhatsApp. Please download the PDF and share it manually."
-        );
-      }
-    } catch (error) {
-      console.error("Package PDF share failed", error);
-      alert("Unable to share the package PDF right now. Please try again later.");
-    }
-  };
 
   // Compute cart count dynamically
   const cartCount = customPackageItems.reduce(
@@ -413,6 +319,7 @@ const Products = () => {
     (sum, i) => sum + i.price * i.quantity,
     0
   );
+  const uniqueSkuCount = customPackageItems.length;
 
   const loadCompressedImage = (url, maxWidth = 600) =>
     new Promise((resolve) => {
@@ -760,178 +667,240 @@ const Products = () => {
         </AnimatePresence>
       )}
 
-      {/* Header */}
-      <div className="max-w-6xl mx-auto text-center mb-14">
-        <p className="text-xs uppercase tracking-[0.4em] text-pink-500 mb-3">
-          Curated For Every Spark
-        </p>
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Individual Fireworks & Signature Packages
-        </h2>
-        <p className="text-gray-500 max-w-3xl mx-auto text-sm md:text-base">
-          Browse ready-to-book productions or mix your own inventory for a
-          bespoke celebration.
-        </p>
+      {/* Hero */}
+      <div className="max-w-6xl mx-auto mb-16">
+        <div className="relative overflow-hidden rounded-[32px] border border-white/70 bg-white/80 px-8 py-10 shadow-2xl">
+          <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-pink-500 mb-4">
+            <Sparkles size={14} />
+            <span>Signature product desk</span>
+          </div>
+          <h1 className="text-3xl md:text-[2.6rem] font-semibold leading-tight text-slate-900">
+            Precision Fireworks Catalogue
+          </h1>
+          <p className="text-sm md:text-base text-slate-500 mt-4 max-w-2xl">
+            Discover certified shells, specialty effects, and field-tested packages designed for weddings, festivals, and televised broadcasts. Everything is engineered to meet safety regulations while keeping the spectacle intact.
+          </p>
+          <div className="flex flex-wrap gap-3 mt-6">
+            <a
+              href="#packages"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-pink-500 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-lg shadow-pink-500/30 hover:bg-pink-600"
+            >
+              Explore Packages
+            </a>
+            <a
+              href="#custom-package"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-600 hover:border-pink-300 hover:text-pink-600"
+            >
+              Build Custom Plan
+            </a>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+            {heroHighlights.map(({ label, value, helper, Icon }) => (
+              <div
+                key={label}
+                className="rounded-2xl border border-slate-100 bg-slate-50/70 px-4 py-4 shadow-inner"
+              >
+                <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-slate-400">
+                  <Icon size={16} className="text-pink-500" />
+                  {label}
+                </div>
+                <div className="text-2xl font-semibold text-slate-900">{value}</div>
+                <p className="text-xs text-slate-500 mt-1">{helper}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-16">
-        {stats.map((stat) => (
-          <div
-            key={stat.label}
-            className="relative overflow-hidden rounded-2xl bg-white/65 backdrop-blur border border-white/70 shadow-lg shadow-black/5 px-6 py-5"
-          >
-            <div className="flex items-center gap-3 mb-2">
-              <div className="h-10 w-10 rounded-2xl bg-pink-50 flex items-center justify-center text-pink-500">
-                <stat.Icon size={20} />
-              </div>
-              <div>
-                <p className="text-sm uppercase tracking-[0.2em] text-gray-400">
-                  {stat.label}
-                </p>
-                <div className="text-3xl font-bold text-pink-500">{stat.value}</div>
-              </div>
-            </div>
-            <p className="text-gray-500 text-sm">{stat.helper}</p>
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-pink-200/20 via-transparent to-yellow-200/20" />
-          </div>
-        ))}
-      </div>
+      
 
       {/* Individual Fireworks */}
       <div className="max-w-6xl mx-auto mb-16">
-        <h3 className="text-2xl md:text-3xl font-semibold text-pink-400 mb-6 text-center">
-          🎆 Individual Fireworks
-        </h3>
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.35em] text-pink-500 mb-2">
+              Individual Catalogue
+            </p>
+            <h3 className="text-2xl md:text-3xl font-semibold text-slate-900">
+              Firework Effects & Specialty Shots
+            </h3>
+            <p className="text-sm text-slate-500 mt-2 max-w-2xl">
+              Filter by technique or special effect, preview the footage, and add the exact calibers you need into the custom package builder.
+            </p>
+          </div>
+          <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-slate-400">
+            <Filter size={16} /> Filters Active
+          </div>
+        </div>
         <div className="flex flex-wrap justify-center gap-3 mb-8">
           {categories.map((category) => {
             const isActive = activeCategory === category;
+            const Icon = categoryIconMap[category] || Sparkles;
             return (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
                   isActive
-                    ? "bg-pink-500 text-white border-pink-500 shadow-lg"
+                    ? "bg-slate-900 text-white border-slate-900 shadow-lg"
                     : "bg-white/80 text-gray-600 border-gray-200 hover:border-pink-300"
                 }`}
               >
+                <Icon size={16} />
                 {category}
               </button>
             );
           })}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredItems.map((item) => (
-            <motion.div
-              key={item.id}
-              className={`bg-white/60 backdrop-blur-md rounded-xl p-4 md:p-5 border border-gray-200 shadow-lg transition-transform duration-300 transform hover:scale-105 ${item.hoverColor}`}
-              variants={productVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              onMouseEnter={() => setHoveredId(item.id)}
-              onMouseLeave={() => setHoveredId(null)}
-            >
-              <div className="relative w-full aspect-square mb-3 rounded-lg overflow-hidden border border-gray-300">
-                {hoveredId === item.id && item.video ? (
-                  <video
-                    src={item.video}
-                    autoPlay
-                    loop
-                    muted
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover"
-                  />
-                )}
-              </div>
+          {filteredItems.map((item) => {
+            const priceRange = getPriceRange(item.sizes);
+            return (
+              <motion.div
+                key={item.id}
+                className={`group relative overflow-hidden rounded-2xl border border-slate-100 bg-white/90 p-5 shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl ${
+                  item.hoverColor || ""
+                }`}
+                variants={productVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                onMouseEnter={() => setHoveredId(item.id)}
+                onMouseLeave={() => setHoveredId(null)}
+              >
+                <div className="relative w-full aspect-[4/3] mb-4 rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
+                  {hoveredId === item.id && item.video ? (
+                    <video
+                      src={item.video}
+                      autoPlay
+                      loop
+                      muted
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition" />
+                  <div className="absolute top-4 left-4 text-[11px] uppercase tracking-[0.3em] text-white/80">
+                    Live Preview
+                  </div>
+                  <div className="absolute top-4 right-4 rounded-full bg-white/80 px-3 py-1 text-[11px] font-semibold text-slate-700">
+                    4K Footage
+                  </div>
+                </div>
 
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] uppercase tracking-[0.2em] text-pink-500">
-                  {item.category}
-                </span>
-                <span className="text-xs px-2 py-1 rounded-full bg-yellow-100 text-yellow-700 font-semibold">
-                  Crowd Favorite
-                </span>
-              </div>
-
-              <h3 className="text-base md:text-lg font-semibold mb-1 text-gray-700">
-                {item.name}
-              </h3>
-              <p className="text-gray-500 mb-2 text-xs md:text-sm">
-                {item.description}
-              </p>
-
-              <div className="flex flex-wrap gap-2 mb-3">
-                {item.sizes.map(({ size, price }) => (
-                  <span
-                    key={size}
-                    className="px-2 py-1 rounded-full bg-gray-100 text-gray-700 text-xs font-semibold"
-                  >
-                    💥 {size} · LKR {price.toLocaleString()}
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] uppercase tracking-[0.3em] text-pink-500">
+                    {item.category}
                   </span>
-                ))}
-              </div>
+                  <span className="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2 py-1 rounded-full">
+                    Crowd Favorite
+                  </span>
+                </div>
 
-              <div className="mt-2 flex flex-wrap justify-center gap-2 sm:gap-3 items-center">
-                {item.sizes.map((sizeObj, index) => (
-                  <button
-                    key={index}
-                    onClick={() => addToCustomPackage(item, sizeObj)}
-                    className="relative inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-white rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 shadow-md hover:shadow-lg hover:from-blue-600 hover:to-blue-700 transform hover:-translate-y-0.5 transition-all duration-200 ease-in-out"
-                  >
-                    <ShoppingCart size={12} className="sm:size-6" />
-                    Add {sizeObj.size}
-                  </button>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                {priceRange && (
+                  <div className="flex items-center justify-between text-xs text-slate-500 mb-2">
+                    <span>From {formatCurrency(priceRange.min)}</span>
+                    <span>Up to {formatCurrency(priceRange.max)}</span>
+                  </div>
+                )}
+
+                <h3 className="text-lg font-semibold text-slate-900 mb-2">{item.name}</h3>
+                <p className="text-sm text-slate-500 mb-4 leading-relaxed">{item.description}</p>
+
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {item.sizes.map(({ size, price }) => (
+                    <span
+                      key={size}
+                      className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600"
+                    >
+                      {size} · {formatCurrency(price)}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {item.sizes.map((sizeObj, index) => (
+                    <button
+                      key={`${item.id}-${sizeObj.size}-${index}`}
+                      onClick={() => addToCustomPackage(item, sizeObj)}
+                      className="inline-flex flex-1 min-w-[120px] items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-500 px-3 py-2 text-xs font-semibold text-white shadow-md transition hover:from-blue-600 hover:to-indigo-600"
+                    >
+                      <ShoppingCart size={14} />
+                      Add {sizeObj.size}
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 
       {/* Custom Package */}
       <div
-        className="max-w-6xl mx-auto mb-16 bg-white p-6 rounded-2xl shadow-md"
+        className="max-w-6xl mx-auto mb-16 rounded-[32px] border border-white/70 bg-white/90 p-6 md:p-8 shadow-2xl"
         id="custom-package"
       >
-        <h3 className="text-2xl font-bold mb-4 text-pink-500">
-          📦 Your Custom Package
-        </h3>
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.35em] text-pink-500 mb-2">
+              Bespoke Builder
+            </p>
+            <h3 className="text-2xl md:text-3xl font-semibold text-slate-900">
+              Your Custom Package
+            </h3>
+          </div>
+          <div className="text-sm text-slate-500">
+            {cartCount} total shots / {formatCurrency(customPackageTotal)} estimate
+          </div>
+        </div>
         {customPackageItems.length === 0 ? (
-          <p className="text-gray-500 text-sm md:text-base">
-            No items added yet.
+          <p className="rounded-2xl border border-dashed border-pink-200 bg-pink-50 px-4 py-6 text-center text-sm text-slate-500">
+            Start adding fireworks to see your bespoke build take shape.
           </p>
         ) : (
           <>
-            <div className="overflow-x-auto mb-4">
-              <table className="w-full border text-center table-auto text-xs md:text-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+              <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-4">
+                <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Unique SKUs</p>
+                <p className="text-2xl font-semibold text-slate-900">{uniqueSkuCount}</p>
+              </div>
+              <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-4">
+                <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Total Shots</p>
+                <p className="text-2xl font-semibold text-slate-900">{cartCount}</p>
+              </div>
+              <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-4">
+                <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Estimate</p>
+                <p className="text-2xl font-semibold text-slate-900">{formatCurrency(customPackageTotal)}</p>
+              </div>
+            </div>
+
+            <div className="overflow-x-auto mb-6">
+              <table className="w-full table-auto text-xs md:text-sm border border-slate-100 rounded-2xl overflow-hidden">
                 <thead>
-                  <tr className="bg-gray-200">
-                    <th className="p-2">Item</th>
-                    <th className="p-2">Size</th>
-                    <th className="p-2">Price</th>
-                    <th className="p-2">Qty</th>
-                    <th className="p-2">Total</th>
-                    <th className="p-2">Action</th>
+                  <tr className="bg-slate-50 text-slate-500">
+                    <th className="p-3 text-left">Item</th>
+                    <th className="p-3 text-left">Size</th>
+                    <th className="p-3 text-right">Price</th>
+                    <th className="p-3 text-center">Qty</th>
+                    <th className="p-3 text-right">Total</th>
+                    <th className="p-3 text-center">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {customPackageItems.map((item, idx) => (
-                    <tr
-                      key={idx}
-                      className="border-t hover:bg-gray-50 transition"
-                    >
-                      <td className="p-2">{item.name}</td>
-                      <td className="p-2">{item.size}</td>
-                      <td className="p-2">Rs.{item.price.toLocaleString()}</td>
-                      <td className="p-2">
+                    <tr key={idx} className="border-t border-slate-100">
+                      <td className="p-3 font-semibold text-slate-700">{item.name}</td>
+                      <td className="p-3 text-slate-500">{item.size}</td>
+                      <td className="p-3 text-right text-slate-600">{formatCurrency(item.price)}</td>
+                      <td className="p-3 text-center">
                         <input
                           type="number"
                           min="1"
@@ -939,23 +908,21 @@ const Products = () => {
                           onChange={(e) =>
                             updateCustomPackageQty(
                               item,
-                              parseInt(e.target.value)
+                              parseInt(e.target.value, 10)
                             )
                           }
-                          className="w-16 border border-gray-200 rounded-md p-1 text-center bg-white text-gray-800 shadow-inner focus:outline-none focus:ring-1 focus:ring-pink-300"
+                          className="w-16 rounded-lg border border-slate-200 bg-white p-1 text-center text-slate-700 focus:outline-none focus:ring-1 focus:ring-pink-300"
                         />
                       </td>
-                      <td className="p-2 font-semibold text-red-500">
-                        Rs.{(item.price * item.quantity).toLocaleString()}
+                      <td className="p-3 text-right font-semibold text-pink-500">
+                        {formatCurrency(item.price * item.quantity)}
                       </td>
-                      <td className="p-2">
+                      <td className="p-3 text-center">
                         <button
                           onClick={() => removeFromCustomPackage(item)}
-                          className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition"
+                          className="inline-flex items-center gap-1 rounded-full bg-red-500/90 px-3 py-1 text-white hover:bg-red-600"
                         >
-                          <span className="inline-flex items-center gap-1">
-                            <Trash2 size={16} color="#fff" />
-                          </span>
+                          <Trash2 size={14} /> Remove
                         </button>
                       </td>
                     </tr>
@@ -964,57 +931,44 @@ const Products = () => {
               </table>
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
-              <h3 className="text-lg font-semibold text-pink-500">
-                Total: Rs.{customPackageTotal.toLocaleString()}
-              </h3>
-
-              <button
-                onClick={generateReport}
-                className="
-      w-full sm:w-auto
-      bg-green-500 text-white 
-      px-4 sm:px-6 lg:px-8 
-      py-2 sm:py-3 
-      rounded-lg 
-      text-sm sm:text-base lg:text-lg 
-      font-semibold 
-      hover:bg-green-600 
-      transition 
-      shadow-md
-    "
-              >
-                📝 Download PDF
-              </button>
-            </div>
-
-            <br />
-            <div className="w-full bg-pink-50 border border-pink-200 rounded-lg p-3 sm:p-4 text-center">
-              {/* Normal description */}
-              <p className="text-gray-700 text-sm sm:text-base mb-2">
-                You can download your records and easily share them on WhatsApp
-                for quick reference. Thank you for choosing us! 🙏
-              </p>
-
-              {/* WhatsApp button with icon */}
-              <button
-                type="button"
-                onClick={shareInvoiceViaWhatsApp}
-                className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm sm:text-base font-semibold px-4 py-2 rounded-lg shadow-md transition"
-              >
-                <FaWhatsapp className="text-lg" />
-                Share via WhatsApp
-              </button>
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
+              <div>
+                <p className="text-sm text-slate-500">Download a branded proposal or share it directly with your client.</p>
+                <p className="text-2xl font-semibold text-slate-900 mt-1">{formatCurrency(customPackageTotal)}</p>
+              </div>
+              <div className="flex flex-wrap gap-3 w-full lg:w-auto justify-center">
+                <button
+                  onClick={generateReport}
+                  className="inline-flex items-center gap-2 rounded-full bg-green-500 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-lg hover:bg-green-600"
+                >
+                  📝 Download PDF
+                </button>
+                <button
+                  type="button"
+                  onClick={shareInvoiceViaWhatsApp}
+                  className="inline-flex items-center gap-2 rounded-full border border-emerald-300 px-6 py-3 text-sm font-semibold text-emerald-600 hover:bg-emerald-50"
+                >
+                  <FaWhatsapp className="text-lg" /> Share via WhatsApp
+                </button>
+              </div>
             </div>
           </>
         )}
       </div>
 
       {/* Standard Packages */}
-      <div className="max-w-7xl mx-auto mb-20 px-4">
-        <h3 className="text-2xl md:text-3xl font-semibold text-pink-400 mb-6 text-center">
-          🎆 Firework Packages
-        </h3>
+      <div className="max-w-7xl mx-auto mb-20 px-4" id="packages">
+        <div className="text-center mb-10">
+          <p className="text-xs uppercase tracking-[0.35em] text-pink-500 mb-2">
+            Signature Collections
+          </p>
+          <h3 className="text-3xl md:text-4xl font-semibold text-slate-900 mb-3">
+            Professionally Curated Firework Packages
+          </h3>
+          <p className="text-sm md:text-base text-gray-600 max-w-3xl mx-auto">
+            Compare transparent pricing, guaranteed savings, and precisely what is included in each experience. Every package is engineered by our pyro specialists for effortless booking and guest-safe execution.
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {packages.map((pack) => {
@@ -1046,15 +1000,19 @@ const Products = () => {
 
                 {/* Card Content */}
                 <div className="relative p-6 flex flex-col h-full">
+                  <div className="flex items-center justify-between mb-3 text-[11px] uppercase tracking-[0.35em] text-gray-500">
+                    <span>{pack.items.length} line items</span>
+                    
+                  </div>
                   <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-2">
                     {pack.name}
                   </h3>
-                  <p className="text-gray-600 mb-4 text-sm">
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
                     {pack.description}
                   </p>
 
                   <p className="text-indigo-600 font-semibold mb-2 text-sm">
-                    Includes:
+                    Includes
                   </p>
                   <ul className="space-y-1 mb-4 text-sm text-gray-700">
                     {pack.items.map((i, idx) => (
@@ -1066,37 +1024,37 @@ const Products = () => {
                           {i.name} × {i.quantity}
                         </span>
                         <span className="text-red-500 font-semibold">
-                          LKR {(i.price * i.quantity).toLocaleString()}
+                          {formatCurrency(i.price * i.quantity)}
                         </span>
                       </li>
                     ))}
                   </ul>
 
-                  <div className="mt-auto space-y-1 text-sm text-gray-700">
-                    <p className="flex justify-between">
-                      <span className="font-medium">Subtotal:</span>
+                  <div className="mt-auto space-y-2 text-sm text-gray-700">
+                    <div className="flex justify-between">
+                      <span className="font-medium">Subtotal</span>
                       <span className="text-blue-600 font-bold">
-                        LKR {subtotal.toLocaleString()}
+                        {formatCurrency(subtotal)}
                       </span>
-                    </p>
-                    <p className="flex justify-between">
-                      <span className="font-medium">Discount:</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Discount</span>
                       <span className="text-pink-500 font-bold">
-                        - LKR {pack.discount.toLocaleString()}
+                        − {formatCurrency(pack.discount)}
                       </span>
-                    </p>
-                    <p className="flex justify-between text-base font-semibold border-t border-gray-200 pt-2">
-                      <span>Total:</span>
+                    </div>
+                    <div className="flex justify-between text-base font-semibold border-t border-gray-200 pt-2">
+                      <span>Total investment</span>
                       <span className="text-red-600">
-                        LKR {total.toLocaleString()}
+                        {formatCurrency(total)}
                       </span>
-                    </p>
+                    </div>
                     <p className="text-xs text-gray-500 text-right">
-                      You save Rs. {pack.discount.toLocaleString()}
+                      Includes on-site safety briefing & operator crew.
                     </p>
                   </div>
 
-                  <div className="mt-4 flex flex-col gap-2">
+                  <div className="mt-5">
                     <a
                       href={whatsappUrl}
                       target="_blank"
