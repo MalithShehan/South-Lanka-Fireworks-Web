@@ -1,2 +1,0 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./index.esm-BteGUWIb.js","./firebase-DrqLkIs2.js"])))=>i.map(i=>d[i]);
-import{_ as a}from"./index-DLaH2KqL.js";import{a as p}from"./firebase-DrqLkIs2.js";import"./vendor-_uqhELNW.js";async function m(){try{const{getAnalytics:t,isSupported:r}=await a(async()=>{const{getAnalytics:i,isSupported:o}=await import("./index.esm-BteGUWIb.js");return{getAnalytics:i,isSupported:o}},__vite__mapDeps([0,1]),import.meta.url);await r()&&t(p)}catch{}}export{m as initAnalytics};
