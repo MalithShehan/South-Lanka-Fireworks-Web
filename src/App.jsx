@@ -69,7 +69,26 @@ export default function App() {
     }, []);
 
     return (
-        <>
+        <div className="animated-bg">
+            {/* Floating glow orbs — pure CSS, GPU-composited */}
+            <div className="bg-orb bg-orb--1" aria-hidden="true" />
+            <div className="bg-orb bg-orb--2" aria-hidden="true" />
+            <div className="bg-orb bg-orb--3" aria-hidden="true" />
+
+            {/* Rising sparkle particles */}
+            <div className="bg-sparkle bg-sparkle--1" aria-hidden="true" />
+            <div className="bg-sparkle bg-sparkle--2" aria-hidden="true" />
+            <div className="bg-sparkle bg-sparkle--3" aria-hidden="true" />
+            <div className="bg-sparkle bg-sparkle--4" aria-hidden="true" />
+            <div className="bg-sparkle bg-sparkle--5" aria-hidden="true" />
+            <div className="bg-sparkle bg-sparkle--6" aria-hidden="true" />
+            <div className="bg-sparkle bg-sparkle--7" aria-hidden="true" />
+            <div className="bg-sparkle bg-sparkle--8" aria-hidden="true" />
+            <div className="bg-sparkle bg-sparkle--9" aria-hidden="true" />
+            <div className="bg-sparkle bg-sparkle--10" aria-hidden="true" />
+            <div className="bg-sparkle bg-sparkle--11" aria-hidden="true" />
+            <div className="bg-sparkle bg-sparkle--12" aria-hidden="true" />
+
             <a href="#home" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-pink-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
                 Skip to main content
             </a>
@@ -89,6 +108,6 @@ export default function App() {
                 </Suspense>
             </main>
             <FloatingButtons />
-        </>
+        </div>
     );
 }
