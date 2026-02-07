@@ -1,21 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-MVPMDS2K");
-    </script>
-    <meta name="google-site-verification" content="google-site-verification=1NoYka2cUzfunfpmVKFEMh1Wrv16HjNQwh2Ks_YAAms" />
-    <!-- End Google Tag Manager -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>South Lanka Fireworks</title>
@@ -39,20 +24,20 @@
 
     <link
       rel="icon"
-      type="image/png"
-      href="/assets/MainLogo.jpg"
-      sizes="512x512"
+      type="image/webp"
+      href="/assets/MainLogo.webp"
+      sizes="200x200"
     />
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/MainLogo.jpg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/MainLogo.webp" />
     <link
       rel="preload"
       as="image"
-      href="/assets/SouthLankaFireworks.png"
+      href="/assets/SouthLankaFireworks.webp"
+      type="image/webp"
       fetchpriority="high"
     />
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
     <!-- Open Graph / Facebook -->
     <meta
@@ -65,7 +50,7 @@
     />
     <meta
       property="og:image"
-      content="https://slfireworks.com/public/assets/MainLogo.jpg"
+      content="https://slfireworks.com/assets/MainLogo.webp"
     />
     <meta property="og:url" content="https://slfireworks.com/" />
     <meta property="og:type" content="website" />
@@ -83,7 +68,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://slfireworks.com/public/assets/MainLogo.jpg"
+      content="https://slfireworks.com/assets/MainLogo.webp"
     />
     <meta name="twitter:site" content="@SouthLankaFireworks" />
 
@@ -93,35 +78,43 @@
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@400;700&family=Poppins:wght@400;600;700&display=swap"
       onload="this.onload=null;this.rel='stylesheet'"
     />
     <noscript>
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@400;700&family=Poppins:wght@400;600;700&display=swap"
       />
     </noscript>
 
     <script>
+      // Defer ALL analytics to after page is interactive
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        window.dataLayer.push(arguments);
-      }
-      const scheduleIdle =
-        window.requestIdleCallback ||
-        function (cb) {
-          return setTimeout(cb, 1500);
-        };
-      scheduleIdle(function () {
-        const gtagScript = document.createElement("script");
-        gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-XVDHNDSNNM";
-        gtagScript.async = true;
-        gtagScript.onload = function () {
-          gtag("js", new Date());
-          gtag("config", "G-XVDHNDSNNM", { anonymize_ip: true });
-        };
-        document.head.appendChild(gtagScript);
+      function gtag() { window.dataLayer.push(arguments); }
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          // GTM
+          (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0],
+              j = d.createElement(s),
+              dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+          })(window, document, 'script', 'dataLayer', 'GTM-MVPMDS2K');
+          // GA4
+          var gs = document.createElement('script');
+          gs.src = 'https://www.googletagmanager.com/gtag/js?id=G-XVDHNDSNNM';
+          gs.async = true;
+          gs.onload = function () {
+            gtag('js', new Date());
+            gtag('config', 'G-XVDHNDSNNM', { anonymize_ip: true });
+          };
+          document.head.appendChild(gs);
+        }, 3000);
       });
     </script>
 
@@ -131,7 +124,7 @@
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "South Lanka Fireworks",
-        "image": "https://slfireworks.com/public/assets/MainLogo.jpg",
+        "image": "https://slfireworks.com/assets/MainLogo.webp",
         "url": "https://slfireworks.com",
         "telephone": "+94-77-7135516",
         "priceRange": "$$",
@@ -168,7 +161,7 @@
           "name": "South Lanka Fireworks",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://slfireworks.com/public/assets/MainLogo.jpg"
+            "url": "https://slfireworks.com/assets/MainLogo.webp"
           }
         }
       }
@@ -241,6 +234,13 @@
       Fireworks.</noscript
     >
     <div id="root"></div>
+
+    <!-- NavBar / FloatingButtons CSS animations (replaces framer-motion) -->
+    <style>
+      @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+      @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0 } to { transform: translateX(0); opacity: 1 } }
+      @keyframes slideInItem { from { opacity: 0; transform: translateX(-30px) } to { opacity: 1; transform: translateX(0) } }
+    </style>
 
     <!-- React App Entry -->
     <script type="module" src="/src/main.jsx"></script>

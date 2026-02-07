@@ -20,6 +20,7 @@ const About = () => {
     <section
       id="about"
       className="relative py-20 px-4 md:px-10 text-gray-100 overflow-hidden"
+      aria-label="About South Lanka Fireworks"
     >
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-10 left-10 h-48 w-48 bg-pink-500/15 blur-3xl" />
@@ -44,7 +45,7 @@ const About = () => {
           property="og:description"
           content="Discover the story of South Lanka Fireworks and how we bring magic to weddings, festivals, and corporate events in Sri Lanka."
         />
-        <meta property="og:image" content="/assets/SouthLankaFireworks.png" />
+        <meta property="og:image" content="/assets/SouthLankaFireworks.webp" />
         <meta property="og:url" content="https://slfireworks.com/about" />
         <meta property="og:type" content="website" />
       </Helmet>

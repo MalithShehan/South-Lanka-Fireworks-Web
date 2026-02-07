@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
 import { ChevronUp } from "lucide-react";
 
 const FloatingButtons = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [whatsappPulse, setWhatsappPulse] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return undefined;
@@ -31,15 +36,14 @@ const FloatingButtons = () => {
   return (
     <>
       {/* Floating WhatsApp Button */}
-      <motion.a
+      <a
         href="https://wa.me/94777135516?text=Hello%20South%20Lanka%20Fireworks!%20I%20would%20like%20to%20know%20about%20your%20firework%20packages."
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        className="fixed bottom-6 right-6 z-50 group"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 2, type: "spring", stiffness: 200 }}
+        className={`fixed bottom-6 right-6 z-50 group transition-all duration-500 ${
+          mounted ? "scale-100 opacity-100" : "scale-0 opacity-0"
+        }`}
       >
         {/* Pulse ring */}
         {whatsappPulse && (
@@ -54,24 +58,18 @@ const FloatingButtons = () => {
             <FaWhatsapp size={28} className="text-white" />
           </div>
         </div>
-      </motion.a>
+      </a>
 
       {/* Scroll-to-Top Button */}
-      <AnimatePresence>
-        {showScrollTop && (
-          <motion.button
-            onClick={scrollToTop}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed bottom-6 left-6 z-50 h-12 w-12 rounded-full bg-white/90 border border-gray-200 shadow-lg flex items-center justify-center text-gray-700 hover:bg-pink-500 hover:text-white hover:border-pink-500 transition-all duration-300 backdrop-blur"
-            aria-label="Scroll to top"
-          >
-            <ChevronUp size={22} />
-          </motion.button>
-        )}
-      </AnimatePresence>
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 left-6 z-50 h-12 w-12 rounded-full bg-white/90 border border-gray-200 shadow-lg flex items-center justify-center text-gray-700 hover:bg-pink-500 hover:text-white hover:border-pink-500 transition-all duration-300 backdrop-blur animate-[fadeIn_0.3s_ease]"
+          aria-label="Scroll to top"
+        >
+          <ChevronUp size={22} />
+        </button>
+      )}
     </>
   );
 };

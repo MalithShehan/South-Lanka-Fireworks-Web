@@ -3,8 +3,8 @@ import Navbar from "./components/NavBar.jsx";
 import Home from "./components/Home.jsx";
 import FloatingButtons from "./components/FloatingButtons.jsx";
 import LoadingSpinner from "./components/LoadingSpinner.jsx";
-import TrustBadges from "./components/TrustBadges.jsx";
 
+const TrustBadges = lazy(() => import("./components/TrustBadges.jsx"));
 const About = lazy(() => import("./components/About.jsx"));
 const Services = lazy(() => import("./components/Services.jsx"));
 const Products = lazy(() => import("./components/Products.jsx"));
@@ -70,19 +70,24 @@ export default function App() {
 
     return (
         <>
+            <a href="#home" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-pink-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+                Skip to main content
+            </a>
             <Navbar />
-            <Home />
-            <TrustBadges />
-            <Suspense fallback={<LoadingSpinner />}>
-                <About />
-                <Services />
-                <Products />
-                <Portfolio />
-                <Feedback />
-                <FAQ />
-                <Contact />
-                <Footer />
-            </Suspense>
+            <main>
+                <Home />
+                <Suspense fallback={<LoadingSpinner />}>
+                    <TrustBadges />
+                    <About />
+                    <Services />
+                    <Products />
+                    <Portfolio />
+                    <Feedback />
+                    <FAQ />
+                    <Contact />
+                    <Footer />
+                </Suspense>
+            </main>
             <FloatingButtons />
         </>
     );

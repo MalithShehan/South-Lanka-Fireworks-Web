@@ -1,8 +1,42 @@
-﻿import { useState } from "react";
+﻿import { useState, useRef, useEffect } from "react";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { FaWhatsapp, FaFacebook, FaTiktok, FaInstagram } from "react-icons/fa";
-import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+
+const LazyIframe = ({ src, title, ...props }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef}>
+      {isVisible ? (
+        <iframe src={src} title={title} {...props} />
+      ) : (
+        <div
+          style={{ width: props.width, height: props.height }}
+          className="bg-gray-800/50 flex items-center justify-center text-gray-500 text-sm"
+          aria-label="Map loading..."
+        >
+          <MapPin size={24} className="animate-pulse" />
+        </div>
+      )}
+    </div>
+  );
+};
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +56,7 @@ const Contact = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     setSubmitting(true);
+    const { default: Swal } = await import("sweetalert2");
 
     const payload = new FormData();
     payload.append("access_key", "f414ed45-f1d0-4522-a132-2604d0dd27ec");
@@ -71,6 +106,7 @@ const Contact = () => {
     <section
       id="contact"
       className="relative py-20 px-6 text-gray-100"
+      aria-label="Contact us"
     >
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-10 right-10 h-32 w-32 bg-pink-500/15 blur-3xl" />
@@ -93,7 +129,7 @@ const Contact = () => {
           property="og:description"
           content="Reach out to South Lanka Fireworks for unforgettable firework shows in Sri Lanka. Book for weddings, corporate events, and festivals."
         />
-        <meta property="og:image" content="/assets/SouthLankaFireworks.png" />
+        <meta property="og:image" content="/assets/SouthLankaFireworks.webp" />
         <meta property="og:url" content="https://slfireworks.com/contact" />
         <meta property="og:type" content="website" />
       </Helmet>
@@ -213,48 +249,55 @@ const Contact = () => {
           <form onSubmit={onSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-1 block">Name *</label>
+                <label htmlFor="contact-name" className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-1 block">Name *</label>
                 <input
+                  id="contact-name"
                   type="text"
                   name="name"
                   placeholder="Your Name"
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  autoComplete="name"
                   className="w-full border border-white/15 rounded-xl px-4 py-3 bg-white/5 text-gray-100 placeholder:text-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400"
                 />
               </div>
               <div>
-                <label className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-1 block">Phone</label>
+                <label htmlFor="contact-phone" className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-1 block">Phone</label>
                 <input
+                  id="contact-phone"
                   type="tel"
                   name="phone"
                   placeholder="07X XXX XXXX"
                   value={formData.phone}
                   onChange={handleChange}
+                  autoComplete="tel"
                   className="w-full border border-white/15 rounded-xl px-4 py-3 bg-white/5 text-gray-100 placeholder:text-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400"
                 />
               </div>
             </div>
             <div>
-              <label className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-1 block">Email *</label>
+              <label htmlFor="contact-email" className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-1 block">Email *</label>
               <input
+                id="contact-email"
                 type="email"
                 name="email"
                 placeholder="Your Email"
                 value={formData.email}
                 onChange={handleChange}
                 required
+                autoComplete="email"
                 className="w-full border border-white/15 rounded-xl px-4 py-3 bg-white/5 text-gray-100 placeholder:text-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400"
               />
             </div>
             <div>
-              <label className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-1 block">Event Type</label>
+              <label htmlFor="contact-eventType" className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-1 block">Event Type</label>
               <select
+                id="contact-eventType"
                 name="eventType"
                 value={formData.eventType}
                 onChange={handleChange}
-                className="w-full border border-white/15 rounded-xl px-4 py-3 bg-white/5 text-gray-100 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400"
+                className="w-full border border-white/15 rounded-xl px-4 py-3 bg-[#1a1730] text-gray-100 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400"
               >
                 <option value="">Select event type...</option>
                 <option value="Wedding">Wedding</option>
@@ -267,8 +310,9 @@ const Contact = () => {
               </select>
             </div>
             <div>
-              <label className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-1 block">Message *</label>
+              <label htmlFor="contact-message" className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-1 block">Message *</label>
               <textarea
+                id="contact-message"
                 name="message"
                 rows="4"
                 placeholder="Tell us about your event – date, location, and any special requirements..."
@@ -302,15 +346,15 @@ const Contact = () => {
 
       {/* Map Section */}
       <div className="max-w-6xl mx-auto mt-14 rounded-3xl overflow-hidden shadow-2xl border border-white/10 backdrop-blur">
-        <iframe
-          title="South Lanka Fireworks Location"
+        <LazyIframe
+          title="South Lanka Fireworks Location - Google Maps"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d239.57941086033475!2d80.1869036120917!3d6.0508440296205155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae1750019cb271d%3A0x6c811e7c258a3a73!2sSouth%20Lanka%20Fireworks!5e1!3m2!1sen!2slk!4v1754989535052!5m2!1sen!2slk"
           width="100%"
-          height="380"
+          height={380}
           style={{ border: 0 }}
           allowFullScreen
-          loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
+          aria-label="Google Maps showing South Lanka Fireworks location in Galle, Sri Lanka"
         />
       </div>
       </div>

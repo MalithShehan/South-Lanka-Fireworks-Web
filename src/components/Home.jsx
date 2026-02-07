@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState, memo } from "react";
 import { Helmet } from "react-helmet-async";
-import BackgroundVideo from "/assets/fireworks-video.mp4";
 
 const HERO_MESSAGES = [
   "Spectacular Firework Shows",
@@ -61,7 +59,7 @@ const Home = () => {
     : HERO_MESSAGES[messageIndex];
 
   return (
-    <div id="home" className="relative min-h-screen w-full overflow-hidden">
+    <div id="home" className="relative min-h-screen w-full overflow-hidden" role="banner">
       
       <Helmet>
         <title>South Lanka Fireworks - Home</title>
@@ -74,8 +72,8 @@ const Home = () => {
           name="keywords"
           content="Fireworks, Pyrotechnics, Firework Shows, Event Fireworks, Wedding Fireworks, Festival Fireworks, Corporate Event Fireworks, Sri Lanka Fireworks"
         />
-        <meta property="og:image" content="/assets/SouthLankaFireworks.png" />
-        <link rel="icon" href="/assets/SouthLankaFireworks.png" />
+        <meta property="og:image" content="/assets/SouthLankaFireworks.webp" />
+        <link rel="icon" href="/assets/SouthLankaFireworks.webp" />
       </Helmet>
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900 via-slate-900 to-black" />
@@ -87,7 +85,7 @@ const Home = () => {
             playsInline
             preload="none"
             className="absolute top-0 left-0 w-full h-full object-cover z-10"
-            src={BackgroundVideo}
+            src="/assets/fireworks-video.mp4"
             aria-hidden="true"
           >
             Your browser does not support the video tag.
@@ -101,58 +99,41 @@ const Home = () => {
 
       {/* Hero content */}
       <div className="relative z-30 flex flex-col items-center justify-center text-center min-h-screen px-4 font-poppins">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-6 font-Kaushan"
-        >
-          <motion.span
-            key={heroMessage}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+        <div className="mb-6 font-Kaushan">
+          <span
             className="text-2xl sm:text-3xl font-semibold bg-gradient-to-r from-yellow-300 via-orange-400 to-pink-500 text-transparent bg-clip-text drop-shadow-[0_0_12px_rgba(255,169,64,0.45)]"
             aria-live="polite"
+            role="status"
           >
             {heroMessage}
-          </motion.span>
-        </motion.div>
+          </span>
+        </div>
 
-        <motion.h1
+        <h1
           className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight drop-shadow-xl font-Kaushan bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-blue-400 animate-gradient"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
         >
           We Create Magical Firework Experiences
           
-        </motion.h1>
+        </h1>
 
-        <motion.p
+        <p
           className="text-gray-200 max-w-2xl text-lg sm:text-xl mb-8 font-light"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
         >
           South Lanka Fireworks delivers unforgettable fireworks shows for
           weddings, festivals, and corporate events across Sri Lanka.
-        </motion.p>
+        </p>
 
-        <motion.div
+        <div
           className="flex flex-col sm:flex-row gap-4 sm:gap-6"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <div className="flex gap-4 flex-wrap justify-center mt-6">
+          <nav className="flex gap-4 flex-wrap justify-center mt-6" aria-label="Hero actions">
             <a
               href="#services"
               className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/25 px-8 py-3 text-sm sm:text-base font-semibold tracking-wide text-white shadow-[0_10px_35px_rgba(255,179,71,0.35)] transition-all duration-300 hover:scale-105"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 opacity-90 group-hover:opacity-100" />
               <span className="relative flex items-center gap-2 text-white">
-                <span className="text-lg">🚀</span>
+                <span className="text-lg" aria-hidden="true">🚀</span>
                 Get Started
               </span>
             </a>
@@ -163,12 +144,12 @@ const Home = () => {
             >
               <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600 opacity-90 group-hover:opacity-100" />
               <span className="relative flex items-center gap-2 text-white">
-                <span className="text-lg ">📞</span>
+                <span className="text-lg" aria-hidden="true">📞</span>
                 Contact Us
               </span>
             </a>
-          </div>
-        </motion.div>
+          </nav>
+        </div>
 
         
       </div>
@@ -176,4 +157,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default memo(Home);

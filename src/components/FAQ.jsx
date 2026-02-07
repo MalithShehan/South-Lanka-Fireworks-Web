@@ -85,7 +85,7 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <section className="relative py-20 px-4 md:px-10 text-gray-100" id="faq">
+    <section className="relative py-20 px-4 md:px-10 text-gray-100" id="faq" aria-label="Frequently asked questions">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-10 left-10 h-48 w-48 bg-blue-500/10 blur-3xl" />
         <div className="absolute bottom-0 right-10 h-64 w-64 bg-pink-500/10 blur-[140px]" />

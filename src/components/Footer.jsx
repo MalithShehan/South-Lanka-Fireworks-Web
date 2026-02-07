@@ -55,7 +55,7 @@ function Footer() {
   };
 
   return (
-    <footer className="relative bg-gradient-to-b from-gray-900 via-gray-900 to-black text-gray-300">
+    <footer className="relative bg-gradient-to-b from-gray-900 via-gray-900 to-black text-gray-300" role="contentinfo">
       {/* Trust Badges Bar */}
       <div className="border-b border-white/10">
         <div className="max-w-6xl mx-auto px-6 py-6">
@@ -79,10 +79,13 @@ function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <img
-                src="/assets/SouthLankaFireworks.png"
+                src="/assets/SouthLankaFireworks.webp"
                 alt="South Lanka Fireworks Logo"
+                width={48}
+                height={48}
                 className="h-12 w-12 object-contain"
                 loading="lazy"
+                decoding="async"
               />
               <div>
                 <h3 className="text-lg font-bold bg-gradient-to-r from-yellow-300 via-pink-400 to-red-500 bg-clip-text text-transparent font-kaushan">

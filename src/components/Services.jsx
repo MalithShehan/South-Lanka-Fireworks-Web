@@ -68,6 +68,7 @@ const Services = () => {
     <section
       id="services"
       className="relative text-gray-100 py-24 px-6 md:px-12 overflow-hidden"
+      aria-label="Our fireworks services"
     >
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-4 right-12 h-44 w-44 bg-pink-500/15 blur-3xl" />

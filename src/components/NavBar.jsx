@@ -2,7 +2,6 @@ import React, { memo, useEffect, useRef, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { FiPhoneCall, FiMessageCircle } from "react-icons/fi";
 import { Link } from "react-scroll";
-import { motion, AnimatePresence } from "framer-motion";
 
 const MENU_ITEMS = [
   { name: "Home", to: "home", helper: "Signature hero + CTA" },
@@ -80,10 +79,8 @@ const Navbar = () => {
   }, [navOpen]);
 
   return (
-    <motion.nav
-      initial={{ y: -80 }}
-      animate={{ y: showNavbar ? 0 : -100 }}
-      transition={{ duration: 0.4 }}
+    <nav
+      style={{ transform: `translateY(${showNavbar ? 0 : -100}px)`, transition: 'transform 0.4s ease' }}
       className="fixed top-0 left-0 w-full z-50"
     >
       <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/85 backdrop-blur-2xl border-b border-white/10" />
@@ -101,11 +98,13 @@ const Navbar = () => {
             <div className="relative">
               <span className="absolute inset-0 rounded-full bg-gradient-to-br from-pink-500/40 to-amber-400/40 blur-lg group-hover:blur-xl transition" />
               <img
-                src="/assets/SouthLankaFireworks.png"
-                alt="Logo"
+                src="/assets/SouthLankaFireworks.webp"
+                alt="South Lanka Fireworks Logo"
+                width={48}
+                height={48}
                 className="relative h-10 w-10 sm:h-12 sm:w-12 object-contain drop-shadow-lg"
                 loading="eager"
-                fetchpriority="high"
+                fetchPriority="high"
                 decoding="async"
               />
             </div>
@@ -120,8 +119,8 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
-            <ul className="flex gap-5 text-sm font-semibold font-montserrat whitespace-nowrap">
+          <nav className="hidden lg:flex items-center gap-4 flex-shrink-0" aria-label="Main navigation">
+            <ul className="flex gap-5 text-sm font-semibold font-montserrat whitespace-nowrap" role="list">
               {MENU_ITEMS.map(({ name, to }) => (
                 <li key={to}>
                   <Link
@@ -142,11 +141,12 @@ const Navbar = () => {
               href="https://wa.me/94777135516?text=Hello%20South%20Lanka%20Fireworks!%20I%20would%20like%20to%20get%20a%20quote%20for%20my%20event."
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Get a quote via WhatsApp"
               className="ml-2 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-amber-400 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-pink-500/25 hover:scale-105 transition-transform whitespace-nowrap"
             >
               Get a Quote
             </a>
-          </div>
+          </nav>
 
           {/* Mobile Toggle */}
           <button
@@ -160,132 +160,118 @@ const Navbar = () => {
         </div>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {navOpen && (
-          <>
-            {/* Overlay */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.6 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black z-40 lg:hidden"
-            />
+      {navOpen && (
+        <>
+          {/* Overlay */}
+          <div
+            className="fixed inset-0 bg-black/60 z-40 lg:hidden animate-[fadeIn_0.3s_ease]"
+          />
 
-            {/* Sidebar */}
-            <motion.div
-              ref={sidebarRef}
-              initial={{ x: "-100%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "-100%", opacity: 0 }}
-              transition={{ duration: 0.45, ease: [0.25, 0.8, 0.25, 1] }}
-              className="fixed top-0 left-0 h-screen w-3/4 sm:w-2/5
-                         backdrop-blur-xl bg-gradient-to-b from-black/90 via-black/70 to-black/80
-                         text-white z-50 shadow-2xl flex flex-col"
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between p-5 border-b border-white/10">
-                <Link
-                  to="home"
-                  smooth
-                  offset={-80}
-                  duration={500}
-                  onClick={() => {
-                    updateHash("home");
-                    closeNav();
-                  }}
-                  className="flex items-center gap-3 cursor-pointer"
+          {/* Sidebar */}
+          <div
+            ref={sidebarRef}
+            className="fixed top-0 left-0 h-screen w-3/4 sm:w-2/5
+                       backdrop-blur-xl bg-gradient-to-b from-black/90 via-black/70 to-black/80
+                       text-white z-50 shadow-2xl flex flex-col animate-[slideInLeft_0.4s_ease]"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between p-5 border-b border-white/10">
+              <Link
+                to="home"
+                smooth
+                offset={-80}
+                duration={500}
+                onClick={() => {
+                  updateHash("home");
+                  closeNav();
+                }}
+                className="flex items-center gap-3 cursor-pointer"
+              >
+                <img
+                  src="/assets/SouthLankaFireworks.webp"
+                  alt="South Lanka Fireworks Logo"
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 object-contain drop-shadow-md"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span
+                  className="bg-gradient-to-r from-yellow-300 via-pink-400 to-red-500
+                                 bg-clip-text text-transparent font-bold font-kaushan text-lg tracking-wide"
                 >
-                  <img
-                    src="/assets/SouthLankaFireworks.png"
-                    alt="Logo"
-                    className="h-10 w-10 object-contain drop-shadow-md"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <span
-                    className="bg-gradient-to-r from-yellow-300 via-pink-400 to-red-500
-                                   bg-clip-text text-transparent font-bold font-kaushan text-lg tracking-wide"
-                  >
-                    South Lanka Fireworks
-                  </span>
-                </Link>
-                <button
-                  onClick={closeNav}
-                  aria-label="Close menu"
-                  className="text-gray-300 hover:text-white"
-                >
-                  <AiOutlineClose size={26} />
-                </button>
-              </div>
+                  South Lanka Fireworks
+                </span>
+              </Link>
+              <button
+                onClick={closeNav}
+                aria-label="Close menu"
+                className="text-gray-300 hover:text-white"
+              >
+                <AiOutlineClose size={26} />
+              </button>
+            </div>
 
-              <div className="p-6 border-b border-white/5 bg-white/5">
-                <p className="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">
-                  Rapid Response
-                </p>
-                <div className="grid grid-cols-1 gap-3">
-                  {QUICK_ACTIONS.map(({ label, helper, href, Icon }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target={href.startsWith("http") ? "_blank" : undefined}
-                      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/90 hover:bg-white/10 transition"
-                    >
-                      <div>
-                        <p className="font-semibold">{label}</p>
-                        <p className="text-xs text-white/60">{helper}</p>
-                      </div>
-                      <span className="h-10 w-10 rounded-2xl bg-gradient-to-br from-yellow-300/40 to-pink-400/40 grid place-items-center">
-                        <Icon size={18} />
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Links with staggered animation */}
-              <ul className="flex flex-col p-6 space-y-3 overflow-y-auto font-montserrat">
-                {MENU_ITEMS.map(({ name, to, helper }, index) => (
-                  <motion.li
-                    key={to}
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      delay: index * 0.08,
-                      duration: 0.35,
-                      ease: "easeOut",
-                    }}
+            <div className="p-6 border-b border-white/5 bg-white/5">
+              <p className="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">
+                Rapid Response
+              </p>
+              <div className="grid grid-cols-1 gap-3">
+                {QUICK_ACTIONS.map(({ label, helper, href, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/90 hover:bg-white/10 transition"
                   >
-                    <Link
-                      to={to}
-                      onClick={() => {
-                        updateHash(to);
-                        closeNav();
-                      }}
-                      smooth
-                      offset={-80}
-                      duration={500}
-                      className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/0 px-4 py-4 text-white transition-all duration-300 hover:border-pink-200 hover:bg-white/10"
-                    >
-                      <span className="text-xs font-semibold tracking-[0.4em] text-white/50">{String(index + 1).padStart(2, "0")}</span>
-                      <div>
-                        <p className="text-base font-semibold">{name}</p>
-                        {helper && (
-                          <p className="text-xs text-white/60">{helper}</p>
-                        )}
-                      </div>
-                    </Link>
-                  </motion.li>
+                    <div>
+                      <p className="font-semibold">{label}</p>
+                      <p className="text-xs text-white/60">{helper}</p>
+                    </div>
+                    <span className="h-10 w-10 rounded-2xl bg-gradient-to-br from-yellow-300/40 to-pink-400/40 grid place-items-center">
+                      <Icon size={18} />
+                    </span>
+                  </a>
                 ))}
-              </ul>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+              </div>
+            </div>
 
-      {/* Global Fonts */}
-    </motion.nav>
+            {/* Links with staggered CSS animation */}
+            <ul className="flex flex-col p-6 space-y-3 overflow-y-auto font-montserrat">
+              {MENU_ITEMS.map(({ name, to, helper }, index) => (
+                <li
+                  key={to}
+                  className="animate-[slideInItem_0.35s_ease_forwards]"
+                  style={{ opacity: 0, animationDelay: `${index * 0.08}s` }}
+                >
+                  <Link
+                    to={to}
+                    onClick={() => {
+                      updateHash(to);
+                      closeNav();
+                    }}
+                    smooth
+                    offset={-80}
+                    duration={500}
+                    className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/0 px-4 py-4 text-white transition-all duration-300 hover:border-pink-200 hover:bg-white/10"
+                  >
+                    <span className="text-xs font-semibold tracking-[0.4em] text-white/50">{String(index + 1).padStart(2, "0")}</span>
+                    <div>
+                      <p className="text-base font-semibold">{name}</p>
+                      {helper && (
+                        <p className="text-xs text-white/60">{helper}</p>
+                      )}
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
+
+    </nav>
   );
 };
 

@@ -104,6 +104,7 @@ const Feedback = () => {
     <section
       id="feedback"
       className="relative py-20 px-4 md:px-10 text-gray-100"
+      aria-label="Client testimonials and feedback"
     >
       <div className="relative max-w-6xl mx-auto">
         <div className="text-center mb-12">
@@ -149,52 +150,61 @@ const Feedback = () => {
             </p>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
-                <label className="text-xs uppercase tracking-[0.3em] text-pink-500">
+                <label htmlFor="feedback-name" className="text-xs uppercase tracking-[0.3em] text-pink-500">
                   Name
                 </label>
                 <input
+                  id="feedback-name"
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  autoComplete="name"
                   className="mt-1 w-full rounded-xl border border-white/15 bg-white/5 text-gray-100 placeholder:text-gray-500 px-4 py-3 shadow-inner focus:ring-2 focus:ring-pink-400 focus:outline-none"
                   placeholder="Your name"
                 />
               </div>
               <div>
-                <label className="text-xs uppercase tracking-[0.3em] text-pink-500">
+                <label htmlFor="feedback-email" className="text-xs uppercase tracking-[0.3em] text-pink-500">
                   Email
                 </label>
                 <input
+                  id="feedback-email"
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  autoComplete="email"
                   className="mt-1 w-full rounded-xl border border-white/15 bg-white/5 text-gray-100 placeholder:text-gray-500 px-4 py-3 shadow-inner focus:ring-2 focus:ring-pink-400 focus:outline-none"
                   placeholder="you@email.com"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-4">
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows="4"
-                  className="rounded-xl border border-white/15 bg-white/5 text-gray-100 placeholder:text-gray-500 px-4 py-3 shadow-inner focus:ring-2 focus:ring-pink-400 focus:outline-none"
-                  placeholder="Tell us what stood out."
-                />
                 <div>
-                  <label className="text-xs uppercase tracking-[0.3em] text-pink-500">
+                  <label htmlFor="feedback-message" className="sr-only">Your feedback message</label>
+                  <textarea
+                    id="feedback-message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows="4"
+                    className="rounded-xl border border-white/15 bg-white/5 text-gray-100 placeholder:text-gray-500 px-4 py-3 shadow-inner focus:ring-2 focus:ring-pink-400 focus:outline-none w-full"
+                    placeholder="Tell us what stood out."
+                  />
+                </div>
+                <div>
+                  <label htmlFor="feedback-rating" className="text-xs uppercase tracking-[0.3em] text-pink-500">
                     Rating
                   </label>
                   <select
+                    id="feedback-rating"
                     name="rating"
                     value={formData.rating}
                     onChange={handleChange}
-                    className="mt-1 w-full rounded-xl border border-white/15 bg-white/5 text-gray-100 px-3 py-3 shadow-inner focus:ring-2 focus:ring-pink-400 focus:outline-none"
+                    className="mt-1 w-full rounded-xl border border-white/15 bg-[#1a1730] text-gray-100 px-3 py-3 shadow-inner focus:ring-2 focus:ring-pink-400 focus:outline-none"
                   >
                     {[5, 4, 3, 2, 1].map((value) => (
                       <option key={value} value={value}>

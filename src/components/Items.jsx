@@ -2,7 +2,7 @@ const items = [
   {
     id: 1,
     name: "Red Color Shell",
-    image: "/assets/RedShell.jpg",
+    image: "/assets/RedShell.webp",
     video: "/assets/RedShellVideo.mp4",
     description:
       "A dazzling red aerial burst that lights up the night sky — perfect for grand finales and festive highlights.",
@@ -15,7 +15,7 @@ const items = [
   {
     id: 2,
     name: "Yellow Color Shell",
-    image: "/assets/YellowShell.jpg",
+    image: "/assets/YellowShell.webp",
     video: "/assets/YellowShell.mp4",
     description:
       "A bright yellow aerial shell that bursts into a stunning display — perfect for celebrations and festive occasions.",
@@ -29,7 +29,7 @@ const items = [
   {
     id: 3,
     name: "Green Shell",
-    image: "/assets/GreenShell.jpg",
+    image: "/assets/GreenShell.webp",
     video: "/assets/GreenShell.mp4",
     description: "Bright green bursts with a vibrant, lively effect.",
     sizes: [
@@ -41,7 +41,7 @@ const items = [
   {
     id: 4,
     name: "Gold Shell",
-    image: "/assets/GoldShell.jpg",
+    image: "/assets/GoldShell.webp",
     video: "/assets/GoldShell.mp4",
     description: "Classic golden bloom with a smooth, quiet finish.",
     sizes: [{ size: "4 inch", price: 2400 }],
@@ -50,7 +50,7 @@ const items = [
   {
     id: 5,
     name: "Purple Shell",
-    image: "/assets/PurpleShell.jpg",
+    image: "/assets/PurpleShell.webp",
     video: "/assets/PurpleShell.mp4",
     description: "Soft purple bursts with a graceful bloom effect.",
     sizes: [{ size: "4 inch", price: 2400 }],
@@ -59,7 +59,7 @@ const items = [
   {
     id: 6,
     name: "Crackling Gold Shell",
-    image: "/assets/CracklingShell.jpg",
+    image: "/assets/CracklingShell.webp",
     video: "/assets/CracklingShell.mp4",
     description:
       "Ignites the sky with golden crackles and a shimmering rain effect — perfect for adding dramatic flair to any show.",
@@ -69,7 +69,7 @@ const items = [
   {
     id: 7,
     name: "White Shell",
-    image: "/assets/WhiteShell.jpg",
+    image: "/assets/WhiteShell.webp",
     video: "/assets/WhiteShell.mp4",
     description: "Elegant white bursts with a sparkling finish.",
     sizes: [{ size: "4 inch", price: 2400 }],
@@ -78,7 +78,7 @@ const items = [
   {
     id: 8,
     name: "Blue Shell",
-    image: "/assets/BlueShell.jpg",
+    image: "/assets/BlueShell.webp",
     video: "/assets/BlueShell.mp4",
     description: "Stunning blue bursts with a cool, calming effect.",
     sizes: [{ size: "4 inch", price: 2400 }],
@@ -87,7 +87,7 @@ const items = [
   {
     id: 9,
     name: "Silver Shell",
-    image: "/assets/SilverShell.jpg",
+    image: "/assets/SilverShell.webp",
     video: "/assets/SilverShell.mp4",
     description: "Elegant silver bursts with a sparkling finish.",
     sizes: [{ size: "3 inch", price: 1500 }],
@@ -96,7 +96,7 @@ const items = [
   {
     id: 10,
     name: "Star Shell Battery",
-    image: "/assets/MultiColorShell.jpg",
+    image: "/assets/MultiColorShell.webp",
     video: "/assets/MultiColorShell.mp4",
     description:
       "A vibrant mix of colors bursting in the sky, firing 3 shells at once for a grand display.",
@@ -106,7 +106,7 @@ const items = [
   {
     id: 11,
     name: "Water Fall",
-    image: "/assets/WaterFall.jpg",
+    image: "/assets/WaterFall.webp",
     video: "/assets/WaterFall.mp4",
     description:
       "A beautiful silver cascade combo ideal for weddings and special events.",
@@ -116,7 +116,7 @@ const items = [
   {
     id: 12,
     name: "Silver Rocket Battery",
-    image: "/assets/SilverRocketBattery.jpg",
+    image: "/assets/SilverRocketBattery.webp",
     video: "/assets/SilverRocketBattery.mp4",
     description:
       "A stunning silver rocket battery that lights up the sky with cascading effects.",
@@ -126,7 +126,7 @@ const items = [
   {
     id: 13,
     name: "Coconut Tree",
-    image: "/assets/CoconutTree.jpg",
+    image: "/assets/CoconutTree.webp",
     video: "/assets/CoconutTree.mp4",
     description:
       "Coconut Magic Blossom — a beautiful coconut tree effect in a single brilliant color.",
@@ -136,7 +136,7 @@ const items = [
   {
     id: 14,
     name: "Name & Logo",
-    image: "/assets/NameLogo.jpg",
+    image: "/assets/NameLogo.webp",
     video: "/assets/NameLogo.mp4",
     description: "Custom fireworks display featuring your name or logo.",
     sizes: [{ size: "Free Size", price: 14000 }],

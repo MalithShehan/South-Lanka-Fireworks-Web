@@ -1,7 +1,6 @@
 // Products.jsx
 import React, { useState } from "react";
 import items from "./Items"; // Your fireworks data
-import jsPDF from "jspdf";
 import {
   ShoppingCart,
   Sparkles,
@@ -345,6 +344,7 @@ const Products = () => {
     });
 
   const buildInvoicePdf = async () => {
+    const { default: jsPDF } = await import("jspdf");
     const doc = new jsPDF({
       orientation: "p",
       unit: "mm",
@@ -613,7 +613,7 @@ const Products = () => {
           property="og:description"
           content="Explore South Lanka Fireworks' individual fireworks and exclusive packages for weddings, festivals, and corporate events in Sri Lanka."
         />
-        <meta property="og:image" content="/assets/SouthLankaFireworks.png" />
+        <meta property="og:image" content="/assets/SouthLankaFireworks.webp" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://slfireworks.com/products" />
 
@@ -627,7 +627,7 @@ const Products = () => {
           name="twitter:description"
           content="Explore South Lanka Fireworks' individual fireworks and exclusive packages for weddings, festivals, and corporate events in Sri Lanka."
         />
-        <meta name="twitter:image" content="/assets/SouthLankaFireworks.png" />
+        <meta name="twitter:image" content="/assets/SouthLankaFireworks.webp" />
       </Helmet>
 
       {/* Floating Cart */}
@@ -775,12 +775,16 @@ const Products = () => {
                       autoPlay
                       loop
                       muted
+                      playsInline
+                      preload="none"
                       className="w-full h-full object-cover"
                     />
                   ) : (
                     <img
                       src={item.image}
                       alt={item.name}
+                      width={400}
+                      height={300}
                       loading="lazy"
                       decoding="async"
                       className="w-full h-full object-cover"
