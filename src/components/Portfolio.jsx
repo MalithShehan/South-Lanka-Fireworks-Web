@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaPlay, FaExternalLinkAlt } from "react-icons/fa";
+import { asset } from "../lib/assetPath";
 
 const portfolioItems = [
   {
@@ -8,8 +9,8 @@ const portfolioItems = [
     title: "Port City Colombo 31st Night Fireworks Show",
     description:
       "A grand fireworks spectacle at Port City to welcome the New Year. Thousands gathered to witness a synchronized pyrotechnic show lighting up the skyline.",
-    image: "/assets/PortCity.webp",
-    video: "/assets/PortCityVideo2025.mp4",
+    image: asset("/assets/PortCity.webp"),
+    video: asset("/assets/PortCityVideo2025.mp4"),
     client: "Port City Colombo",
     date: "31st December 2025",
     fullVideoUrl: "https://www.tiktok.com/@southlankafireworks/video/7590400823612509448?is_from_webapp=1&sender_device=pc&web_id=7597102042049644050",
@@ -19,8 +20,8 @@ const portfolioItems = [
     title: "St. Aloysius College Galle First Flag Fireworks Show",
     description:
       "A breathtaking fireworks display held at St. Aloysius College Galle to mark the historic first flag-raising ceremony. A memorable evening filled with color and celebration.",
-    image: "/assets/StAloysius.webp",
-    video: "/assets/StAloysiusVideo.mp4",
+    image: asset("/assets/StAloysius.webp"),
+    video: asset("/assets/StAloysiusVideo.mp4"),
     client: "St. Aloysius College Galle",
     date: "02th May 2025",
     fullVideoUrl:
@@ -31,8 +32,8 @@ const portfolioItems = [
     title: "Mahinda College Galle First Flag Fireworks Show",
     description:
       "A vibrant fireworks display organized to commemorate the first flag-raising ceremony at Mahinda College Galle. The night sky lit up in celebration, leaving a lasting impression on the attendees.",
-    image: "/assets/MahindaCollege.webp",
-    video: "/assets/MahindaCollegeVideo.mp4",
+    image: asset("/assets/MahindaCollege.webp"),
+    video: asset("/assets/MahindaCollegeVideo.mp4"),
     client: "Mahinda College Galle",
     date: "17th Mar 2025",
     fullVideoUrl: "https://vt.tiktok.com/ZSS7S3B3H/",
@@ -42,8 +43,8 @@ const portfolioItems = [
     title: "The Food Harbour Grand Opening Fireworks Show",
     description:
       "A spectacular fireworks display to celebrate the grand opening of The Food Harbour. The event featured a dazzling array of pyrotechnics that captivated the audience and marked the beginning of a new culinary destination.",
-    image: "/assets/FoodHarbour.webp",
-    video: "/assets/FoodHarbourVideo.mp4",
+    image: asset("/assets/FoodHarbour.webp"),
+    video: asset("/assets/FoodHarbourVideo.mp4"),
     client: "The Food Harbour",
     date: "17th Jan 2026",
     fullVideoUrl: "https://www.tiktok.com/@southlankafireworks/video/7596250070283013396?is_from_webapp=1&sender_device=pc&web_id=7597102042049644050",

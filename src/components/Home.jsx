@@ -1,5 +1,6 @@
 import { useEffect, useState, memo } from "react";
 import { Helmet } from "react-helmet-async";
+import { asset } from "../lib/assetPath";
 
 const HERO_MESSAGES = [
   "Spectacular Firework Shows",
@@ -72,8 +73,8 @@ const Home = () => {
           name="keywords"
           content="Fireworks, Pyrotechnics, Firework Shows, Event Fireworks, Wedding Fireworks, Festival Fireworks, Corporate Event Fireworks, Sri Lanka Fireworks"
         />
-        <meta property="og:image" content="/assets/SouthLankaFireworks.webp" />
-        <link rel="icon" href="/assets/SouthLankaFireworks.webp" />
+        <meta property="og:image" content={asset("/assets/SouthLankaFireworks.webp")} />
+        <link rel="icon" href={asset("/assets/SouthLankaFireworks.webp")} />
       </Helmet>
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900 via-slate-900 to-black" />
@@ -85,7 +86,7 @@ const Home = () => {
             playsInline
             preload="none"
             className="absolute top-0 left-0 w-full h-full object-cover z-10"
-            src="/assets/fireworks-video.mp4"
+            src={asset("/assets/fireworks-video.mp4")}
             aria-hidden="true"
           >
             Your browser does not support the video tag.

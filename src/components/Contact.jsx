@@ -2,6 +2,7 @@
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { FaWhatsapp, FaFacebook, FaTiktok, FaInstagram } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
+import { asset } from "../lib/assetPath";
 
 const LazyIframe = ({ src, title, ...props }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -129,7 +130,7 @@ const Contact = () => {
           property="og:description"
           content="Reach out to South Lanka Fireworks for unforgettable firework shows in Sri Lanka. Book for weddings, corporate events, and festivals."
         />
-        <meta property="og:image" content="/assets/SouthLankaFireworks.webp" />
+        <meta property="og:image" content={asset("/assets/SouthLankaFireworks.webp")} />
         <meta property="og:url" content="https://slfireworks.com/contact" />
         <meta property="og:type" content="website" />
       </Helmet>

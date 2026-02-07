@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { asset } from "../lib/assetPath";
 import {
   AiFillFacebook,
   AiFillInstagram,
@@ -45,7 +46,7 @@ const About = () => {
           property="og:description"
           content="Discover the story of South Lanka Fireworks and how we bring magic to weddings, festivals, and corporate events in Sri Lanka."
         />
-        <meta property="og:image" content="/assets/SouthLankaFireworks.webp" />
+        <meta property="og:image" content={asset("/assets/SouthLankaFireworks.webp")} />
         <meta property="og:url" content="https://slfireworks.com/about" />
         <meta property="og:type" content="website" />
       </Helmet>

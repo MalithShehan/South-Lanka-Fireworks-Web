@@ -1,4 +1,5 @@
 import { Link } from "react-scroll";
+import { asset } from "../lib/assetPath";
 import {
   AiFillFacebook,
   AiFillInstagram,
@@ -79,7 +80,7 @@ function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <img
-                src="/assets/SouthLankaFireworks.webp"
+                src={asset("/assets/SouthLankaFireworks.webp")}
                 alt="South Lanka Fireworks Logo"
                 width={48}
                 height={48}

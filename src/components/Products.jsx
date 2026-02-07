@@ -1,6 +1,7 @@
 // Products.jsx
 import React, { useState } from "react";
 import items from "./Items"; // Your fireworks data
+import { asset } from "../lib/assetPath";
 import {
   ShoppingCart,
   Sparkles,
@@ -356,18 +357,18 @@ const Products = () => {
     const pageHeight = doc.internal.pageSize.getHeight();
 
     const [bgImg, logoImg] = await Promise.all([
-      loadImageAsBase64("/assets/invoice-bg.png"),
-      loadImageAsBase64("/assets/SouthLankaFireworks.png"),
+      loadImageAsBase64(asset("/assets/invoice-bg.png")),
+      loadImageAsBase64(asset("/assets/SouthLankaFireworks.png")),
     ]);
 
     const [regIcon, personIcon, addressIcon, phoneIcon, emailIcon, webIcon] =
       await Promise.all([
-        loadCompressedImage("/assets/icon-reg.png"),
-        loadCompressedImage("/assets/icon-person.png"),
-        loadCompressedImage("/assets/icon-address.png"),
-        loadCompressedImage("/assets/icon-phone.png"),
-        loadCompressedImage("/assets/icon-email.png"),
-        loadCompressedImage("/assets/icon-web.png"),
+        loadCompressedImage(asset("/assets/icon-reg.png")),
+        loadCompressedImage(asset("/assets/icon-person.png")),
+        loadCompressedImage(asset("/assets/icon-address.png")),
+        loadCompressedImage(asset("/assets/icon-phone.png")),
+        loadCompressedImage(asset("/assets/icon-email.png")),
+        loadCompressedImage(asset("/assets/icon-web.png")),
       ]);
 
     const _uniqueItems = customPackageItems.length;
@@ -613,7 +614,7 @@ const Products = () => {
           property="og:description"
           content="Explore South Lanka Fireworks' individual fireworks and exclusive packages for weddings, festivals, and corporate events in Sri Lanka."
         />
-        <meta property="og:image" content="/assets/SouthLankaFireworks.webp" />
+        <meta property="og:image" content={asset("/assets/SouthLankaFireworks.webp")} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://slfireworks.com/products" />
 
@@ -627,7 +628,7 @@ const Products = () => {
           name="twitter:description"
           content="Explore South Lanka Fireworks' individual fireworks and exclusive packages for weddings, festivals, and corporate events in Sri Lanka."
         />
-        <meta name="twitter:image" content="/assets/SouthLankaFireworks.webp" />
+        <meta name="twitter:image" content={asset("/assets/SouthLankaFireworks.webp")} />
       </Helmet>
 
       {/* Floating Cart */}

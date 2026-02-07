@@ -9,7 +9,7 @@ export default defineConfig({
     compression({ algorithm: 'gzip', threshold: 1024 }),
     compression({ algorithm: 'brotliCompress', threshold: 1024 }),
   ],
-  base: './',
+  base: '/South-Lanka-Fireworks-Web/',
   build: {
     rollupOptions: {
       output: {

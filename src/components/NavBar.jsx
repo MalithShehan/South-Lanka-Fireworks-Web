@@ -2,6 +2,7 @@ import React, { memo, useEffect, useRef, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { FiPhoneCall, FiMessageCircle } from "react-icons/fi";
 import { Link } from "react-scroll";
+import { asset } from "../lib/assetPath";
 
 const MENU_ITEMS = [
   { name: "Home", to: "home", helper: "Signature hero + CTA" },
@@ -98,7 +99,7 @@ const Navbar = () => {
             <div className="relative">
               <span className="absolute inset-0 rounded-full bg-gradient-to-br from-pink-500/40 to-amber-400/40 blur-lg group-hover:blur-xl transition" />
               <img
-                src="/assets/SouthLankaFireworks.webp"
+                src={asset("/assets/SouthLankaFireworks.webp")}
                 alt="South Lanka Fireworks Logo"
                 width={48}
                 height={48}
@@ -188,7 +189,7 @@ const Navbar = () => {
                 className="flex items-center gap-3 cursor-pointer"
               >
                 <img
-                  src="/assets/SouthLankaFireworks.webp"
+                  src={asset("/assets/SouthLankaFireworks.webp")}
                   alt="South Lanka Fireworks Logo"
                   width={40}
                   height={40}
