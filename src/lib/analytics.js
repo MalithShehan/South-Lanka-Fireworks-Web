@@ -1,11 +1,11 @@
-import { app } from "./firebase";
+import { getFirebaseApp } from "./firebase";
 
 export async function initAnalytics() {
   try {
     const { getAnalytics, isSupported } = await import("firebase/analytics");
     const supported = await isSupported();
     if (supported) {
-      getAnalytics(app);
+      getAnalytics(getFirebaseApp());
     }
   } catch (error) {
     if (import.meta.env.DEV) {

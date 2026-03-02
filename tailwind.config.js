@@ -14,12 +14,11 @@ export const theme = {
       Eater: ['Eater', 'cursive'],
     },
     screens: {
-      // Change default breakpoints or add custom ones
-      sm: '480px', // default 640px
-      md: '768px', // default 768px
-      lg: '1024px', // default 1024px
-      xl: '1280px', // default 1280px
-      '2xl': '1536px' // default 1536px
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1536px'
     },
   },
 };

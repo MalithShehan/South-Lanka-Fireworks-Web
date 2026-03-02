@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
 import { ChevronUp } from "lucide-react";
 
@@ -36,14 +37,17 @@ const FloatingButtons = () => {
   return (
     <>
       {/* Floating WhatsApp Button */}
-      <a
+      <motion.a
         href="https://wa.me/94777135516?text=Hello%20South%20Lanka%20Fireworks!%20I%20would%20like%20to%20know%20about%20your%20firework%20packages."
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        className={`fixed bottom-6 right-6 z-50 group transition-all duration-500 ${
-          mounted ? "scale-100 opacity-100" : "scale-0 opacity-0"
-        }`}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={mounted ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+        whileHover={{ scale: 1.12 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="fixed bottom-8 sm:bottom-6 right-4 sm:right-6 z-50 group"
       >
         {/* Pulse ring */}
         {whatsappPulse && (
@@ -58,20 +62,28 @@ const FloatingButtons = () => {
             <FaWhatsapp size={28} className="text-white" />
           </div>
         </div>
-      </a>
+      </motion.a>
 
       {/* Scroll-to-Top Button */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-6 left-6 z-50 h-12 w-12 rounded-full bg-white/90 border border-gray-200 shadow-lg flex items-center justify-center text-gray-700 hover:bg-pink-500 hover:text-white hover:border-pink-500 transition-all duration-300 backdrop-blur animate-[fadeIn_0.3s_ease]"
-          aria-label="Scroll to top"
-        >
-          <ChevronUp size={22} />
-        </button>
-      )}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            onClick={scrollToTop}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            whileHover={{ scale: 1.15, y: -3 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            className="fixed bottom-8 sm:bottom-6 left-4 sm:left-6 z-50 h-12 w-12 rounded-full bg-white/90 border border-gray-200 shadow-lg flex items-center justify-center text-gray-700 hover:bg-pink-500 hover:text-white hover:border-pink-500 transition-colors duration-300"
+            aria-label="Scroll to top"
+          >
+            <ChevronUp size={22} />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </>
   );
 };
 
-export default FloatingButtons;
+export default memo(FloatingButtons);

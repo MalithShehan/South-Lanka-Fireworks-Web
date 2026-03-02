@@ -1,5 +1,5 @@
 // Products.jsx
-import React, { useState } from "react";
+import React, { useState, useMemo, memo } from "react";
 import items from "./Items"; // Your fireworks data
 import { asset } from "../lib/assetPath";
 import {
@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
-import { Helmet } from "react-helmet-async";
 
 const productVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -141,18 +140,19 @@ const Products = () => {
   const [toastMessage, setToastMessage] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const enhancedItems = items.map((item) => ({
+  const enhancedItems = useMemo(() => items.map((item) => ({
     ...item,
     category: categorizeItem(item),
-  }));
-  const categories = [
+  })), []);
+  const categories = useMemo(() => [
     "All",
     ...Array.from(new Set(enhancedItems.map((item) => item.category))),
-  ];
-  const filteredItems =
+  ], [enhancedItems]);
+  const filteredItems = useMemo(() =>
     activeCategory === "All"
       ? enhancedItems
-      : enhancedItems.filter((item) => item.category === activeCategory);
+      : enhancedItems.filter((item) => item.category === activeCategory),
+  [activeCategory, enhancedItems]);
 
   const totalDiscount = packages.reduce((sum, pack) => sum + pack.discount, 0);
   const avgDiscount = packages.length
@@ -588,60 +588,19 @@ const Products = () => {
       className="relative text-gray-100 py-16 px-4 md:px-12 min-h-screen overflow-hidden"
       id="products"
     >
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 h-64 w-64 bg-pink-500/15 blur-3xl" />
-        <div className="absolute -bottom-10 left-8 h-72 w-72 bg-amber-500/15 blur-[160px]" />
-      </div>
       <div className="relative">
-      <Helmet>
-        <title>South Lanka Fireworks - Products & Packages</title>
-        <meta
-          name="description"
-          content="Explore South Lanka Fireworks' individual fireworks and exclusive packages for weddings, festivals, and corporate events in Sri Lanka."
-        />
-        <meta
-          name="keywords"
-          content="Fireworks, Firework Packages, Individual Fireworks, Wedding Fireworks, Festival Fireworks, Corporate Fireworks, Sri Lanka"
-        />
-        <meta name="author" content="South Lanka Fireworks" />
-
-        {/* Open Graph */}
-        <meta
-          property="og:title"
-          content="South Lanka Fireworks - Products & Packages"
-        />
-        <meta
-          property="og:description"
-          content="Explore South Lanka Fireworks' individual fireworks and exclusive packages for weddings, festivals, and corporate events in Sri Lanka."
-        />
-        <meta property="og:image" content={asset("/assets/SouthLankaFireworks.webp")} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://slfireworks.com/products" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="South Lanka Fireworks - Products & Packages"
-        />
-        <meta
-          name="twitter:description"
-          content="Explore South Lanka Fireworks' individual fireworks and exclusive packages for weddings, festivals, and corporate events in Sri Lanka."
-        />
-        <meta name="twitter:image" content={asset("/assets/SouthLankaFireworks.webp")} />
-      </Helmet>
 
       {/* Floating Cart */}
       {cartCount > 0 && (
         <div
-          className="fixed top-20 right-5 z-50 flex items-center gap-2 bg-white shadow-lg px-4 py-2 rounded-full cursor-pointer"
+          className="fixed top-20 right-3 sm:right-5 z-50 flex items-center gap-2 bg-gray-900 border border-white/20 shadow-lg px-3 sm:px-4 py-2 rounded-full cursor-pointer"
           onClick={() => {
             const section = document.getElementById("custom-package");
             if (section) section.scrollIntoView({ behavior: "smooth" });
           }}
         >
-          <ShoppingCart size={24} className="text-blue-500" />
-          <span className="font-bold text-blue-600">{cartCount}</span>
+          <ShoppingCart size={24} className="text-pink-400" />
+          <span className="font-bold text-pink-300">{cartCount}</span>
         </div>
       )}
 
@@ -653,7 +612,7 @@ const Products = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -50, scale: 0.9 }}
             transition={{ duration: 0.5, type: "spring", stiffness: 120 }}
-            className="fixed top-2 left-2 sm:left-5 z-50 w-[85vw] sm:w-80 md:w-96 lg:w-[400px] 
+            className="fixed top-16 sm:top-2 left-2 sm:left-5 z-50 w-[85vw] sm:w-80 md:w-96 lg:w-[400px] 
                  bg-gradient-to-r from-green-500 to-teal-400 text-white px-4 sm:px-6 md:px-8 
                  py-3 sm:py-4 md:py-5 rounded-xl shadow-xl border border-white/20
                  text-xs sm:text-sm md:text-base lg:text-lg"
@@ -670,7 +629,7 @@ const Products = () => {
 
       {/* Hero */}
       <div className="max-w-6xl mx-auto mb-16">
-        <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/5 backdrop-blur-sm px-8 py-10 shadow-2xl">
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-[32px] border border-white/10 bg-[#0c0a1a]/90 px-4 sm:px-8 py-8 sm:py-10 shadow-2xl">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-pink-500 mb-4">
             <Sparkles size={14} />
             <span>Signature product desk</span>
@@ -759,7 +718,7 @@ const Products = () => {
             return (
               <motion.div
                 key={item.id}
-                className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl ${
+                className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0c0a1a]/90 p-5 shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl ${
                   item.hoverColor || ""
                 }`}
                 variants={productVariants}
@@ -835,7 +794,7 @@ const Products = () => {
                     <button
                       key={`${item.id}-${sizeObj.size}-${index}`}
                       onClick={() => addToCustomPackage(item, sizeObj)}
-                      className="inline-flex flex-1 min-w-[120px] items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-500 px-3 py-2 text-xs font-semibold text-white shadow-md transition hover:from-blue-600 hover:to-indigo-600"
+                      className="inline-flex flex-1 min-w-[100px] items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-500 px-2 sm:px-3 py-2 text-xs font-semibold text-white shadow-md transition hover:from-blue-600 hover:to-indigo-600"
                     >
                       <ShoppingCart size={14} />
                       Add {sizeObj.size}
@@ -850,7 +809,7 @@ const Products = () => {
 
       {/* Custom Package */}
       <div
-        className="max-w-6xl mx-auto mb-16 rounded-[32px] border border-white/10 bg-white/5 backdrop-blur-sm p-6 md:p-8 shadow-2xl"
+        className="max-w-6xl mx-auto mb-16 rounded-2xl sm:rounded-[32px] border border-white/10 bg-[#0c0a1a]/90 p-4 sm:p-6 md:p-8 shadow-2xl"
         id="custom-package"
       >
         <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
@@ -925,9 +884,9 @@ const Products = () => {
                       <td className="p-3 text-center">
                         <button
                           onClick={() => removeFromCustomPackage(item)}
-                          className="inline-flex items-center gap-1 rounded-full bg-red-500/90 px-3 py-1 text-white hover:bg-red-600"
+                          className="inline-flex items-center gap-1 rounded-full bg-red-500/90 px-2 sm:px-3 py-1 text-white hover:bg-red-600"
                         >
-                          <Trash2 size={14} /> Remove
+                          <Trash2 size={14} /> <span className="hidden sm:inline">Remove</span>
                         </button>
                       </td>
                     </tr>
@@ -1080,4 +1039,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default memo(Products);

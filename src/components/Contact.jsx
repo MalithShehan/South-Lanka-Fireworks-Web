@@ -1,8 +1,9 @@
-﻿import { useState, useRef, useEffect } from "react";
+﻿import { useState, useRef, useEffect, memo } from "react";
+import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { FaWhatsapp, FaFacebook, FaTiktok, FaInstagram } from "react-icons/fa";
-import { Helmet } from "react-helmet-async";
-import { asset } from "../lib/assetPath";
+import AnimatedSection from "./AnimatedSection";
+import GlowCard from "./GlowCard";
 
 const LazyIframe = ({ src, title, ...props }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -106,7 +107,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative py-20 px-6 text-gray-100"
+      className="relative py-20 px-4 sm:px-6 text-gray-100"
       aria-label="Contact us"
     >
       <div className="absolute inset-0 pointer-events-none">
@@ -114,44 +115,24 @@ const Contact = () => {
         <div className="absolute bottom-0 left-6 h-40 w-40 bg-amber-500/15 blur-3xl" />
       </div>
       <div className="relative">
-      <Helmet>
-        <title>South Lanka Fireworks - Contact Us</title>
-        <meta
-          name="description"
-          content="Get in touch with South Lanka Fireworks. Contact us for wedding fireworks, festival shows, corporate events, or custom fireworks packages across Sri Lanka."
-        />
-        <meta
-          name="keywords"
-          content="Contact South Lanka Fireworks, Wedding Fireworks Sri Lanka, Fireworks for Events, Festival Fireworks Sri Lanka, Corporate Fireworks Sri Lanka"
-        />
-        <meta name="author" content="South Lanka Fireworks" />
-        <meta property="og:title" content="Contact South Lanka Fireworks" />
-        <meta
-          property="og:description"
-          content="Reach out to South Lanka Fireworks for unforgettable firework shows in Sri Lanka. Book for weddings, corporate events, and festivals."
-        />
-        <meta property="og:image" content={asset("/assets/SouthLankaFireworks.webp")} />
-        <meta property="og:url" content="https://slfireworks.com/contact" />
-        <meta property="og:type" content="website" />
-      </Helmet>
 
-      <div className="max-w-5xl mx-auto text-center mb-14">
+      <AnimatedSection variant="fadeUp" className="max-w-5xl mx-auto text-center mb-14">
         <p className="text-xs uppercase tracking-[0.4em] text-pink-500 mb-3">
           Get In Touch
         </p>
-        <h2 className="text-4xl font-extrabold text-white mb-4">
-          Let's Plan Your Show
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+          Let's Plan <span className="bg-gradient-to-r from-pink-400 via-orange-300 to-yellow-300 bg-clip-text text-transparent">Your Show</span>
         </h2>
         <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-          Whether it's a wedding, festival, or corporate event â€” reach out and we'll
+          Whether it's a wedding, festival, or corporate event â€" reach out and we'll
           craft the perfect fireworks experience for you.
         </p>
-      </div>
+      </AnimatedSection>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 max-w-6xl mx-auto">
         {/* Contact Info */}
         <div className="space-y-6">
-          <div className="bg-white/5 border border-white/10 backdrop-blur-sm p-8 rounded-3xl shadow-xl">
+          <GlowCard glowColor="rgba(236, 72, 153, 0.15)" className="bg-[#0c0a1a]/90 border border-white/10 p-5 sm:p-8 rounded-3xl shadow-xl">
             <h3 className="text-2xl font-semibold mb-6 text-white">
               Our Location & Details
             </h3>
@@ -193,56 +174,43 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </GlowCard>
 
           {/* Quick Connect */}
-          <div className="bg-white/5 border border-white/10 backdrop-blur-sm p-6 rounded-3xl shadow-xl">
+          <GlowCard glowColor="rgba(251, 191, 36, 0.15)" className="bg-[#0c0a1a]/90 border border-white/10 p-6 rounded-3xl shadow-xl">
             <h4 className="text-sm font-semibold uppercase tracking-[0.3em] text-white mb-4">
               Quick Connect
             </h4>
             <div className="grid grid-cols-2 gap-3">
-              <a
-                href="https://wa.me/+94777135516?text=Hello%20South%20Lanka%20Fireworks!%20I%20would%20like%20to%20know%20more%20about%20your%20products."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm font-medium text-green-400 hover:bg-green-500/20 transition"
-              >
-                <FaWhatsapp size={18} />
-                WhatsApp
-              </a>
-              <a
-                href="https://www.facebook.com/share/1CEsjdTcV4/?mibextid=wwXIfr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-xl border border-blue-500/30 bg-blue-500/10 px-4 py-3 text-sm font-medium text-blue-400 hover:bg-blue-500/20 transition"
-              >
-                <FaFacebook size={18} />
-                Facebook
-              </a>
-              <a
-                href="https://www.tiktok.com/@southlankafireworks?_t=ZS-8ysCsrhOBOx&_r=1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-xl border border-pink-500/30 bg-pink-500/10 px-4 py-3 text-sm font-medium text-pink-400 hover:bg-pink-500/20 transition"
-              >
-                <FaTiktok size={18} />
-                TikTok
-              </a>
-              <a
-                href="https://www.instagram.com/southlankafireworks"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-xl border border-purple-500/30 bg-purple-500/10 px-4 py-3 text-sm font-medium text-purple-400 hover:bg-purple-500/20 transition"
-              >
-                <FaInstagram size={18} />
-                Instagram
-              </a>
+              {[
+                { href: "https://wa.me/+94777135516?text=Hello%20South%20Lanka%20Fireworks!%20I%20would%20like%20to%20know%20more%20about%20your%20products.", icon: <FaWhatsapp size={18} />, label: "WhatsApp", classes: "border-green-500/30 bg-green-500/10 text-green-400 hover:bg-green-500/20" },
+                { href: "https://www.facebook.com/share/1CEsjdTcV4/?mibextid=wwXIfr", icon: <FaFacebook size={18} />, label: "Facebook", classes: "border-blue-500/30 bg-blue-500/10 text-blue-400 hover:bg-blue-500/20" },
+                { href: "https://www.tiktok.com/@southlankafireworks?_t=ZS-8ysCsrhOBOx&_r=1", icon: <FaTiktok size={18} />, label: "TikTok", classes: "border-pink-500/30 bg-pink-500/10 text-pink-400 hover:bg-pink-500/20" },
+                { href: "https://www.instagram.com/southlankafireworks", icon: <FaInstagram size={18} />, label: "Instagram", classes: "border-purple-500/30 bg-purple-500/10 text-purple-400 hover:bg-purple-500/20" },
+              ].map((social, i) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className={`flex items-center gap-2 rounded-xl border px-3 sm:px-4 py-3 text-sm font-medium transition ${social.classes}`}
+                >
+                  {social.icon}
+                  {social.label}
+                </motion.a>
+              ))}
             </div>
-          </div>
+          </GlowCard>
         </div>
 
         {/* Contact Form */}
-        <div className="bg-white/5 border border-white/10 backdrop-blur-sm p-8 rounded-3xl shadow-xl">
+        <GlowCard glowColor="rgba(236, 72, 153, 0.12)" className="bg-[#0c0a1a]/90 border border-white/10 p-5 sm:p-8 rounded-3xl shadow-xl">
           <h3 className="text-2xl font-semibold mb-2 text-white">
             Send Us a Message
           </h3>
@@ -260,7 +228,7 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   autoComplete="name"
-                  className="w-full border border-white/15 rounded-xl px-4 py-3 bg-white/5 text-gray-100 placeholder:text-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400"
+                  className="w-full border border-white/15 rounded-xl px-4 py-3 bg-white/5 text-gray-100 placeholder:text-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400 transition-all duration-300 focus:border-pink-500/50"
                 />
               </div>
               <div>
@@ -273,7 +241,7 @@ const Contact = () => {
                   value={formData.phone}
                   onChange={handleChange}
                   autoComplete="tel"
-                  className="w-full border border-white/15 rounded-xl px-4 py-3 bg-white/5 text-gray-100 placeholder:text-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400"
+                  className="w-full border border-white/15 rounded-xl px-4 py-3 bg-white/5 text-gray-100 placeholder:text-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400 transition-all duration-300 focus:border-pink-500/50"
                 />
               </div>
             </div>
@@ -288,7 +256,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 autoComplete="email"
-                className="w-full border border-white/15 rounded-xl px-4 py-3 bg-white/5 text-gray-100 placeholder:text-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400"
+                className="w-full border border-white/15 rounded-xl px-4 py-3 bg-white/5 text-gray-100 placeholder:text-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400 transition-all duration-300 focus:border-pink-500/50"
               />
             </div>
             <div>
@@ -298,7 +266,7 @@ const Contact = () => {
                 name="eventType"
                 value={formData.eventType}
                 onChange={handleChange}
-                className="w-full border border-white/15 rounded-xl px-4 py-3 bg-[#1a1730] text-gray-100 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400"
+                className="w-full border border-white/15 rounded-xl px-4 py-3 bg-[#1a1730] text-gray-100 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400 transition-all duration-300 focus:border-pink-500/50"
               >
                 <option value="">Select event type...</option>
                 <option value="Wedding">Wedding</option>
@@ -320,16 +288,19 @@ const Contact = () => {
                 value={formData.message}
                 onChange={handleChange}
                 required
-                className="w-full border border-white/15 rounded-xl px-4 py-3 resize-none bg-white/5 text-gray-100 placeholder:text-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400"
+                className="w-full border border-white/15 rounded-xl px-4 py-3 resize-none bg-white/5 text-gray-100 placeholder:text-gray-500 shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-400 transition-all duration-300 focus:border-pink-500/50"
               />
             </div>
-            <button
+            <motion.button
               type="submit"
               disabled={submitting}
-              className="w-full bg-gradient-to-r from-pink-500 to-amber-400 text-white py-3 rounded-xl hover:opacity-95 transition font-semibold shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full bg-gradient-to-r from-pink-500 to-amber-400 text-white py-3 rounded-xl transition font-semibold shadow-lg shadow-pink-500/30 disabled:opacity-60 disabled:cursor-not-allowed relative overflow-hidden"
             >
-              {submitting ? "Sending..." : "Send Message"}
-            </button>
+              <span className="absolute inset-0 shimmer-effect" />
+              <span className="relative">{submitting ? "Sending..." : "Send Message"}</span>
+            </motion.button>
             <p className="text-xs text-gray-400 text-center">
               Or reach us instantly via{" "}
               <a
@@ -342,17 +313,18 @@ const Contact = () => {
               </a>
             </p>
           </form>
-        </div>
+        </GlowCard>
       </div>
 
       {/* Map Section */}
-      <div className="max-w-6xl mx-auto mt-14 rounded-3xl overflow-hidden shadow-2xl border border-white/10 backdrop-blur">
+      <div className="max-w-6xl mx-auto mt-14 rounded-3xl overflow-hidden shadow-2xl border border-white/10">
         <LazyIframe
           title="South Lanka Fireworks Location - Google Maps"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d239.57941086033475!2d80.1869036120917!3d6.0508440296205155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae1750019cb271d%3A0x6c811e7c258a3a73!2sSouth%20Lanka%20Fireworks!5e1!3m2!1sen!2slk!4v1754989535052!5m2!1sen!2slk"
           width="100%"
           height={380}
           style={{ border: 0 }}
+          className="w-full h-[250px] sm:h-[320px] md:h-[380px]"
           allowFullScreen
           referrerPolicy="no-referrer-when-downgrade"
           aria-label="Google Maps showing South Lanka Fireworks location in Galle, Sri Lanka"
@@ -363,4 +335,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default memo(Contact);

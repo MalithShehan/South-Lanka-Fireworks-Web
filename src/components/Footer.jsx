@@ -1,4 +1,6 @@
+import { memo } from "react";
 import { Link } from "react-scroll";
+import { motion } from "framer-motion";
 import { asset } from "../lib/assetPath";
 import {
   AiFillFacebook,
@@ -7,6 +9,7 @@ import {
 import { SiTiktok } from "react-icons/si";
 import { FaWhatsapp } from "react-icons/fa";
 import { MapPin, Phone, Mail, Clock, Shield, Award, Sparkles } from "lucide-react";
+import AnimatedSection from "./AnimatedSection";
 
 const FOOTER_LINKS = [
   { label: "Home", to: "home" },
@@ -61,13 +64,16 @@ function Footer() {
       <div className="border-b border-white/10">
         <div className="max-w-6xl mx-auto px-6 py-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {TRUST_BADGES.map(({ Icon, label }) => (
-              <div key={label} className="flex items-center justify-center gap-3 text-sm">
-                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-pink-500/20 to-amber-400/20 flex items-center justify-center">
+            {TRUST_BADGES.map(({ Icon, label }, i) => (
+              <AnimatedSection key={label} variant="scaleUp" delay={i * 0.1} className="flex items-center justify-center gap-3 text-sm">
+                <motion.div
+                  whileHover={{ scale: 1.15, rotate: 5 }}
+                  className="h-10 w-10 rounded-full bg-gradient-to-br from-pink-500/20 to-amber-400/20 flex items-center justify-center"
+                >
                   <Icon size={18} className="text-amber-400" />
-                </div>
+                </motion.div>
                 <span className="text-gray-400 font-medium">{label}</span>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
@@ -75,7 +81,7 @@ function Footer() {
 
       {/* Main Footer Content */}
       <div className="max-w-6xl mx-auto px-6 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-4">
@@ -100,16 +106,18 @@ function Footer() {
             </p>
             <div className="flex gap-3">
               {SOCIAL_LINKS.map(({ label, href, Icon, hoverColor }) => (
-                <a
+                <motion.a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
+                  whileHover={{ scale: 1.15, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
                   className={`h-10 w-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-gray-400 transition duration-300 ${hoverColor} hover:border-white/20 hover:bg-white/10`}
                 >
                   <Icon size={18} />
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>
@@ -160,7 +168,7 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:southlankafireworks@gmail.com" className="flex items-center gap-3 text-gray-400 hover:text-pink-400 transition">
+                <a href="mailto:southlankafireworks@gmail.com" className="flex items-center gap-3 text-gray-400 hover:text-pink-400 transition break-all sm:break-normal">
                   <Mail size={16} className="text-orange-400 flex-shrink-0" />
                   southlankafireworks@gmail.com
                 </a>
@@ -190,15 +198,17 @@ function Footer() {
               </li>
             </ul>
             <div className="mt-6">
-              <a
+              <motion.a
                 href="https://wa.me/94777135516?text=Hello%20South%20Lanka%20Fireworks!%20I%20would%20like%20to%20get%20a%20quote."
                 target="_blank"
                 rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-2 rounded-full bg-green-600 hover:bg-green-700 px-5 py-2.5 text-sm font-semibold text-white transition shadow-lg shadow-green-600/20"
               >
                 <FaWhatsapp size={16} />
                 Get a Free Quote
-              </a>
+              </motion.a>
             </div>
           </div>
         </div>
@@ -210,17 +220,19 @@ function Footer() {
           <p className="text-xs text-gray-500">
             &copy; {new Date().getFullYear()} South Lanka Fireworks. All rights reserved. | Reg. No: SG/5276
           </p>
-          <button
+          <motion.button
             onClick={scrollToTop}
+            whileHover={{ scale: 1.1, y: -2 }}
+            whileTap={{ scale: 0.95 }}
             className="text-xs text-gray-500 hover:text-pink-400 transition flex items-center gap-1"
             aria-label="Back to top"
           >
             Back to Top ↑
-          </button>
+          </motion.button>
         </div>
       </div>
     </footer>
   );
 }
 
-export default Footer;
+export default memo(Footer);

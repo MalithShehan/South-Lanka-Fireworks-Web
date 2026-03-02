@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import { Shield, Award, Users, MapPin, Clock, Sparkles } from "lucide-react";
 
 const trustItems = [
@@ -96,11 +96,11 @@ const TrustBadges = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
           {trustItems.map(({ Icon, title, description, color, bgColor }, index) => (
             <div
               key={title}
-              className={`group bg-white/5 border border-white/10 rounded-2xl p-5 text-center shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 backdrop-blur ${
+              className={`group bg-[#0c0a1a]/90 border border-white/10 rounded-2xl p-3 sm:p-5 text-center shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
               }`}
               style={{
@@ -123,4 +123,4 @@ const TrustBadges = () => {
   );
 };
 
-export default TrustBadges;
+export default memo(TrustBadges);

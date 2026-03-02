@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
@@ -46,7 +46,7 @@ const faqData = [
 ];
 
 const FAQItem = ({ faq, isOpen, onToggle }) => (
-  <div className="border border-white/10 rounded-2xl bg-white/5 shadow-md overflow-hidden backdrop-blur">
+  <div className="border border-white/10 rounded-2xl bg-[#0c0a1a]/90 shadow-md overflow-hidden">
     <button
       onClick={onToggle}
       className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-white/5 transition"
@@ -86,10 +86,7 @@ const FAQ = () => {
 
   return (
     <section className="relative py-20 px-4 md:px-10 text-gray-100" id="faq" aria-label="Frequently asked questions">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 left-10 h-48 w-48 bg-blue-500/10 blur-3xl" />
-        <div className="absolute bottom-0 right-10 h-64 w-64 bg-pink-500/10 blur-[140px]" />
-      </div>
+      
 
       <div className="relative max-w-4xl mx-auto">
         <div className="text-center mb-12">
@@ -128,7 +125,7 @@ const FAQ = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-white/5 border border-white/10 rounded-2xl px-8 py-6 shadow-lg backdrop-blur">
+          <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-[#0c0a1a]/90 border border-white/10 rounded-2xl px-4 sm:px-8 py-6 shadow-lg">
             <div className="text-center sm:text-left">
               <p className="font-semibold text-white">Still have questions?</p>
               <p className="text-sm text-gray-400">We're here to help you plan the perfect show.</p>
@@ -148,4 +145,4 @@ const FAQ = () => {
   );
 };
 
-export default FAQ;
+export default memo(FAQ);

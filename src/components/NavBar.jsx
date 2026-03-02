@@ -1,4 +1,5 @@
 import React, { memo, useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { FiPhoneCall, FiMessageCircle } from "react-icons/fi";
 import { Link } from "react-scroll";
@@ -31,9 +32,11 @@ const QUICK_ACTIONS = [
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
-  const [showNavbar, setShowNavbar] = useState(true);
   const sidebarRef = useRef(null);
   const lastScrollYRef = useRef(0);
+  const navRef = useRef(null);
+  const navBgRef = useRef(null);
+  const progressBarRef = useRef(null);
 
   const toggleNav = () => setNavOpen((prev) => !prev);
   const closeNav = () => setNavOpen(false);
@@ -48,14 +51,40 @@ const Navbar = () => {
     window.history.replaceState(null, "", "#home");
   }, []);
 
-  // Hide/show navbar on scroll
+  // Hide/show navbar on scroll + progress bar (ref-based, zero re-renders)
   useEffect(() => {
     if (typeof window === "undefined") return undefined;
+    let ticking = false;
     const handleScroll = () => {
-      const currentY = window.scrollY;
-      const shouldShow = currentY <= lastScrollYRef.current || currentY < 80;
-      setShowNavbar(shouldShow);
-      lastScrollYRef.current = currentY;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const currentY = window.scrollY;
+        const shouldShow = currentY <= lastScrollYRef.current || currentY < 80;
+        const scrolled = currentY > 50;
+        lastScrollYRef.current = currentY;
+
+        // Update nav visibility
+        if (navRef.current) {
+          navRef.current.style.transform = shouldShow ? 'translateY(0)' : 'translateY(-100px)';
+        }
+
+        // Update background opacity
+        if (navBgRef.current) {
+          navBgRef.current.style.background = scrolled
+            ? 'linear-gradient(to right, rgba(0,0,0,0.95), rgba(0,0,0,0.85), rgba(0,0,0,0.95))'
+            : 'linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.70), rgba(0,0,0,0.85))';
+        }
+
+        // Update progress bar
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (currentY / docHeight) * 100 : 0;
+        if (progressBarRef.current) {
+          progressBarRef.current.style.width = `${Math.min(progress, 100)}%`;
+        }
+
+        ticking = false;
+      });
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -81,11 +110,23 @@ const Navbar = () => {
 
   return (
     <nav
-      style={{ transform: `translateY(${showNavbar ? 0 : -100}px)`, transition: 'transform 0.4s ease' }}
+      ref={navRef}
+      style={{ transform: 'translateY(0)', transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}
       className="fixed top-0 left-0 w-full z-50"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/85 backdrop-blur-2xl border-b border-white/10" />
-      <div className="absolute inset-x-4 sm:inset-x-8 bottom-0 h-[2px] bg-gradient-to-r from-pink-500 via-amber-300 to-blue-400 opacity-70" />
+      <div
+        ref={navBgRef}
+        className="absolute inset-0 border-b border-white/10 transition-[background] duration-500"
+        style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.70), rgba(0,0,0,0.85))' }}
+      />
+      {/* Scroll progress bar */}
+      <div
+        ref={progressBarRef}
+        className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-pink-500 via-amber-300 to-blue-400 transition-[width] duration-150"
+        style={{ width: '0%' }}
+        role="progressbar"
+        aria-label="Page scroll progress"
+      />
       <div className="relative max-w-[1200px] mx-auto flex flex-nowrap items-center justify-between gap-3 sm:gap-4 md:gap-6 px-4 sm:px-6 md:px-10 py-2 text-gray-200">
           {/* Logo */}
           <Link
@@ -121,7 +162,7 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <nav className="hidden lg:flex items-center gap-4 flex-shrink-0" aria-label="Main navigation">
-            <ul className="flex gap-5 text-sm font-semibold font-montserrat whitespace-nowrap" role="list">
+            <ul className="flex gap-5 text-sm font-semibold whitespace-nowrap" role="list">
               {MENU_ITEMS.map(({ name, to }) => (
                 <li key={to}>
                   <Link
@@ -143,9 +184,10 @@ const Navbar = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Get a quote via WhatsApp"
-              className="ml-2 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-amber-400 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-pink-500/25 hover:scale-105 transition-transform whitespace-nowrap"
+              className="ml-2 relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-amber-400 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-pink-500/25 hover:scale-105 hover:shadow-pink-500/40 transition-all whitespace-nowrap group overflow-hidden"
             >
-              Get a Quote
+              <span className="absolute inset-0 shimmer-effect" />
+              <span className="relative">Get a Quote</span>
             </a>
           </nav>
 
@@ -172,7 +214,7 @@ const Navbar = () => {
           <div
             ref={sidebarRef}
             className="fixed top-0 left-0 h-screen w-3/4 sm:w-2/5
-                       backdrop-blur-xl bg-gradient-to-b from-black/90 via-black/70 to-black/80
+                       bg-gradient-to-b from-black/95 via-black/85 to-black/90
                        text-white z-50 shadow-2xl flex flex-col animate-[slideInLeft_0.4s_ease]"
           >
             {/* Header */}
@@ -207,7 +249,7 @@ const Navbar = () => {
               <button
                 onClick={closeNav}
                 aria-label="Close menu"
-                className="text-gray-300 hover:text-white"
+                className="text-gray-300 hover:text-white p-2 -mr-2 rounded-lg active:bg-white/10"
               >
                 <AiOutlineClose size={26} />
               </button>
@@ -239,7 +281,7 @@ const Navbar = () => {
             </div>
 
             {/* Links with staggered CSS animation */}
-            <ul className="flex flex-col p-6 space-y-3 overflow-y-auto font-montserrat">
+            <ul className="flex flex-col p-6 space-y-3 overflow-y-auto">
               {MENU_ITEMS.map(({ name, to, helper }, index) => (
                 <li
                   key={to}

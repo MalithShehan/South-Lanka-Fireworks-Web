@@ -1,5 +1,4 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDok_805_R54D6TvfQnrhk5XLaEbJ41hec",
@@ -11,6 +10,19 @@ const firebaseConfig = {
   measurementId: "G-QMR2FHNGJE",
 };
 
-export const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+let _app;
+export function getFirebaseApp() {
+  if (!_app) _app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+  return _app;
+}
+
+let _db;
+export async function getDb() {
+  if (!_db) {
+    const { getFirestore } = await import("firebase/firestore");
+    _db = getFirestore(getFirebaseApp());
+  }
+  return _db;
+}
+
 export { firebaseConfig };

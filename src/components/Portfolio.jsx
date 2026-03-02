@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { motion } from "framer-motion";
 import { FaPlay, FaExternalLinkAlt } from "react-icons/fa";
 import { asset } from "../lib/assetPath";
@@ -82,7 +82,7 @@ const Portfolio = () => {
 
   return (
     <section
-      className="py-20 px-4 md:px-10 text-gray-100"
+      className="py-16 sm:py-20 px-4 md:px-10 text-gray-100"
       id="portfolio"
       aria-label="Portfolio of featured firework shows"
     >
@@ -100,20 +100,20 @@ const Portfolio = () => {
         </p>
       </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 mb-14">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-10 sm:mb-14">
         {highlightStats.map((stat) => (
           <div
             key={stat.label}
-            className="bg-white/5 border border-white/10 rounded-2xl px-4 py-3 shadow-lg backdrop-blur-md text-center sm:text-left"
+            className="bg-[#0c0a1a]/90 border border-white/10 rounded-2xl px-4 py-3 shadow-lg text-center sm:text-left"
           >
             <p className="text-sm text-gray-400">{stat.label}</p>
-            <p className="text-3xl font-bold text-white mt-1">{stat.value}</p>
+            <p className="text-2xl sm:text-3xl font-bold text-white mt-1">{stat.value}</p>
             <p className="text-xs text-gray-500 mt-1">{stat.helper}</p>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 max-w-7xl mx-auto">
         {displayedItems.map((item, index) => (
           <motion.div
             key={item.id}
@@ -121,7 +121,7 @@ const Portfolio = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.2 }}
-            className="group bg-white/5 border border-white/10 rounded-3xl overflow-hidden shadow-xl hover:shadow-pink-500/20 transition-all backdrop-blur-sm"
+            className="group bg-[#0c0a1a]/90 border border-white/10 rounded-3xl overflow-hidden shadow-xl hover:shadow-pink-500/20 transition-all"
             onMouseEnter={() => setHoveredId(item.id)}
             onMouseLeave={() => setHoveredId(null)}
           >
@@ -212,4 +212,4 @@ const Portfolio = () => {
   );
 };
 
-export default Portfolio;
+export default memo(Portfolio);

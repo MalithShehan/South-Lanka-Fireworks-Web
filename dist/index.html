@@ -38,6 +38,10 @@
     />
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+    <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin />
+    <link rel="dns-prefetch" href="https://api.web3forms.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
     <!-- Open Graph / Facebook -->
     <meta
@@ -72,19 +76,26 @@
     />
     <meta name="twitter:site" content="@SouthLankaFireworks" />
 
+    <!-- Critical inline CSS for above-fold animations -->
+    <style>
+      @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+      @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0 } to { transform: translateX(0); opacity: 1 } }
+      @keyframes slideInItem { from { opacity: 0; transform: translateX(-30px) } to { opacity: 1; transform: translateX(0) } }
+    </style>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@400;700&family=Poppins:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:wght@400;600;700&display=swap"
       onload="this.onload=null;this.rel='stylesheet'"
     />
     <noscript>
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@400;700&family=Poppins:wght@400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:wght@400;600;700&display=swap"
       />
     </noscript>
 
@@ -216,9 +227,12 @@
         ]
       }
     </script>
-    <script type="module" crossorigin src="./assets/index-ClX6LGZ9.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/vendor-_uqhELNW.js">
-    <link rel="stylesheet" crossorigin href="./assets/index-DWC9eM5_.css">
+    <script type="module" crossorigin src="./assets/index-PFAS3SJl.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/vendor-react-B3TQWceJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/vendor-misc-CrAr8NGp.js">
+    <link rel="modulepreload" crossorigin href="./assets/vendor-pdf-CLtptcCC.js">
+    <link rel="modulepreload" crossorigin href="./assets/vendor-motion-9TSIwKh-.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-VoJeM9QL.css">
   </head>
 
   <body>
@@ -237,13 +251,6 @@
       Fireworks.</noscript
     >
     <div id="root"></div>
-
-    <!-- NavBar / FloatingButtons CSS animations (replaces framer-motion) -->
-    <style>
-      @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
-      @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0 } to { transform: translateX(0); opacity: 1 } }
-      @keyframes slideInItem { from { opacity: 0; transform: translateX(-30px) } to { opacity: 1; transform: translateX(0) } }
-    </style>
 
     <!-- React App Entry -->
   </body>
