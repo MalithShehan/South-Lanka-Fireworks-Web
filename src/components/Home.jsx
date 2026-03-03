@@ -186,7 +186,7 @@ const Home = () => {
         >
           We Create Magical
           <br />
-          <span className="relative inline-block">
+          <span className="relative inline-block bg-gradient-to-r from-yellow-300 via-pink-400 to-blue-400 bg-clip-text text-transparent animate-gradient">
             Firework Experiences
             <motion.span
               className="absolute -bottom-2 left-0 right-0 h-[3px] bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-400 rounded-full"
