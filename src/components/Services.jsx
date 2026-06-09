@@ -1,157 +1,196 @@
 import React, { memo } from "react";
 import { motion } from "framer-motion";
-import { FaFire, FaStar, FaRocket, FaGlobe } from "react-icons/fa";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { FaFire, FaGlobe, FaRocket, FaStar } from "react-icons/fa";
 import AnimatedSection from "./AnimatedSection";
 import GlowCard from "./GlowCard";
 
-const services = [
-  {
-    id: 1,
-    title: "Custom Fireworks Displays",
-    description:
-      "Tailored fireworks shows designed to fit any event, theme, or budget with spectacular effects.",
-    link: "/services/custom-displays",
-    tag: "Signature Shows",
-    Icon: FaFire,
-    gradient: "from-amber-200/70 via-transparent to-rose-100/60",
-    iconBg: "bg-amber-50",
-    iconColor: "text-amber-500",
-  },
-  {
-    id: 2,
-    title: "Event Special Effects",
-    description:
-      "Enhance weddings, festivals, and corporate events with synchronized special effects.",
-    link: "/services/special-effects",
-    tag: "Atmosphere FX",
-    Icon: FaStar,
-    gradient: "from-pink-200/70 via-transparent to-amber-100/50",
-    iconBg: "bg-pink-50",
-    iconColor: "text-pink-500",
-  },
-  {
-    id: 3,
-    title: "Safety Consulting & Licensing",
-    description:
-      "Professional advice and licensing support ensuring your event meets all safety standards.",
-    link: "/services/safety-consulting",
-    tag: "Trusted Guidance",
-    Icon: FaRocket,
-    gradient: "from-blue-200/70 via-transparent to-cyan-100/50",
-    iconBg: "bg-blue-50",
-    iconColor: "text-blue-500",
-  },
-  {
-    id: 4,
-    title: "Nationwide Delivery & Setup",
-    description:
-      "Comprehensive logistics service delivering and setting up fireworks anywhere in Sri Lanka.",
-    link: "/services/delivery-setup",
-    tag: "End-to-End",
-    Icon: FaGlobe,
-    gradient: "from-indigo-200/70 via-transparent to-slate-100/60",
-    iconBg: "bg-indigo-50",
-    iconColor: "text-indigo-500",
-  },
+const serviceBadges = [
+  { text: "Tailored packages", border: "border-amber-400/20 text-amber-300 bg-amber-400/5 hover:border-amber-400/40 hover:bg-amber-400/10 hover:shadow-[0_0_12px_rgba(251,191,36,0.15)]" },
+  { text: "On-site coordination", border: "border-emerald-400/20 text-emerald-300 bg-emerald-400/5 hover:border-emerald-400/40 hover:bg-emerald-400/10 hover:shadow-[0_0_12px_rgba(16,185,129,0.15)]" },
+  { text: "Islandwide travel", border: "border-cyan-400/20 text-cyan-300 bg-cyan-400/5 hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:shadow-[0_0_12px_rgba(34,211,238,0.15)]" },
 ];
 
-const glowColors = [
-  "rgba(251, 146, 60, 0.3)",
-  "rgba(236, 72, 153, 0.3)",
-  "rgba(59, 130, 246, 0.3)",
-  "rgba(99, 102, 241, 0.3)",
+const services = [
+  {
+    id: "01",
+    title: "Custom fireworks displays",
+    description:
+      "Signature shows designed around your venue, audience, and event timing.",
+    tag: "Signature moments",
+    Icon: FaFire,
+    glowColor: "rgba(251, 146, 60, 0.22)",
+    gradient: "from-orange-400/20 via-rose-400/10 to-transparent",
+    iconClass: "bg-orange-400/14 text-orange-300",
+    bulletColor: "text-orange-300",
+    linkClass: "text-orange-300 hover:text-orange-200",
+    bullets: [
+      "Wedding finales and first-dance moments",
+      "Countowns, entrances, and celebratory reveals",
+      "Color and pacing matched to your event style",
+    ],
+  },
+  {
+    id: "02",
+    title: "Special effects for live events",
+    description:
+      "Enhance the stage, atmosphere, and crowd energy with coordinated effects.",
+    tag: "Atmosphere and impact",
+    Icon: FaStar,
+    glowColor: "rgba(251, 191, 36, 0.2)",
+    gradient: "from-amber-400/20 via-yellow-300/10 to-transparent",
+    iconClass: "bg-amber-400/14 text-amber-300",
+    bulletColor: "text-amber-300",
+    linkClass: "text-amber-300 hover:text-amber-200",
+    bullets: [
+      "Festival moments and live performance cues",
+      "Effects timed to music, speeches, or countdowns",
+      "Stronger audience impact without visual clutter",
+    ],
+  },
+  {
+    id: "03",
+    title: "Safety planning and licensing guidance",
+    description:
+      "Professional advice to help your event run within the right safety conditions.",
+    tag: "Confidence before launch",
+    Icon: FaRocket,
+    glowColor: "rgba(16, 185, 129, 0.2)",
+    gradient: "from-emerald-400/18 via-teal-300/10 to-transparent",
+    iconClass: "bg-emerald-400/14 text-emerald-300",
+    bulletColor: "text-emerald-300",
+    linkClass: "text-emerald-300 hover:text-emerald-200",
+    bullets: [
+      "Venue spacing and firing distance checks",
+      "Practical guidance for organizers and venues",
+      "Planning support before the event day arrives",
+    ],
+  },
+  {
+    id: "04",
+    title: "Nationwide delivery and setup",
+    description:
+      "From transport to on-site preparation, our crew supports your event across Sri Lanka.",
+    tag: "End-to-end service",
+    Icon: FaGlobe,
+    glowColor: "rgba(59, 130, 246, 0.18)",
+    gradient: "from-blue-400/18 via-cyan-300/10 to-transparent",
+    iconClass: "bg-blue-400/14 text-blue-300",
+    bulletColor: "text-cyan-300",
+    linkClass: "text-cyan-300 hover:text-cyan-200",
+    bullets: [
+      "Travel, setup, launch, and coordination in one service",
+      "Suitable for private events and public celebrations",
+      "A single team managing the full execution flow",
+    ],
+  },
 ];
 
 const Services = () => {
   return (
     <section
       id="services"
-      className="relative text-gray-100 py-16 md:py-24 px-4 sm:px-6 md:px-12 overflow-hidden"
+      className="relative overflow-hidden px-4 py-16 text-stone-100 sm:px-6 md:px-12 md:py-24"
       aria-label="Our fireworks services"
     >
-      
-      <div className="relative">
-      <AnimatedSection variant="fadeUp" className="max-w-5xl mx-auto text-center mb-12">
-        <p className="text-xs uppercase tracking-[0.4em] text-pink-500 mb-3">
-          Expertise & Craft
-        </p>
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Our Services</h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
-          Discover the wide range of fireworks and pyrotechnic services we offer
-          to light up your special occasions.
-        </p>
-      </AnimatedSection>
-
-      <AnimatedSection variant="scaleUp" delay={0.2} className="flex flex-wrap items-center justify-center gap-3 mb-8 md:mb-16 text-xs font-semibold uppercase tracking-[0.3em] text-gray-400">
-        <span className="px-4 py-2 rounded-full border border-white/10 bg-[#0c0a1a]/90 hover:border-pink-500/30 transition-colors duration-300">
-          ISO-Certified Team
-        </span>
-        <span className="px-4 py-2 rounded-full border border-white/10 bg-[#0c0a1a]/90 hover:border-pink-500/30 transition-colors duration-300">
-          24/7 Support
-        </span>
-        <span className="px-4 py-2 rounded-full border border-white/10 bg-[#0c0a1a]/90 hover:border-pink-500/30 transition-colors duration-300">
-          Nationwide Reach
-        </span>
-      </AnimatedSection>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 max-w-6xl mx-auto">
-        {services.map((service, index) => (
-          <GlowCard
-            key={service.id}
-            glowColor={glowColors[index] || glowColors[0]}
-            delay={index * 0.15}
-            className="relative group"
-          >
-            <div
-              className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${service.gradient} opacity-0 group-hover:opacity-100 transition duration-500 blur-xl`}
-            />
-            <div className="relative h-full bg-[#0c0a1a]/90 border border-white/10 rounded-3xl p-7 shadow-lg transition duration-300 group-hover:shadow-2xl">
-              <div className="mb-5 flex items-center justify-between">
-                <motion.div
-                  whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-                  transition={{ duration: 0.5 }}
-                  className={`h-12 w-12 rounded-2xl flex items-center justify-center shadow-sm ${service.iconBg}`}
-                >
-                  <service.Icon size={26} className={service.iconColor} />
-                </motion.div>
-                <span className="text-xs uppercase tracking-[0.3em] text-gray-400">
-                  #{String(service.id).padStart(2, "0")}
-                </span>
-              </div>
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-gray-300 mb-4">
-                <span className="h-1.5 w-1.5 rounded-full bg-pink-400 animate-pulse" />
-                {service.tag}
-              </span>
-              <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-              <p className="text-sm text-gray-400 leading-relaxed">
-                {service.description}
-              </p>
-              <div className="mt-4 flex items-center gap-2 text-xs text-pink-400 font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span>Learn more</span>
-                <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
-              </div>
-            </div>
-          </GlowCard>
-        ))}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-8 top-0 h-44 w-44 rounded-full bg-amber-300/10 blur-3xl" />
+        <div className="absolute bottom-0 right-12 h-52 w-52 rounded-full bg-orange-500/10 blur-3xl" />
       </div>
 
-      {/* CTA Section */}
-      <AnimatedSection variant="fadeUp" delay={0.4} className="max-w-3xl mx-auto mt-16 text-center">
-          <div className="bg-gradient-to-r from-pink-500/10 via-amber-500/10 to-blue-500/10 border border-white/10 rounded-3xl p-6 sm:p-8">
-          <h3 className="text-2xl font-semibold text-white mb-3">
-            Ready to light up your next event?
-          </h3>
-          <p className="text-gray-400 text-sm mb-6">
-            Contact us for a free consultation and custom quote tailored to your celebration.
+      <div className="relative">
+        <AnimatedSection variant="fadeUp" className="mx-auto mb-12 max-w-5xl text-center">
+          <p className="mb-3 text-xs uppercase tracking-[0.4em] text-amber-200">Services</p>
+          <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">
+            Choose the support your event needs.
+          </h2>
+          <p className="mx-auto max-w-2xl text-sm leading-7 text-stone-300 sm:text-base">
+            We help customers understand the options quickly, then tailor the right mix of
+            fireworks, effects, planning, and on-site support for the occasion.
           </p>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-amber-400 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-pink-500/25 hover:scale-105 hover:shadow-pink-500/40 transition-all"
-          >
-            Get a Free Quote
-          </a>
+        </AnimatedSection>
+
+        <AnimatedSection
+          variant="scaleUp"
+          delay={0.2}
+          className="mb-8 flex flex-wrap items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-stone-400 md:mb-14"
+        >
+          {serviceBadges.map((badge) => (
+            <span
+              key={badge.text}
+              className={`rounded-full border px-4 py-2 transition-all duration-300 ${badge.border}`}
+            >
+              {badge.text}
+            </span>
+          ))}
+        </AnimatedSection>
+
+        <div className="mx-auto grid max-w-6xl gap-8 sm:grid-cols-2 xl:grid-cols-4">
+          {services.map((service, index) => (
+            <GlowCard
+              key={service.id}
+              glowColor={service.glowColor}
+              delay={index * 0.12}
+              borderRadius="2rem"
+              className="bg-white/[0.03] backdrop-blur-md p-6 shadow-lg"
+            >
+              <div className="relative flex h-full flex-col">
+                <div className="mb-5 flex items-center justify-between">
+                  <motion.div
+                    whileHover={{ rotate: [0, -8, 8, 0], scale: 1.08 }}
+                    transition={{ duration: 0.45 }}
+                    className={`flex h-12 w-12 items-center justify-center rounded-2xl ${service.iconClass}`}
+                  >
+                    <service.Icon size={24} />
+                  </motion.div>
+                  <span className="text-xs uppercase tracking-[0.28em] text-stone-500">
+                    {service.id}
+                  </span>
+                </div>
+
+                <span className="mb-4 inline-flex w-fit items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-stone-200">
+                  {service.tag}
+                </span>
+
+                <h3 className="text-xl font-semibold text-white">{service.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-stone-300">{service.description}</p>
+
+                <ul className="mt-5 space-y-3">
+                  {service.bullets.map((bullet) => (
+                    <li key={bullet} className="flex items-start gap-3 text-sm leading-6 text-stone-200">
+                      <CheckCircle2 size={16} className={`mt-1 flex-shrink-0 ${service.bulletColor}`} />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <motion.a
+                  href="#contact"
+                  whileHover={{ x: 4 }}
+                  className={`mt-6 inline-flex items-center gap-2 text-sm font-semibold transition ${service.linkClass}`}
+                >
+                  Ask about this service
+                  <ArrowRight size={16} />
+                </motion.a>
+              </div>
+            </GlowCard>
+          ))}
         </div>
-      </AnimatedSection>
+
+        <AnimatedSection variant="fadeUp" delay={0.4} className="mx-auto mt-16 max-w-3xl text-center">
+          <div className="rounded-[2rem] border border-white/10 bg-white/[0.02] backdrop-blur-md p-6 sm:p-8">
+            <h3 className="text-2xl font-semibold text-white">Need help choosing the right package?</h3>
+            <p className="mt-3 text-sm leading-7 text-stone-300 sm:text-base">
+              Tell us the event type, date, and location. We will recommend a display plan that feels right for the audience and the budget.
+            </p>
+            <a
+              href="#contact"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 text-sm font-semibold text-[#1a110d] shadow-lg shadow-black/10 transition-all hover:scale-[1.03] hover:bg-amber-50"
+            >
+              Get a Free Quote
+            </a>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );

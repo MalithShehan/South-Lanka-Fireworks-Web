@@ -16,6 +16,7 @@ const COLORS = [
   "#ff4444", "#ffaa00", "#ff6699", "#44aaff", "#aa44ff",
   "#ffdd44", "#ff8844", "#ff44aa", "#44ffaa", "#ff66ff",
   "#ffd700", "#ff1493", "#00bfff", "#7b68ee", "#ff6347",
+  "#00e5ff", "#39ff14", "#ff007f", "#ff6b35", "#00d4aa",
 ];
 
 const MAX_PARTICLES = 500;
@@ -273,7 +274,7 @@ const FireworksCanvas = () => {
       ref={canvasRef}
       className="fixed inset-0 z-0 pointer-events-none"
       aria-hidden="true"
-      style={{ opacity: 0.6 }}
+      style={{ opacity: 0.75 }}
     />
   );
 };

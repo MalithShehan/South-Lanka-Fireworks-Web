@@ -8,11 +8,11 @@ import { asset } from "../lib/assetPath";
 const MENU_ITEMS = [
   { name: "Home", to: "home", helper: "Signature hero + CTA" },
   { name: "About Us", to: "about", helper: "Licensed crew & mission" },
-  { name: "Service", to: "services", helper: "Firework services lineup" },
-  { name: "Items", to: "products", helper: "Individual shells & effects" },
+  { name: "Services", to: "services", helper: "Firework services lineup" },
+  { name: "Catalogue", to: "products", helper: "Individual shells & effects" },
   { name: "Packages", to: "packages", helper: "Pre-built show templates" },
   { name: "Portfolio", to: "portfolio", helper: "Recent launches & reels" },
-  { name: "Contact Us", to: "contact", helper: "Quotes + dispatch" },
+  { name: "Contact", to: "contact", helper: "Quotes + dispatch" },
 ];
 
 const QUICK_ACTIONS = [
@@ -43,13 +43,43 @@ const Navbar = () => {
   const updateHash = (target) => {
     if (typeof window === "undefined") return;
     window.history.replaceState(null, "", `#${target}`);
-  };
+    
+    const titles = {
+      home: "South Lanka Fireworks - Premium Pyrotechnics Sri Lanka",
+      about: "South Lanka Fireworks - About Our Certified Crew & Safety",
+      services: "South Lanka Fireworks - Professional Pyrotechnics Services",
+      products: "South Lanka Fireworks - Custom Package Builder & Catalogue",
+      packages: "South Lanka Fireworks - Signature Show Packages & Pricing",
+      portfolio: "South Lanka Fireworks - Featured Shows & Live Launches",
+      contact: "South Lanka Fireworks - Get a Free Quote & Book Now",
+    };
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    window.scrollTo({ top: 0, behavior: "instant" });
-    window.history.replaceState(null, "", "#home");
-  }, []);
+    const descriptions = {
+      home: "South Lanka Fireworks delivers premium pyrotechnic shows for weddings, festivals, and corporate celebrations across Sri Lanka.",
+      about: "Learn about South Lanka Fireworks: our 20+ years of industry experience, 100% safety record, and certified crew.",
+      services: "Explore our pyrotechnics services: custom fireworks displays, special effects, safety planning, and islandwide delivery.",
+      products: "Use our bespoke package builder to customize your fireworks setup or browse our individual specialty shells catalog.",
+      packages: "Compare our 6 pre-built fireworks packages designed for weddings, corporate events, and festivals.",
+      portfolio: "Watch high-definition clips of our featured launches, New Year countdowns, and landmark shows across Sri Lanka.",
+      contact: "Contact South Lanka Fireworks for a free quote. We respond within 2 hours to help you plan your event's display.",
+    };
+    
+    if (titles[target]) {
+      document.title = titles[target];
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute("content", titles[target]);
+      const twTitle = document.querySelector('meta[name="twitter:title"]');
+      if (twTitle) twTitle.setAttribute("content", titles[target]);
+    }
+    if (descriptions[target]) {
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute("content", descriptions[target]);
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.setAttribute("content", descriptions[target]);
+      const twDesc = document.querySelector('meta[name="twitter:description"]');
+      if (twDesc) twDesc.setAttribute("content", descriptions[target]);
+    }
+  };
 
   // Hide/show navbar on scroll + progress bar (ref-based, zero re-renders)
   useEffect(() => {
@@ -72,8 +102,8 @@ const Navbar = () => {
         // Update background opacity
         if (navBgRef.current) {
           navBgRef.current.style.background = scrolled
-            ? 'linear-gradient(to right, rgba(0,0,0,0.95), rgba(0,0,0,0.85), rgba(0,0,0,0.95))'
-            : 'linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.70), rgba(0,0,0,0.85))';
+            ? 'linear-gradient(to right, rgba(18,11,8,0.96), rgba(24,14,10,0.9), rgba(18,11,8,0.96))'
+            : 'linear-gradient(to right, rgba(18,11,8,0.84), rgba(24,14,10,0.74), rgba(18,11,8,0.84))';
         }
 
         // Update progress bar
@@ -116,13 +146,13 @@ const Navbar = () => {
     >
       <div
         ref={navBgRef}
-        className="absolute inset-0 border-b border-white/10 transition-[background] duration-500"
-        style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.70), rgba(0,0,0,0.85))' }}
+        className="absolute inset-0 border-b border-white/10 backdrop-blur-xl transition-[background] duration-500"
+        style={{ background: 'linear-gradient(to right, rgba(18,11,8,0.84), rgba(24,14,10,0.74), rgba(18,11,8,0.84))' }}
       />
       {/* Scroll progress bar */}
       <div
         ref={progressBarRef}
-        className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-pink-500 via-amber-300 to-blue-400 transition-[width] duration-150"
+        className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-amber-300 via-rose-500 to-violet-500 transition-[width] duration-150"
         style={{ width: '0%' }}
         role="progressbar"
         aria-label="Page scroll progress"
@@ -138,7 +168,7 @@ const Navbar = () => {
         className="group flex min-w-0 items-center gap-3 text-xl sm:text-2xl font-bold tracking-wide cursor-pointer"
           >
             <div className="relative">
-              <span className="absolute inset-0 rounded-full bg-gradient-to-br from-pink-500/40 to-amber-400/40 blur-lg group-hover:blur-xl transition" />
+              <span className="absolute inset-0 rounded-full bg-gradient-to-br from-amber-300/40 to-orange-400/40 blur-lg transition group-hover:blur-xl" />
               <img
                 src={asset("/assets/SouthLankaFireworks.webp")}
                 alt="South Lanka Fireworks Logo"
@@ -151,7 +181,7 @@ const Navbar = () => {
               />
             </div>
             <div className="flex flex-col">
-              <span className="bg-gradient-to-r from-yellow-300 via-pink-400 to-red-500 bg-clip-text text-transparent font-kaushan leading-tight">
+              <span className="bg-gradient-to-r from-yellow-300 via-orange-300 to-rose-300 bg-clip-text text-transparent font-kaushan leading-tight">
                 South Lanka Fireworks
               </span>
               <span className="text-[11px] uppercase tracking-[0.35em] text-gray-400 hidden sm:block">
@@ -174,7 +204,7 @@ const Navbar = () => {
                     className="group relative px-2 py-1 tracking-[0.08em] text-white hover:text-white transition"
                   >
                     <span className="relative z-10">{name}</span>
-                    <span className="absolute inset-x-0 -bottom-1 h-[2px] bg-gradient-to-r from-pink-400 to-orange-300 scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
+                    <span className="absolute inset-x-0 -bottom-1 h-[2px] origin-left scale-x-0 bg-gradient-to-r from-amber-300 via-rose-400 to-violet-400 transition-transform duration-300 group-hover:scale-x-100" />
                   </Link>
                 </li>
               ))}
@@ -184,7 +214,7 @@ const Navbar = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Get a quote via WhatsApp"
-              className="ml-2 relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-amber-400 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-pink-500/25 hover:scale-105 hover:shadow-pink-500/40 transition-all whitespace-nowrap group overflow-hidden"
+              className="group relative ml-2 inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-amber-400 via-rose-500 to-violet-500 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-rose-500/20 transition-all hover:scale-105 hover:shadow-rose-500/30 whitespace-nowrap"
             >
               <span className="absolute inset-0 shimmer-effect" />
               <span className="relative">Get a Quote</span>
@@ -214,7 +244,7 @@ const Navbar = () => {
           <div
             ref={sidebarRef}
             className="fixed top-0 left-0 h-screen w-3/4 sm:w-2/5
-                       bg-gradient-to-b from-black/95 via-black/85 to-black/90
+                       bg-gradient-to-b from-[#120b08]/98 via-[#17100d]/94 to-[#0d0907]/98
                        text-white z-50 shadow-2xl flex flex-col animate-[slideInLeft_0.4s_ease]"
           >
             {/* Header */}
@@ -240,7 +270,7 @@ const Navbar = () => {
                   decoding="async"
                 />
                 <span
-                  className="bg-gradient-to-r from-yellow-300 via-pink-400 to-red-500
+                  className="bg-gradient-to-r from-yellow-300 via-orange-300 to-rose-300
                                  bg-clip-text text-transparent font-bold font-kaushan text-lg tracking-wide"
                 >
                   South Lanka Fireworks
@@ -272,7 +302,7 @@ const Navbar = () => {
                       <p className="font-semibold">{label}</p>
                       <p className="text-xs text-white/60">{helper}</p>
                     </div>
-                    <span className="h-10 w-10 rounded-2xl bg-gradient-to-br from-yellow-300/40 to-pink-400/40 grid place-items-center">
+                    <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-yellow-300/40 to-orange-400/40">
                       <Icon size={18} />
                     </span>
                   </a>
@@ -297,7 +327,7 @@ const Navbar = () => {
                     smooth
                     offset={-80}
                     duration={500}
-                    className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/0 px-4 py-4 text-white transition-all duration-300 hover:border-pink-200 hover:bg-white/10"
+                    className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/0 px-4 py-4 text-white transition-all duration-300 hover:border-amber-200/30 hover:bg-white/10"
                   >
                     <span className="text-xs font-semibold tracking-[0.4em] text-white/50">{String(index + 1).padStart(2, "0")}</span>
                     <div>

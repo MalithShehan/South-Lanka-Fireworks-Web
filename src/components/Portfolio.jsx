@@ -56,16 +56,22 @@ const highlightStats = [
     label: "Shows Delivered",
     value: "1000+",
     helper: "Across Sri Lanka",
+    color: "text-orange-300",
+    border: "border-orange-400/15",
   },
   {
     label: "Peak Audience",
     value: "10K+",
     helper: "Per flagship event",
+    color: "text-cyan-300",
+    border: "border-cyan-400/15",
   },
   {
     label: "Safety Record",
     value: "100%",
     helper: "Certified crew",
+    color: "text-emerald-300",
+    border: "border-emerald-400/15",
   },
 ];
 
@@ -87,7 +93,7 @@ const Portfolio = () => {
       aria-label="Portfolio of featured firework shows"
     >
       <div className="max-w-6xl mx-auto text-center mb-16">
-        <p className="uppercase tracking-[0.3em] text-pink-500 text-xs mb-4">
+        <p className="uppercase tracking-[0.3em] text-amber-200 text-xs mb-4">
           Signature Displays
         </p>
         <h2 className="text-3xl md:text-4xl font-bold text-white">
@@ -104,11 +110,11 @@ const Portfolio = () => {
         {highlightStats.map((stat) => (
           <div
             key={stat.label}
-            className="bg-[#0c0a1a]/90 border border-white/10 rounded-2xl px-4 py-3 shadow-lg text-center sm:text-left"
+            className={`rounded-2xl border ${stat.border} bg-[#0d0818]/88 px-4 py-3 text-center shadow-lg shadow-black/20 sm:text-left`}
           >
-            <p className="text-sm text-gray-400">{stat.label}</p>
+            <p className={`text-sm ${stat.color}`}>{stat.label}</p>
             <p className="text-2xl sm:text-3xl font-bold text-white mt-1">{stat.value}</p>
-            <p className="text-xs text-gray-500 mt-1">{stat.helper}</p>
+            <p className="mt-1 text-xs text-stone-500">{stat.helper}</p>
           </div>
         ))}
       </div>
@@ -121,7 +127,7 @@ const Portfolio = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.2 }}
-            className="group bg-[#0c0a1a]/90 border border-white/10 rounded-3xl overflow-hidden shadow-xl hover:shadow-pink-500/20 transition-all"
+            className="group overflow-hidden rounded-3xl border border-amber-200/10 bg-[#17100d]/88 shadow-xl shadow-black/20 transition-all hover:border-amber-200/20 hover:shadow-[0_24px_60px_rgba(249,115,22,0.16)]"
             onMouseEnter={() => setHoveredId(item.id)}
             onMouseLeave={() => setHoveredId(null)}
           >
@@ -158,7 +164,7 @@ const Portfolio = () => {
 
             <div className="p-6 text-center sm:text-left">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-center sm:text-left">
-                <span className="text-[11px] uppercase tracking-[0.4em] text-pink-500">
+                <span className="text-[11px] uppercase tracking-[0.4em] text-amber-200">
                   {item.client}
                 </span>
                 <span className="text-xs text-gray-400 bg-white/10 px-2 py-1 rounded-full self-center sm:self-auto">
@@ -178,14 +184,14 @@ const Portfolio = () => {
                   href={item.fullVideoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full bg-pink-500 text-white hover:bg-pink-600 transition"
+                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-2 text-sm font-semibold text-[#1a110d] shadow-lg shadow-orange-500/20 transition hover:from-amber-300 hover:to-orange-400"
                 >
                   <FaPlay size={14} /> Watch Full Video
                 </a>
                 <button
                   type="button"
                   onClick={() => setHoveredId(item.id)}
-                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full border border-white/15 text-gray-300 hover:text-white"
+                  className="inline-flex items-center gap-2 rounded-full border border-amber-200/15 px-4 py-2 text-sm font-semibold text-stone-300 transition hover:border-amber-200/25 hover:bg-white/5 hover:text-white"
                 >
                   <FaExternalLinkAlt size={12} /> Replay Preview
                 </button>
@@ -201,7 +207,7 @@ const Portfolio = () => {
             type="button"
             onClick={() => setIsExpanded((prev) => !prev)}
             aria-expanded={isExpanded}
-            className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-pink-500/30 text-pink-400 font-semibold hover:bg-pink-500/10 transition"
+            className="inline-flex items-center gap-3 rounded-full border border-amber-200/20 px-6 py-3 font-semibold text-amber-100 transition hover:bg-amber-300/10"
           >
             {isExpanded ? "Show Fewer Shows" : "See More Shows"}
             <FaExternalLinkAlt size={13} />

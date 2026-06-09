@@ -27,7 +27,7 @@ const items = [
     ],
     hoverColor: "hover:shadow-yellow-400/70",
   },
-  
+
   {
     id: 3,
     name: "Green Shell",
@@ -97,6 +97,19 @@ const items = [
   },
   {
     id: 10,
+    name: "Blesser Shells",
+    image: asset("/assets/BlesserShell.webp"),
+    video: asset("/assets/BlesserShell.mp4"),
+    description:
+      "Graceful, long-lasting silver bursts that flower softly against the night — perfect for adding elegance to any display.",
+    sizes: [
+      { size: "3 inch", price: 1500 },
+      { size: "4 inch", price: 2400 },
+    ],
+    hoverColor: "hover:shadow-gray-400/70",
+  },
+  {
+    id: 11,
     name: "Star Shell Battery",
     image: asset("/assets/MultiColorShell.webp"),
     video: asset("/assets/MultiColorShell.mp4"),
@@ -106,7 +119,7 @@ const items = [
     hoverColor: "hover:shadow-pink-400/70",
   },
   {
-    id: 11,
+    id: 12,
     name: "Water Fall",
     image: asset("/assets/WaterFall.webp"),
     video: asset("/assets/WaterFall.mp4"),
@@ -116,7 +129,7 @@ const items = [
     hoverColor: "hover:shadow-sky-400/70",
   },
   {
-    id: 12,
+    id: 13,
     name: "Silver Rocket Battery",
     image: asset("/assets/SilverRocketBattery.webp"),
     video: asset("/assets/SilverRocketBattery.mp4"),
@@ -126,7 +139,7 @@ const items = [
     hoverColor: "hover:shadow-gray-300/70",
   },
   {
-    id: 13,
+    id: 14,
     name: "Coconut Tree",
     image: asset("/assets/CoconutTree.webp"),
     video: asset("/assets/CoconutTree.mp4"),
@@ -136,7 +149,7 @@ const items = [
     hoverColor: "hover:shadow-orange-400/70",
   },
   {
-    id: 14,
+    id: 15,
     name: "Name & Logo",
     image: asset("/assets/NameLogo.webp"),
     video: asset("/assets/NameLogo.mp4"),

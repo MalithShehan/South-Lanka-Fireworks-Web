@@ -75,7 +75,7 @@ const FloatingButtons = () => {
             whileHover={{ scale: 1.15, y: -3 }}
             whileTap={{ scale: 0.9 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className="fixed bottom-8 sm:bottom-6 left-4 sm:left-6 z-50 h-12 w-12 rounded-full bg-white/90 border border-gray-200 shadow-lg flex items-center justify-center text-gray-700 hover:bg-pink-500 hover:text-white hover:border-pink-500 transition-colors duration-300"
+            className="fixed bottom-8 sm:bottom-6 left-4 sm:left-6 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-rose-300/20 bg-gradient-to-br from-amber-400 to-rose-500 text-white shadow-lg shadow-rose-500/30 transition-colors duration-300 hover:from-amber-300 hover:to-rose-400"
             aria-label="Scroll to top"
           >
             <ChevronUp size={22} />

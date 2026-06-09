@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 const GlowCard = ({
   children,
   className = "",
-  glowColor = "rgba(236, 72, 153, 0.3)",
+  glowColor = "rgba(249, 115, 22, 0.3)",
   borderRadius = "1.5rem",
   delay = 0,
   ...rest
@@ -20,36 +20,44 @@ const GlowCard = ({
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
       whileHover={{
-        y: -8,
-        boxShadow: `0 25px 60px -12px ${glowColor}`,
-        transition: { duration: 0.3 },
+        y: -4,
+        borderColor: glowColor,
+        boxShadow: `0 20px 40px -10px ${glowColor}, 0 0 40px -15px ${glowColor}`,
+        transition: { duration: 0.35, ease: [0.25, 1, 0.5, 1] },
       }}
-      className={`relative group overflow-hidden ${className}`}
-      style={{ borderRadius }}
+      className={`relative group overflow-hidden border border-white/10 ${className}`}
+      style={{ borderRadius, transition: "border-color 0.35s ease, box-shadow 0.35s ease" }}
       {...rest}
     >
-      {/* Animated gradient border */}
+
+      {/* Subtle inner glow */}
       <div
-        className="absolute inset-0 rounded-[inherit] p-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        className="absolute inset-0 rounded-[inherit] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
         style={{
-          background: `linear-gradient(135deg, ${glowColor}, transparent, ${glowColor})`,
-          backgroundSize: "200% 200%",
-          animation: "borderGlow 3s ease infinite",
-          filter: "blur(10px)",
+          boxShadow: `inset 0 0 40px ${glowColor}`,
         }}
         aria-hidden="true"
-      >
-        <div className="w-full h-full rounded-[inherit] bg-[#0c0a1a]" />
-      </div>
+      />
 
       {/* Content */}
       <div className="relative z-10 h-full">{children}</div>
 
-      {/* Hover glow spot — soft gradient, no filter blur */}
+      {/* Enhanced hover glow spot with multiple layers */}
       <div
         className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
         style={{
-          background: `radial-gradient(circle at 50% 50%, ${glowColor} 0%, transparent 40%)`,
+          background: `radial-gradient(circle at 50% 50%, ${glowColor} 0%, rgba(251, 191, 36, 0.15) 20%, transparent 45%)`,
+        }}
+        aria-hidden="true"
+      />
+      
+      {/* Shimmer effect on hover */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{
+          background: `linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.1) 50%, transparent 75%)`,
+          backgroundSize: "200% 100%",
+          animation: "shimmerSweep 2s ease-in-out infinite",
         }}
         aria-hidden="true"
       />

@@ -1,13 +1,21 @@
+import { asset } from "../lib/assetPath";
+
 const LoadingSpinner = () => (
-  <div className="flex flex-col items-center justify-center py-20 gap-4">
-    <div className="relative h-16 w-16">
+  <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
+    <div className="relative h-24 w-24">
       {/* Outer ring */}
-      <div className="absolute inset-0 rounded-full border-4 border-white/10" />
+      <div className="absolute inset-0 rounded-full border-4 border-white/10 bg-white/5 shadow-[0_0_40px_rgba(249,115,22,0.08)]" />
       {/* Spinning gradient ring */}
-      <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-pink-500 border-r-amber-400 animate-spin" />
-      {/* Inner glow */}
-      <div className="absolute inset-2 rounded-full bg-gradient-to-br from-pink-500/20 to-amber-500/20 flex items-center justify-center">
-        <span className="text-lg">✨</span>
+      <div className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-orange-400 border-r-amber-300 animate-spin" />
+      {/* Center logo */}
+      <div className="absolute inset-3 flex items-center justify-center rounded-full bg-gradient-to-br from-orange-400/20 to-amber-300/20 ring-1 ring-white/10">
+        <img
+          src={asset("/assets/SouthLankaFireworks.webp")}
+          alt="South Lanka Fireworks Logo"
+          className="h-11 w-11 object-contain"
+          loading="eager"
+          decoding="async"
+        />
       </div>
     </div>
     <div className="text-center">

@@ -19,11 +19,16 @@ const Footer = lazy(() => import("./components/Footer.jsx"));
  * Renders children only when close to the viewport (800px lead).
  * Keeps the placeholder height so layout doesn't shift.
  */
-function DeferredSection({ children, minHeight = 200 }) {
+function DeferredSection({ children, minHeight = 200, anchorId }) {
   const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState(() => {
+        if (typeof window === "undefined") return false;
+        return Boolean(window.location.hash) || Boolean(anchorId && window.location.hash?.slice(1) === anchorId);
+    });
 
   useEffect(() => {
+        if (visible) return;
+
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
@@ -37,10 +42,34 @@ function DeferredSection({ children, minHeight = 200 }) {
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+    }, [anchorId, visible]);
+
+    useEffect(() => {
+        if (!visible || typeof window === "undefined") return;
+        if (!anchorId || window.location.hash?.slice(1) !== anchorId) return;
+
+        const timeoutId = window.setTimeout(() => {
+            const el = ref.current;
+            if (!el) return;
+
+            const yOffset = -80;
+            const yPosition = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+            window.scrollTo({
+                top: Math.max(yPosition, 0),
+                behavior: "auto",
+            });
+        }, 120);
+
+        return () => window.clearTimeout(timeoutId);
+    }, [anchorId, visible]);
 
   return (
-    <div ref={ref} style={{ minHeight: visible ? undefined : minHeight }}>
+        <div
+            ref={ref}
+            data-section-anchor={anchorId}
+            style={{ minHeight: visible ? undefined : minHeight }}
+        >
       {visible ? (
         <Suspense fallback={<LoadingSpinner />}>
           {children}
@@ -72,7 +101,9 @@ export default function App() {
             const hash = window.location.hash?.slice(1);
             if (!hash) return true;
 
-            const element = document.getElementById(hash);
+            const element =
+                document.getElementById(hash) ||
+                document.querySelector(`[data-section-anchor="${hash}"]`);
             if (!element) return false;
 
             const yOffset = -80;
@@ -125,50 +156,53 @@ export default function App() {
                 </Suspense>
             )}
 
-            {/* Floating glow orbs — pure CSS, GPU-composited */}
+            {/* Floating glow orbs — multi-color, GPU-composited */}
             <div className="bg-orb bg-orb--1" aria-hidden="true" />
             <div className="bg-orb bg-orb--2" aria-hidden="true" />
             <div className="bg-orb bg-orb--3" aria-hidden="true" />
+            <div className="bg-orb bg-orb--4" aria-hidden="true" />
 
-            {/* Rising sparkle particles — reduced to 6 for GPU savings */}
+            {/* Rising sparkle particles — colorful */}
             <div className="bg-sparkle bg-sparkle--1" aria-hidden="true" />
             <div className="bg-sparkle bg-sparkle--2" aria-hidden="true" />
             <div className="bg-sparkle bg-sparkle--3" aria-hidden="true" />
             <div className="bg-sparkle bg-sparkle--4" aria-hidden="true" />
             <div className="bg-sparkle bg-sparkle--5" aria-hidden="true" />
             <div className="bg-sparkle bg-sparkle--6" aria-hidden="true" />
+            <div className="bg-sparkle bg-sparkle--7" aria-hidden="true" />
+            <div className="bg-sparkle bg-sparkle--8" aria-hidden="true" />
 
-            <a href="#home" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-pink-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+            <a href="#home" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-amber-500 focus:text-[#1a110d] focus:px-4 focus:py-2 focus:rounded-lg">
                 Skip to main content
             </a>
             <Navbar />
             <main>
                 <Home />
-                <DeferredSection minHeight={200}>
+                <DeferredSection minHeight={200} anchorId="trust-badges">
                     <TrustBadges />
                 </DeferredSection>
-                <DeferredSection minHeight={400}>
+                <DeferredSection minHeight={400} anchorId="about">
                     <About />
                 </DeferredSection>
-                <DeferredSection minHeight={400}>
+                <DeferredSection minHeight={400} anchorId="services">
                     <Services />
                 </DeferredSection>
-                <DeferredSection minHeight={600}>
+                <DeferredSection minHeight={600} anchorId="products">
                     <Products />
                 </DeferredSection>
-                <DeferredSection minHeight={400}>
+                <DeferredSection minHeight={400} anchorId="portfolio">
                     <Portfolio />
                 </DeferredSection>
-                <DeferredSection minHeight={400}>
+                <DeferredSection minHeight={400} anchorId="feedback">
                     <Feedback />
                 </DeferredSection>
-                <DeferredSection minHeight={300}>
+                <DeferredSection minHeight={300} anchorId="faq">
                     <FAQ />
                 </DeferredSection>
-                <DeferredSection minHeight={400}>
+                <DeferredSection minHeight={400} anchorId="contact">
                     <Contact />
                 </DeferredSection>
-                <DeferredSection minHeight={300}>
+                <DeferredSection minHeight={300} anchorId="footer">
                     <Footer />
                 </DeferredSection>
             </main>

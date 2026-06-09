@@ -34,8 +34,8 @@ const packages = [
       { name: "Water Fall", price: 2500, quantity: 1 },
     ],
     discount: 5700,
-    bgColor: "bg-blue-200/50",
-    hoverColor: "hover:shadow-sky-400/50",
+    bgColor: "bg-amber-200/45",
+    hoverColor: "hover:shadow-amber-400/40",
   },
   {
     id: 102,
@@ -51,8 +51,8 @@ const packages = [
       { name: "Water Fall", price: 2500, quantity: 1 },
     ],
     discount: 8900,
-    bgColor: "bg-yellow-200/50",
-    hoverColor: "hover:shadow-orange-400/50",
+    bgColor: "bg-orange-200/45",
+    hoverColor: "hover:shadow-orange-400/40",
   },
   {
     id: 103,
@@ -68,8 +68,8 @@ const packages = [
       { name: "Water Fall", price: 2500, quantity: 1 },
     ],
     discount: 6700,
-    bgColor: "bg-red-200/50",
-    hoverColor: "hover:shadow-pink-400/50",
+    bgColor: "bg-rose-200/45",
+    hoverColor: "hover:shadow-orange-500/35",
   },
   {
     id: 104,
@@ -85,8 +85,8 @@ const packages = [
       { name: "Water Fall (100feet)", price: 15000, quantity: 1 },
     ],
     discount: 6800,
-    bgColor: "bg-green-200/50",
-    hoverColor: "hover:shadow-emerald-400/50",
+    bgColor: "bg-yellow-200/45",
+    hoverColor: "hover:shadow-amber-400/40",
   },
   {
     id: 105,
@@ -102,8 +102,8 @@ const packages = [
       { name: "Water Fall (100feet)", price: 15000, quantity: 1 },
     ],
     discount: 4200,
-    bgColor: "bg-pink-200/50",
-    hoverColor: "hover:shadow-rose-400/50",
+    bgColor: "bg-orange-100/45",
+    hoverColor: "hover:shadow-orange-300/35",
   },
   {
     id: 106,
@@ -119,8 +119,47 @@ const packages = [
       { name: "Water Fall (100feet)", price: 15000, quantity: 1 },
     ],
     discount: 9500,
-    bgColor: "bg-purple-200/50",
-    hoverColor: "hover:shadow-violet-400/50",
+    bgColor: "bg-amber-100/45",
+    hoverColor: "hover:shadow-amber-300/35",
+  },
+];
+
+const packageThemes = [
+  {
+    border: "border-amber-300/20",
+    glow: "from-amber-300/18 via-orange-300/8 to-transparent",
+    badge: "border border-amber-300/25 bg-amber-300/10 text-amber-100",
+    highlight: "text-amber-200",
+  },
+  {
+    border: "border-orange-300/18",
+    glow: "from-orange-300/16 via-rose-300/8 to-transparent",
+    badge: "border border-orange-300/25 bg-orange-300/10 text-orange-100",
+    highlight: "text-orange-100",
+  },
+  {
+    border: "border-rose-300/18",
+    glow: "from-rose-300/16 via-orange-300/8 to-transparent",
+    badge: "border border-rose-300/25 bg-rose-300/10 text-rose-100",
+    highlight: "text-rose-100",
+  },
+  {
+    border: "border-yellow-300/18",
+    glow: "from-yellow-300/16 via-amber-300/8 to-transparent",
+    badge: "border border-yellow-300/25 bg-yellow-300/10 text-yellow-100",
+    highlight: "text-yellow-100",
+  },
+  {
+    border: "border-amber-200/18",
+    glow: "from-amber-200/16 via-rose-300/8 to-transparent",
+    badge: "border border-amber-200/25 bg-amber-200/10 text-amber-50",
+    highlight: "text-amber-50",
+  },
+  {
+    border: "border-orange-200/18",
+    glow: "from-orange-200/16 via-yellow-300/8 to-transparent",
+    badge: "border border-orange-200/25 bg-orange-200/10 text-orange-50",
+    highlight: "text-orange-50",
   },
 ];
 
@@ -307,9 +346,11 @@ const Products = () => {
 
   // Update item quantity
   const updateCustomPackageQty = (item, qty) => {
+    const safeQty = Number.isFinite(qty) && qty > 0 ? qty : 1;
+
     setCustomPackageItems(
       customPackageItems.map((i) =>
-        i.id === item.id && i.size === item.size ? { ...i, quantity: qty } : i
+        i.id === item.id && i.size === item.size ? { ...i, quantity: safeQty } : i
       )
     );
   };
@@ -593,14 +634,14 @@ const Products = () => {
       {/* Floating Cart */}
       {cartCount > 0 && (
         <div
-          className="fixed top-20 right-3 sm:right-5 z-50 flex items-center gap-2 bg-gray-900 border border-white/20 shadow-lg px-3 sm:px-4 py-2 rounded-full cursor-pointer"
+          className="fixed top-20 right-3 z-50 flex cursor-pointer items-center gap-2 rounded-full border border-amber-200/20 bg-[#1a110d]/95 px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.3)] sm:right-5 sm:px-4"
           onClick={() => {
             const section = document.getElementById("custom-package");
             if (section) section.scrollIntoView({ behavior: "smooth" });
           }}
         >
-          <ShoppingCart size={24} className="text-pink-400" />
-          <span className="font-bold text-pink-300">{cartCount}</span>
+          <ShoppingCart size={22} className="text-amber-200" />
+          <span className="font-bold text-amber-100">{cartCount}</span>
         </div>
       )}
 
@@ -613,7 +654,7 @@ const Products = () => {
             exit={{ opacity: 0, y: -50, scale: 0.9 }}
             transition={{ duration: 0.5, type: "spring", stiffness: 120 }}
             className="fixed top-16 sm:top-2 left-2 sm:left-5 z-50 w-[85vw] sm:w-80 md:w-96 lg:w-[400px] 
-                 bg-gradient-to-r from-green-500 to-teal-400 text-white px-4 sm:px-6 md:px-8 
+                bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white px-4 sm:px-6 md:px-8 
                  py-3 sm:py-4 md:py-5 rounded-xl shadow-xl border border-white/20
                  text-xs sm:text-sm md:text-base lg:text-lg"
           >
@@ -629,43 +670,47 @@ const Products = () => {
 
       {/* Hero */}
       <div className="max-w-6xl mx-auto mb-16">
-        <div className="relative overflow-hidden rounded-2xl sm:rounded-[32px] border border-white/10 bg-[#0c0a1a]/90 px-4 sm:px-8 py-8 sm:py-10 shadow-2xl">
-          <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-pink-500 mb-4">
+        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#19110d]/84 px-4 py-8 shadow-2xl sm:rounded-[32px] sm:px-8 sm:py-10">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(251,191,36,0.14),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(249,115,22,0.12),transparent_28%)]" />
+          <div className="relative inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-amber-200 mb-4">
             <Sparkles size={14} />
-            <span>Signature product desk</span>
+            <span>Catalogue and package planner</span>
           </div>
-          <h1 className="text-3xl md:text-[2.6rem] font-semibold leading-tight text-white">
-            Precision Fireworks Catalogue
-          </h1>
-          <p className="text-sm md:text-base text-gray-400 mt-4 max-w-2xl">
-            Discover certified shells, specialty effects, and field-tested packages designed for weddings, festivals, and televised broadcasts. Everything is engineered to meet safety regulations while keeping the spectacle intact.
+          <h2 className="relative text-3xl font-semibold leading-tight text-white md:text-[2.6rem]">
+            Build the right fireworks setup
+            <span className="block bg-gradient-to-r from-amber-200 via-orange-300 to-rose-300 bg-clip-text text-transparent">
+              for your venue, audience, and budget
+            </span>
+          </h2>
+          <p className="mt-4 max-w-2xl text-sm text-stone-300 md:text-base">
+            Compare ready-made packages, browse individual effects, and create a custom shortlist without losing track of the budget. Everything here is organized for faster decision-making.
           </p>
-          <div className="flex flex-wrap gap-3 mt-6">
+          <div className="mt-6 flex flex-wrap gap-3">
             <a
               href="#packages"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-pink-500 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-lg shadow-pink-500/30 hover:bg-pink-600"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-lg shadow-orange-500/20 transition hover:brightness-105"
             >
               Explore Packages
             </a>
             <a
               href="#custom-package"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-gray-300 hover:border-pink-400 hover:text-pink-400"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-stone-100 transition hover:border-amber-200/35 hover:bg-white/5"
             >
               Build Custom Plan
             </a>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
             {heroHighlights.map(({ label, value, helper, Icon }) => (
               <div
                 key={label}
-                className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 shadow-inner"
+                className="rounded-2xl border border-white/10 bg-black/10 px-4 py-4 shadow-inner backdrop-blur-sm"
               >
-                <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-gray-400">
-                  <Icon size={16} className="text-pink-500" />
+                <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-stone-400">
+                  <Icon size={16} className="text-amber-200" />
                   {label}
                 </div>
                 <div className="text-2xl font-semibold text-white">{value}</div>
-                <p className="text-xs text-gray-400 mt-1">{helper}</p>
+                <p className="mt-1 text-xs text-stone-400">{helper}</p>
               </div>
             ))}
           </div>
@@ -678,18 +723,19 @@ const Products = () => {
       <div className="max-w-6xl mx-auto mb-16">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.35em] text-pink-500 mb-2">
+            <p className="mb-2 text-[11px] uppercase tracking-[0.35em] text-amber-200">
               Individual Catalogue
             </p>
             <h3 className="text-2xl md:text-3xl font-semibold text-white">
               Firework Effects & Specialty Shots
             </h3>
-            <p className="text-sm text-gray-400 mt-2 max-w-2xl">
+            <p className="mt-2 max-w-2xl text-sm text-stone-300">
               Filter by technique or special effect, preview the footage, and add the exact calibers you need into the custom package builder.
             </p>
           </div>
-          <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-gray-400">
-            <Filter size={16} /> Filters Active
+          <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-stone-400">
+            <Filter size={16} />
+            {activeCategory === "All" ? "Showing all items" : `${activeCategory} selected`}
           </div>
         </div>
         <div className="flex flex-wrap justify-center gap-3 mb-8">
@@ -702,8 +748,8 @@ const Products = () => {
                 onClick={() => setActiveCategory(category)}
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
                   isActive
-                    ? "bg-slate-900 text-white border-slate-900 shadow-lg"
-                    : "bg-white/5 text-gray-300 border-white/10 hover:border-pink-400"
+                    ? "border-transparent bg-gradient-to-r from-amber-400 to-orange-500 text-[#1a110d] shadow-lg shadow-orange-500/20"
+                    : "border-white/10 bg-[#1a110d]/70 text-stone-200 hover:border-amber-200/30 hover:bg-white/5"
                 }`}
               >
                 <Icon size={16} />
@@ -718,7 +764,7 @@ const Products = () => {
             return (
               <motion.div
                 key={item.id}
-                className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0c0a1a]/90 p-5 shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl ${
+                className={`group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#150f0c]/92 p-5 shadow-xl transition duration-300 hover:-translate-y-1 hover:border-amber-200/18 hover:shadow-2xl ${
                   item.hoverColor || ""
                 }`}
                 variants={productVariants}
@@ -728,7 +774,7 @@ const Products = () => {
                 onMouseEnter={() => setHoveredId(item.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
-                <div className="relative w-full aspect-[4/3] mb-4 rounded-xl overflow-hidden border border-white/10 bg-slate-900/50">
+                <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/20">
                   {hoveredId === item.id && item.video ? (
                     <video
                       src={item.video}
@@ -750,7 +796,7 @@ const Products = () => {
                       className="w-full h-full object-cover"
                     />
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#150f0c]/80 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
                   <div className="absolute top-4 left-4 text-[11px] uppercase tracking-[0.3em] text-white/80">
                     Live Preview
                   </div>
@@ -760,29 +806,29 @@ const Products = () => {
                 </div>
 
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] uppercase tracking-[0.3em] text-pink-500">
+                  <span className="text-[11px] uppercase tracking-[0.3em] text-amber-200">
                     {item.category}
                   </span>
-                  <span className="text-[11px] font-semibold text-gray-400 bg-white/10 px-2 py-1 rounded-full">
+                  <span className="rounded-full border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-semibold text-stone-300">
                     Crowd Favorite
                   </span>
                 </div>
 
                 {priceRange && (
-                  <div className="flex items-center justify-between text-xs text-gray-400 mb-2">
+                  <div className="mb-2 flex items-center justify-between text-xs text-stone-400">
                     <span>From {formatCurrency(priceRange.min)}</span>
                     <span>Up to {formatCurrency(priceRange.max)}</span>
                   </div>
                 )}
 
                 <h3 className="text-lg font-semibold text-white mb-2">{item.name}</h3>
-                <p className="text-sm text-gray-400 mb-4 leading-relaxed">{item.description}</p>
+                <p className="mb-4 text-sm leading-relaxed text-stone-300">{item.description}</p>
 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {item.sizes.map(({ size, price }) => (
                     <span
                       key={size}
-                      className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-gray-300"
+                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-stone-200"
                     >
                       {size} · {formatCurrency(price)}
                     </span>
@@ -794,7 +840,7 @@ const Products = () => {
                     <button
                       key={`${item.id}-${sizeObj.size}-${index}`}
                       onClick={() => addToCustomPackage(item, sizeObj)}
-                      className="inline-flex flex-1 min-w-[100px] items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-500 px-2 sm:px-3 py-2 text-xs font-semibold text-white shadow-md transition hover:from-blue-600 hover:to-indigo-600"
+                      className="inline-flex min-w-[120px] flex-1 items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 px-2 py-2.5 text-xs font-semibold text-[#1a110d] shadow-md shadow-orange-500/10 transition hover:brightness-105 sm:px-3"
                     >
                       <ShoppingCart size={14} />
                       Add {sizeObj.size}
@@ -809,47 +855,47 @@ const Products = () => {
 
       {/* Custom Package */}
       <div
-        className="max-w-6xl mx-auto mb-16 rounded-2xl sm:rounded-[32px] border border-white/10 bg-[#0c0a1a]/90 p-4 sm:p-6 md:p-8 shadow-2xl"
+        className="max-w-6xl mx-auto mb-16 rounded-2xl border border-white/10 bg-[#19110d]/86 p-4 shadow-2xl sm:rounded-[32px] sm:p-6 md:p-8"
         id="custom-package"
       >
         <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.35em] text-pink-500 mb-2">
+            <p className="mb-2 text-[11px] uppercase tracking-[0.35em] text-amber-200">
               Bespoke Builder
             </p>
             <h3 className="text-2xl md:text-3xl font-semibold text-white">
               Your Custom Package
             </h3>
           </div>
-          <div className="text-sm text-gray-400">
+          <div className="text-sm text-stone-300">
             {cartCount} total shots / {formatCurrency(customPackageTotal)} estimate
           </div>
         </div>
         {customPackageItems.length === 0 ? (
-          <p className="rounded-2xl border border-dashed border-pink-500/30 bg-pink-500/10 px-4 py-6 text-center text-sm text-gray-400">
-            Start adding fireworks to see your bespoke build take shape.
+          <p className="rounded-2xl border border-dashed border-amber-200/25 bg-amber-300/8 px-4 py-6 text-center text-sm text-stone-300">
+            Add shells or special effects above to build your shortlist and track the estimate instantly.
           </p>
         ) : (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
-                <p className="text-xs uppercase tracking-[0.35em] text-gray-400">Unique SKUs</p>
+              <div className="rounded-2xl border border-white/10 bg-black/10 px-4 py-4">
+                <p className="text-xs uppercase tracking-[0.35em] text-stone-400">Unique SKUs</p>
                 <p className="text-2xl font-semibold text-white">{uniqueSkuCount}</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
-                <p className="text-xs uppercase tracking-[0.35em] text-gray-400">Total Shots</p>
+              <div className="rounded-2xl border border-white/10 bg-black/10 px-4 py-4">
+                <p className="text-xs uppercase tracking-[0.35em] text-stone-400">Total Shots</p>
                 <p className="text-2xl font-semibold text-white">{cartCount}</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
-                <p className="text-xs uppercase tracking-[0.35em] text-gray-400">Estimate</p>
-                <p className="text-2xl font-semibold text-white">{formatCurrency(customPackageTotal)}</p>
+              <div className="rounded-2xl border border-white/10 bg-black/10 px-4 py-4">
+                <p className="text-xs uppercase tracking-[0.35em] text-stone-400">Estimate</p>
+                <p className="text-2xl font-semibold text-amber-100">{formatCurrency(customPackageTotal)}</p>
               </div>
             </div>
 
             <div className="overflow-x-auto mb-6">
               <table className="w-full table-auto text-xs md:text-sm border border-white/10 rounded-2xl overflow-hidden">
                 <thead>
-                  <tr className="bg-white/5 text-gray-400">
+                  <tr className="bg-white/5 text-stone-400">
                     <th className="p-3 text-left">Item</th>
                     <th className="p-3 text-left">Size</th>
                     <th className="p-3 text-right">Price</th>
@@ -861,9 +907,9 @@ const Products = () => {
                 <tbody>
                   {customPackageItems.map((item, idx) => (
                     <tr key={idx} className="border-t border-white/10">
-                      <td className="p-3 font-semibold text-gray-200">{item.name}</td>
-                      <td className="p-3 text-gray-400">{item.size}</td>
-                      <td className="p-3 text-right text-gray-300">{formatCurrency(item.price)}</td>
+                      <td className="p-3 font-semibold text-stone-100">{item.name}</td>
+                      <td className="p-3 text-stone-400">{item.size}</td>
+                      <td className="p-3 text-right text-stone-300">{formatCurrency(item.price)}</td>
                       <td className="p-3 text-center">
                         <input
                           type="number"
@@ -875,16 +921,16 @@ const Products = () => {
                               parseInt(e.target.value, 10)
                             )
                           }
-                          className="w-16 rounded-lg border border-white/15 bg-white/5 p-1 text-center text-gray-200 focus:outline-none focus:ring-1 focus:ring-pink-400"
+                          className="w-16 rounded-lg border border-white/15 bg-white/5 p-1 text-center text-stone-100 focus:outline-none focus:ring-1 focus:ring-amber-300"
                         />
                       </td>
-                      <td className="p-3 text-right font-semibold text-pink-500">
+                      <td className="p-3 text-right font-semibold text-amber-100">
                         {formatCurrency(item.price * item.quantity)}
                       </td>
                       <td className="p-3 text-center">
                         <button
                           onClick={() => removeFromCustomPackage(item)}
-                          className="inline-flex items-center gap-1 rounded-full bg-red-500/90 px-2 sm:px-3 py-1 text-white hover:bg-red-600"
+                          className="inline-flex items-center gap-1 rounded-full border border-rose-300/25 bg-rose-400/12 px-2 py-1 text-rose-100 transition hover:bg-rose-400/18 sm:px-3"
                         >
                           <Trash2 size={14} /> <span className="hidden sm:inline">Remove</span>
                         </button>
@@ -897,20 +943,20 @@ const Products = () => {
 
             <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
               <div>
-                <p className="text-sm text-gray-400">Download a branded proposal or share it directly with your client.</p>
+                <p className="text-sm text-stone-300">Download a branded proposal or share it directly with your client.</p>
                 <p className="text-2xl font-semibold text-white mt-1">{formatCurrency(customPackageTotal)}</p>
               </div>
               <div className="flex flex-wrap gap-3 w-full lg:w-auto justify-center">
                 <button
                   onClick={generateReport}
-                  className="inline-flex items-center gap-2 rounded-full bg-green-500 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-lg hover:bg-green-600"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#1a110d] shadow-lg transition hover:bg-amber-50"
                 >
                   📝 Download PDF
                 </button>
                 <button
                   type="button"
                   onClick={shareInvoiceViaWhatsApp}
-                  className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 px-6 py-3 text-sm font-semibold text-emerald-400 hover:bg-emerald-500/10"
+                  className="inline-flex items-center gap-2 rounded-full border border-amber-200/25 px-6 py-3 text-sm font-semibold text-amber-100 transition hover:bg-white/5"
                 >
                   <FaWhatsapp className="text-lg" /> Share via WhatsApp
                 </button>
@@ -923,19 +969,19 @@ const Products = () => {
       {/* Standard Packages */}
       <div className="max-w-7xl mx-auto mb-20 px-4" id="packages">
         <div className="text-center mb-10">
-          <p className="text-xs uppercase tracking-[0.35em] text-pink-500 mb-2">
+          <p className="mb-2 text-xs uppercase tracking-[0.35em] text-amber-200">
             Signature Collections
           </p>
           <h3 className="text-3xl md:text-4xl font-semibold text-white mb-3">
-            Professionally Curated Firework Packages
+            Ready-made packages for faster booking
           </h3>
-          <p className="text-sm md:text-base text-gray-400 max-w-3xl mx-auto">
-            Compare transparent pricing, guaranteed savings, and precisely what is included in each experience. Every package is engineered by our pyro specialists for effortless booking and guest-safe execution.
+          <p className="mx-auto max-w-3xl text-sm text-stone-300 md:text-base">
+            Compare package sizes, see exactly what is included, and share the right option with your event team in one tap.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {packages.map((pack) => {
+          {packages.map((pack, index) => {
             const { subtotal, total } = calculatePackageTotals(pack);
             const highlightLabel =
               pack.discount >= 6000
@@ -944,41 +990,40 @@ const Products = () => {
                 ? "Popular"
                 : null;
             const whatsappUrl = getPackageWhatsappUrl(pack);
+            const theme = packageThemes[index % packageThemes.length];
 
             return (
               <motion.div
                 key={pack.id}
-                className={`relative overflow-hidden rounded-2xl shadow-xl border border-white/10 hover:shadow-2xl transition-all duration-300 ${pack.bgColor}`}
+                className={`relative overflow-hidden rounded-[2rem] border ${theme.border} bg-[#19110d]/88 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl`}
                 variants={productVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
               >
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent pointer-events-none"></div>
+                <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${theme.glow}`} />
                 {highlightLabel && (
-                  <span className="absolute top-4 right-4 bg-pink-500 text-white text-xs font-semibold tracking-wide px-3 py-1 rounded-full shadow-lg">
+                  <span className={`absolute right-4 top-4 rounded-full px-3 py-1 text-xs font-semibold tracking-wide shadow-lg ${theme.badge}`}>
                     {highlightLabel}
                   </span>
                 )}
 
-                {/* Card Content */}
                 <div className="relative p-6 flex flex-col h-full">
-                  <div className="flex items-center justify-between mb-3 text-[11px] uppercase tracking-[0.35em] text-gray-300">
+                  <div className="mb-3 flex items-center justify-between text-[11px] uppercase tracking-[0.35em] text-stone-400">
                     <span>{pack.items.length} line items</span>
                     
                   </div>
                   <h3 className="text-lg md:text-xl font-semibold text-white mb-2">
                     {pack.name}
                   </h3>
-                  <p className="text-gray-300 mb-4 text-sm leading-relaxed">
+                  <p className="mb-4 text-sm leading-relaxed text-stone-300">
                     {pack.description}
                   </p>
 
-                  <p className="text-indigo-600 font-semibold mb-2 text-sm">
+                  <p className={`mb-2 text-sm font-semibold ${theme.highlight}`}>
                     Includes
                   </p>
-                  <ul className="space-y-1 mb-4 text-sm text-gray-300">
+                  <ul className="mb-4 space-y-1 text-sm text-stone-300">
                     {pack.items.map((i, idx) => (
                       <li
                         key={idx}
@@ -987,33 +1032,33 @@ const Products = () => {
                         <span>
                           {i.name} × {i.quantity}
                         </span>
-                        <span className="text-red-500 font-semibold">
+                        <span className="font-semibold text-stone-100">
                           {formatCurrency(i.price * i.quantity)}
                         </span>
                       </li>
                     ))}
                   </ul>
 
-                  <div className="mt-auto space-y-2 text-sm text-gray-300">
+                  <div className="mt-auto space-y-2 text-sm text-stone-300">
                     <div className="flex justify-between">
                       <span className="font-medium">Subtotal</span>
-                      <span className="text-blue-600 font-bold">
+                      <span className="font-bold text-stone-100">
                         {formatCurrency(subtotal)}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="font-medium">Discount</span>
-                      <span className="text-pink-500 font-bold">
+                      <span className="font-bold text-rose-200">
                         − {formatCurrency(pack.discount)}
                       </span>
                     </div>
                     <div className="flex justify-between text-base font-semibold border-t border-white/15 pt-2">
                       <span>Total investment</span>
-                      <span className="text-red-600">
+                      <span className={theme.highlight}>
                         {formatCurrency(total)}
                       </span>
                     </div>
-                    <p className="text-xs text-gray-400 text-right">
+                    <p className="text-right text-xs text-stone-400">
                       Includes on-site safety briefing & operator crew.
                     </p>
                   </div>
@@ -1023,7 +1068,7 @@ const Products = () => {
                       href={whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 w-full border border-emerald-400/40 text-emerald-400 text-sm font-semibold py-2 rounded-lg hover:bg-emerald-500/10 transition"
+                      className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 py-3 text-sm font-semibold text-white transition hover:border-amber-200/30 hover:bg-white/10"
                     >
                       <FaWhatsapp /> Book via WhatsApp
                     </a>

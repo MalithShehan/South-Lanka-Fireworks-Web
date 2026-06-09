@@ -2,6 +2,17 @@ import { useState, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
+const FAQ_COLORS = [
+  "border-l-amber-400",
+  "border-l-rose-400",
+  "border-l-violet-400",
+  "border-l-cyan-400",
+  "border-l-emerald-400",
+  "border-l-blue-400",
+  "border-l-orange-400",
+  "border-l-fuchsia-400",
+];
+
 const faqData = [
   {
     question: "How far in advance should I book a fireworks show?",
@@ -41,15 +52,15 @@ const faqData = [
   {
     question: "How do I get a quote?",
     answer:
-      "Getting a quote is easy! You can WhatsApp us at +94 77 713 5516, fill out the contact form on our website, or use the custom package builder to generate an instant estimate. We typically respond within 2 hours during business hours.",
+      "Getting a quote is easy! You can WhatsApp us at +94 77 713 5516, fill out the contact form on our website, or use the custom package builder to generate an instant estimate. We typically respond within 2 hours, and our team is available 24/7.",
   },
 ];
 
-const FAQItem = ({ faq, isOpen, onToggle }) => (
-  <div className="border border-white/10 rounded-2xl bg-[#0c0a1a]/90 shadow-md overflow-hidden">
+const FAQItem = ({ faq, isOpen, onToggle, colorClass }) => (
+  <div className={`overflow-hidden rounded-[1.6rem] border border-white/10 border-l-[3px] ${colorClass} bg-[#0d0818]/86 shadow-md backdrop-blur-sm`}>
     <button
       onClick={onToggle}
-      className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-white/5 transition"
+      className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition hover:bg-white/5"
       aria-expanded={isOpen}
     >
       <span className="text-base font-semibold text-white pr-4">
@@ -60,7 +71,7 @@ const FAQItem = ({ faq, isOpen, onToggle }) => (
         transition={{ duration: 0.3 }}
         className="flex-shrink-0"
       >
-        <ChevronDown size={20} className="text-pink-500" />
+        <ChevronDown size={20} className="text-amber-200" />
       </motion.div>
     </button>
     <AnimatePresence>
@@ -72,7 +83,7 @@ const FAQItem = ({ faq, isOpen, onToggle }) => (
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="overflow-hidden"
         >
-          <div className="px-6 pb-5 text-sm text-gray-400 leading-relaxed border-t border-white/10 pt-4">
+          <div className="border-t border-white/10 px-6 pb-5 pt-4 text-sm leading-relaxed text-stone-300">
             {faq.answer}
           </div>
         </motion.div>
@@ -85,25 +96,29 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <section className="relative py-20 px-4 md:px-10 text-gray-100" id="faq" aria-label="Frequently asked questions">
+    <section className="relative px-4 py-20 text-gray-100 md:px-10" id="faq" aria-label="Frequently asked questions">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-10 top-20 h-44 w-44 rounded-full bg-amber-300/10 blur-3xl" />
+        <div className="absolute bottom-10 right-16 h-52 w-52 rounded-full bg-orange-500/10 blur-3xl" />
+      </div>
       
 
       <div className="relative max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <p className="text-xs uppercase tracking-[0.4em] text-pink-500 mb-3">
+          <p className="mb-3 text-xs uppercase tracking-[0.4em] text-amber-200">
             Common Questions
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
             Frequently Asked Questions
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-stone-300">
             Everything you need to know about booking a fireworks show with us.
             Can't find what you're looking for? Just{" "}
             <a
               href="https://wa.me/94777135516"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-green-500 font-medium hover:underline"
+              className="font-medium text-amber-200 hover:underline"
             >
               message us on WhatsApp
             </a>
@@ -120,21 +135,22 @@ const FAQ = () => {
               onToggle={() =>
                 setOpenIndex(openIndex === index ? null : index)
               }
+              colorClass={FAQ_COLORS[index % FAQ_COLORS.length]}
             />
           ))}
         </div>
 
         <div className="mt-12 text-center">
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-[#0c0a1a]/90 border border-white/10 rounded-2xl px-4 sm:px-8 py-6 shadow-lg">
+          <div className="inline-flex flex-col items-center gap-4 rounded-[1.8rem] border border-white/10 bg-[#17100d]/86 px-4 py-6 shadow-lg backdrop-blur-sm sm:flex-row sm:px-8">
             <div className="text-center sm:text-left">
               <p className="font-semibold text-white">Still have questions?</p>
-              <p className="text-sm text-gray-400">We're here to help you plan the perfect show.</p>
+              <p className="text-sm text-stone-300">We're here to help you plan the perfect show.</p>
             </div>
             <a
               href="https://wa.me/94777135516?text=Hello!%20I%20have%20a%20question%20about%20your%20fireworks%20services."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-green-500 px-6 py-3 text-sm font-semibold text-white hover:bg-green-600 transition shadow-lg shadow-green-500/20 whitespace-nowrap"
+              className="inline-flex whitespace-nowrap rounded-full bg-gradient-to-r from-amber-400 via-rose-500 to-violet-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-rose-500/20 transition hover:scale-[1.02]"
             >
               Chat With Us
             </a>

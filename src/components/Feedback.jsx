@@ -30,9 +30,9 @@ const defaultTestimonials = [
 ];
 
 const statHighlights = [
-  { label: "Average Rating", value: 4.9, suffix: "/5", decimals: 1, helper: "Based on 250+ events" },
-  { label: "Happy Clients", value: 250, suffix: "+", decimals: 0, helper: "Dedicated concierge" },
-  { label: "Repeat Clients", value: 85, suffix: "%", decimals: 0, helper: "Across Sri Lanka" },
+  { label: "Average Rating", value: 4.9, suffix: "/5", decimals: 1, helper: "Across weddings, launches, and festivals", color: "text-amber-300", glowColor: "rgba(251, 191, 36, 0.18)" },
+  { label: "Happy Clients", value: 250, suffix: "+", decimals: 0, helper: "Trusted for milestone events", color: "text-rose-300", glowColor: "rgba(244, 63, 94, 0.18)" },
+  { label: "Repeat Clients", value: 85, suffix: "%", decimals: 0, helper: "Customers who book again", color: "text-violet-300", glowColor: "rgba(139, 92, 246, 0.18)" },
 ];
 
 const Feedback = () => {
@@ -141,18 +141,23 @@ const Feedback = () => {
   return (
     <section
       id="feedback"
-      className="relative py-20 px-4 md:px-10 text-gray-100"
+      className="relative px-4 py-20 text-gray-100 md:px-10"
       aria-label="Client testimonials and feedback"
     >
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-8 top-10 h-48 w-48 rounded-full bg-amber-300/10 blur-3xl" />
+        <div className="absolute bottom-0 right-10 h-56 w-56 rounded-full bg-orange-500/10 blur-3xl" />
+      </div>
+
       <div className="relative max-w-6xl mx-auto">
         <AnimatedSection variant="fadeUp" className="text-center mb-12">
-          <p className="uppercase text-xs tracking-[0.35em] text-pink-500">
+          <p className="text-xs uppercase tracking-[0.35em] text-amber-200">
             Customer Voices
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-white">
             What Sri Lanka Says About Us
           </h2>
-          <p className="text-sm md:text-base text-gray-400 mt-3 max-w-2xl mx-auto">
+          <p className="mx-auto mt-3 max-w-2xl text-sm text-stone-300 md:text-base">
             Real feedback from couples, corporate teams, and festival committees who trusted South Lanka Fireworks with their milestones.
           </p>
         </AnimatedSection>
@@ -161,11 +166,11 @@ const Feedback = () => {
           {statHighlights.map((stat, i) => (
             <GlowCard
               key={stat.label}
-              glowColor="rgba(236, 72, 153, 0.2)"
+              glowColor="rgba(251, 146, 60, 0.18)"
               delay={i * 0.1}
-              className="rounded-2xl border border-white/10 bg-white/5 p-5 text-center shadow-lg"
+              className="rounded-[1.75rem] border border-white/10 bg-[#17100d]/82 p-5 text-center shadow-lg backdrop-blur-sm"
             >
-              <p className="text-sm uppercase tracking-[0.35em] text-pink-500">
+              <p className={`text-sm uppercase tracking-[0.35em] ${stat.color}`}>
                 {stat.label}
               </p>
               <AnimatedCounter
@@ -175,7 +180,7 @@ const Feedback = () => {
                 duration={2}
                 className="text-3xl font-bold text-white mt-2 block"
               />
-              <p className="text-xs text-gray-400 mt-2">{stat.helper}</p>
+              <p className="mt-2 text-xs text-stone-400">{stat.helper}</p>
             </GlowCard>
           ))}
         </div>
@@ -186,17 +191,17 @@ const Feedback = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="rounded-3xl border border-white/10 bg-[#0c0a1a]/90 p-6 shadow-2xl"
+            className="rounded-[2rem] border border-white/10 bg-[#17100d]/86 p-6 shadow-2xl backdrop-blur-sm"
           >
             <h3 className="text-2xl font-semibold text-white mb-4">
               Share Your Experience
             </h3>
-            <p className="text-sm text-gray-400 mb-6">
+            <p className="mb-6 text-sm text-stone-300">
               We read every message. Your note helps event planners see what it is like to work with us.
             </p>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="feedback-name" className="text-xs uppercase tracking-[0.3em] text-pink-500">
+                <label htmlFor="feedback-name" className="text-xs uppercase tracking-[0.3em] text-amber-200">
                   Name
                 </label>
                 <input
@@ -207,12 +212,12 @@ const Feedback = () => {
                   onChange={handleChange}
                   required
                   autoComplete="name"
-                  className="mt-1 w-full rounded-xl border border-white/15 bg-white/5 text-gray-100 placeholder:text-gray-500 px-4 py-3 shadow-inner focus:ring-2 focus:ring-pink-400 focus:outline-none transition-all duration-300 focus:border-pink-500/50"
+                  className="mt-1 w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-gray-100 placeholder:text-gray-500 shadow-inner transition-all duration-300 focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-300"
                   placeholder="Your name"
                 />
               </div>
               <div>
-                <label htmlFor="feedback-email" className="text-xs uppercase tracking-[0.3em] text-pink-500">
+                <label htmlFor="feedback-email" className="text-xs uppercase tracking-[0.3em] text-amber-200">
                   Email
                 </label>
                 <input
@@ -223,7 +228,7 @@ const Feedback = () => {
                   onChange={handleChange}
                   required
                   autoComplete="email"
-                  className="mt-1 w-full rounded-xl border border-white/15 bg-white/5 text-gray-100 placeholder:text-gray-500 px-4 py-3 shadow-inner focus:ring-2 focus:ring-pink-400 focus:outline-none transition-all duration-300 focus:border-pink-500/50"
+                  className="mt-1 w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-gray-100 placeholder:text-gray-500 shadow-inner transition-all duration-300 focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-300"
                   placeholder="you@email.com"
                 />
               </div>
@@ -237,12 +242,12 @@ const Feedback = () => {
                     onChange={handleChange}
                     required
                     rows="4"
-                    className="rounded-xl border border-white/15 bg-white/5 text-gray-100 placeholder:text-gray-500 px-4 py-3 shadow-inner focus:ring-2 focus:ring-pink-400 focus:outline-none w-full transition-all duration-300 focus:border-pink-500/50"
+                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-gray-100 placeholder:text-gray-500 shadow-inner transition-all duration-300 focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-300"
                     placeholder="Tell us what stood out."
                   />
                 </div>
                 <div>
-                  <label className="text-xs uppercase tracking-[0.3em] text-pink-500 mb-2 block">
+                    <label className="mb-2 block text-xs uppercase tracking-[0.3em] text-amber-200">
                     Rating
                   </label>
                   <div className="flex gap-1 mt-1">
@@ -274,7 +279,7 @@ const Feedback = () => {
                 disabled={submitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full rounded-2xl bg-gradient-to-r from-pink-500 via-orange-400 to-yellow-300 py-3 text-center font-semibold text-white shadow-lg shadow-pink-500/40 transition disabled:opacity-60 disabled:cursor-not-allowed relative overflow-hidden"
+                className="relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-amber-400 via-rose-500 to-violet-500 py-3 text-center font-semibold text-white shadow-lg shadow-rose-500/25 transition disabled:cursor-not-allowed disabled:opacity-60"
               >
                 <span className="absolute inset-0 shimmer-effect" />
                 <span className="relative">{submitting ? "Sending…" : "Submit Feedback"}</span>
@@ -295,12 +300,11 @@ const Feedback = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -50 }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="rounded-2xl border border-white/10 bg-[#0c0a1a]/90 p-6 shadow-xl relative overflow-hidden"
+                  className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#17100d]/86 p-6 shadow-xl backdrop-blur-sm"
                 >
-                  {/* Decorative gradient corner */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-pink-500/10 to-transparent rounded-bl-full" aria-hidden="true" />
-                  <FaQuoteLeft className="text-pink-500 text-3xl mb-4 opacity-60" />
-                  <p className="text-gray-300 leading-relaxed text-lg italic">
+                  <div className="absolute top-0 right-0 h-32 w-32 rounded-bl-full bg-gradient-to-bl from-rose-400/10 via-violet-400/8 to-transparent" aria-hidden="true" />
+                  <FaQuoteLeft className="mb-4 text-3xl text-amber-200 opacity-60" />
+                  <p className="text-lg italic leading-relaxed text-stone-200">
                     "{combinedTestimonials[activeTestimonial]?.quote}"
                   </p>
                   <div className="mt-6 flex items-center justify-between">
@@ -308,7 +312,7 @@ const Feedback = () => {
                       <p className="font-semibold text-white text-lg">
                         {combinedTestimonials[activeTestimonial]?.name}
                       </p>
-                      <p className="text-xs uppercase tracking-[0.3em] text-pink-500">
+                      <p className="text-xs uppercase tracking-[0.3em] text-amber-200">
                         {combinedTestimonials[activeTestimonial]?.event}
                       </p>
                     </div>
@@ -332,10 +336,10 @@ const Feedback = () => {
                     aria-label={`Go to testimonial ${i + 1}`}
                     className={`rounded-full transition-all duration-300 ${
                       i === activeTestimonial
-                        ? "h-3 w-8 bg-gradient-to-r from-pink-500 to-amber-400"
-                        : "h-3 w-3 bg-white/20 hover:bg-white/40"
+                        ? "h-2.5 w-8 bg-gradient-to-r from-amber-400 to-orange-500"
+                        : "h-2.5 w-2.5 bg-white/20 hover:bg-white/40"
                     }`}
-                    style={{ minWidth: 44, minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    style={{ minWidth: 18, minHeight: 18 }}
                   />
                 ))}
               </div>
@@ -353,8 +357,8 @@ const Feedback = () => {
                   transition={{ delay: index * 0.05, duration: 0.3 }}
                   className={`text-left rounded-xl border p-3 transition-all duration-300 ${
                     index === activeTestimonial
-                      ? "border-pink-500/40 bg-pink-500/10"
-                      : "border-white/10 bg-white/5 hover:border-white/20"
+                      ? "border-amber-200/30 bg-amber-300/10"
+                      : "border-white/10 bg-[#17100d]/70 hover:border-white/20"
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -365,7 +369,7 @@ const Feedback = () => {
                       ))}
                     </div>
                   </div>
-                  <p className="text-xs text-gray-400 mt-1 line-clamp-1">{testimonial.quote}</p>
+                  <p className="mt-1 line-clamp-1 text-xs text-stone-400">{testimonial.quote}</p>
                 </motion.button>
               ))}
             </div>

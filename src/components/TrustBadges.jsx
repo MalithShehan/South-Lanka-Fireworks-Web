@@ -6,43 +6,49 @@ const trustItems = [
     Icon: Shield,
     title: "100% Safety Record",
     description: "Zero incidents across all 1000+ shows",
-    color: "text-green-500",
-    bgColor: "bg-green-50",
+    color: "text-emerald-300",
+    bgColor: "bg-emerald-400/12",
+    borderHover: "hover:border-emerald-400/30 hover:shadow-[0_20px_45px_rgba(16,185,129,0.15)]",
   },
   {
     Icon: Award,
     title: "Licensed & Certified",
     description: "Government-approved pyrotechnicians",
-    color: "text-amber-500",
-    bgColor: "bg-amber-50",
+    color: "text-blue-300",
+    bgColor: "bg-blue-400/12",
+    borderHover: "hover:border-blue-400/30 hover:shadow-[0_20px_45px_rgba(59,130,246,0.15)]",
   },
   {
     Icon: Users,
     title: "25+ Years Experience",
     description: "Trusted by Sri Lanka since 2005",
-    color: "text-blue-500",
-    bgColor: "bg-blue-50",
+    color: "text-amber-300",
+    bgColor: "bg-amber-400/12",
+    borderHover: "hover:border-amber-400/30 hover:shadow-[0_20px_45px_rgba(245,158,11,0.15)]",
   },
   {
     Icon: MapPin,
     title: "Nationwide Coverage",
     description: "Serving all districts across Sri Lanka",
-    color: "text-pink-500",
-    bgColor: "bg-pink-50",
+    color: "text-rose-300",
+    bgColor: "bg-rose-400/12",
+    borderHover: "hover:border-rose-400/30 hover:shadow-[0_20px_45px_rgba(244,63,94,0.15)]",
   },
   {
     Icon: Clock,
     title: "Quick Response",
     description: "Quotes within 2 hours guaranteed",
-    color: "text-indigo-500",
-    bgColor: "bg-indigo-50",
+    color: "text-cyan-300",
+    bgColor: "bg-cyan-400/12",
+    borderHover: "hover:border-cyan-400/30 hover:shadow-[0_20px_45px_rgba(6,182,212,0.15)]",
   },
   {
     Icon: Sparkles,
     title: "Custom Designs",
     description: "Tailored shows for every budget",
-    color: "text-purple-500",
-    bgColor: "bg-purple-50",
+    color: "text-violet-300",
+    bgColor: "bg-violet-400/12",
+    borderHover: "hover:border-violet-400/30 hover:shadow-[0_20px_45px_rgba(139,92,246,0.15)]",
   },
 ];
 
@@ -84,7 +90,7 @@ const TrustBadges = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
           }`}
         >
-          <p className="text-xs uppercase tracking-[0.4em] text-pink-500 mb-3">
+          <p className="text-xs uppercase tracking-[0.4em] text-amber-200 mb-3">
             Why Choose Us
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
@@ -97,10 +103,10 @@ const TrustBadges = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
-          {trustItems.map(({ Icon, title, description, color, bgColor }, index) => (
+          {trustItems.map(({ Icon, title, description, color, bgColor, borderHover }, index) => (
             <div
               key={title}
-              className={`group bg-[#0c0a1a]/90 border border-white/10 rounded-2xl p-3 sm:p-5 text-center shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${
+              className={`group rounded-2xl border border-white/10 bg-[#0d0818]/86 p-3 text-center shadow-lg shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 ${borderHover} sm:p-5 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
               }`}
               style={{
@@ -109,12 +115,12 @@ const TrustBadges = () => {
               }}
             >
               <div
-                className={`h-12 w-12 rounded-xl ${bgColor} flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}
+                className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl ${bgColor} ring-1 ring-white/5 transition-transform group-hover:scale-110`}
               >
                 <Icon size={22} className={color} />
               </div>
               <h3 className="text-sm font-semibold text-white mb-1">{title}</h3>
-              <p className="text-xs text-gray-400 leading-relaxed">{description}</p>
+              <p className="text-xs leading-relaxed text-stone-400">{description}</p>
             </div>
           ))}
         </div>
