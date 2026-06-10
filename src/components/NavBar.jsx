@@ -237,6 +237,7 @@ const Navbar = () => {
         <>
           {/* Overlay */}
           <div
+            onClick={closeNav}
             className="fixed inset-0 bg-black/60 z-40 lg:hidden animate-[fadeIn_0.3s_ease]"
           />
 
@@ -244,11 +245,14 @@ const Navbar = () => {
           <div
             ref={sidebarRef}
             className="fixed top-0 left-0 h-screen w-3/4 sm:w-2/5
-                       bg-gradient-to-b from-[#120b08]/98 via-[#17100d]/94 to-[#0d0907]/98
-                       text-white z-50 shadow-2xl flex flex-col animate-[slideInLeft_0.4s_ease]"
+                       text-white z-50 shadow-2xl flex flex-col backdrop-blur-xl border-r border-white/10
+                       animate-[slideInLeft_0.4s_ease]"
+            style={{
+              background: 'linear-gradient(180deg, rgba(18, 11, 8, 0.98) 0%, rgba(23, 16, 13, 0.96) 50%, rgba(13, 9, 7, 0.98) 100%)'
+            }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-5 border-b border-white/10">
+            <div className="flex items-center justify-between p-5 border-b border-white/10 gap-3">
               <Link
                 to="home"
                 smooth
@@ -258,30 +262,30 @@ const Navbar = () => {
                   updateHash("home");
                   closeNav();
                 }}
-                className="flex items-center gap-3 cursor-pointer"
+                className="flex items-center gap-2 cursor-pointer min-w-0 flex-1"
               >
                 <img
                   src={asset("/assets/SouthLankaFireworks.webp")}
                   alt="South Lanka Fireworks Logo"
-                  width={40}
-                  height={40}
-                  className="h-10 w-10 object-contain drop-shadow-md"
+                  width={36}
+                  height={36}
+                  className="h-9 w-9 object-contain drop-shadow-md flex-shrink-0"
                   loading="lazy"
                   decoding="async"
                 />
                 <span
                   className="bg-gradient-to-r from-yellow-300 via-orange-300 to-rose-300
-                                 bg-clip-text text-transparent font-bold font-kaushan text-lg tracking-wide"
+                                 bg-clip-text text-transparent font-bold font-kaushan text-base tracking-wide truncate"
                 >
-                  South Lanka Fireworks
+                  South Lanka
                 </span>
               </Link>
               <button
                 onClick={closeNav}
                 aria-label="Close menu"
-                className="text-gray-300 hover:text-white p-2 -mr-2 rounded-lg active:bg-white/10"
+                className="text-gray-300 hover:text-white p-2 rounded-lg active:bg-white/10 flex-shrink-0"
               >
-                <AiOutlineClose size={26} />
+                <AiOutlineClose size={24} />
               </button>
             </div>
 
