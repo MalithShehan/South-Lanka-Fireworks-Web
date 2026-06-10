@@ -182,7 +182,7 @@ const Home = () => {
         {/* Main heading with reveal animation */}
         <motion.h1
           variants={itemVariants}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight font-Kaushan bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-rose-400 to-violet-400 animate-gradient max-w-5xl"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight font-Kaushan max-w-5xl text-shine"
           style={{
             textShadow: '0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(251, 191, 36, 0.12)',
             filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4))'
@@ -191,7 +191,7 @@ const Home = () => {
           <span className="sr-only">South Lanka Fireworks - </span>
           We Create Magical
           <br />
-          <span className="relative inline-block bg-gradient-to-r from-yellow-300 via-rose-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
+          <span className="relative inline-block text-shine">
             Firework Experiences in Sri Lanka
             <motion.span
               className="absolute -bottom-2 left-0 right-0 h-[3px] bg-gradient-to-r from-yellow-400 via-rose-500 to-cyan-400 rounded-full shadow-[0_0_20px_rgba(236,72,153,0.6)]"
