@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import React, { useState, memo } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { motion } from "framer-motion";
 import { FaPlay, FaExternalLinkAlt } from "react-icons/fa";
 import { asset } from "@/lib/assetPath";
@@ -82,6 +82,13 @@ const INITIAL_VISIBLE_ITEMS = 3;
 const Portfolio = () => {
   const [hoveredId, setHoveredId] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsTouchDevice(window.matchMedia("(hover: none)").matches);
+    }
+  }, []);
 
   const displayedItems = isExpanded
     ? portfolioItems
@@ -134,7 +141,7 @@ const Portfolio = () => {
             onMouseLeave={() => setHoveredId(null)}
           >
             <div className="relative h-64 w-full overflow-hidden">
-              {hoveredId === item.id ? (
+              {hoveredId === item.id && !isTouchDevice ? (
                 <video
                   src={item.video}
                   autoPlay

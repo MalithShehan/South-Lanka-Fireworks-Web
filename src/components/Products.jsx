@@ -1,7 +1,7 @@
-﻿"use client";
+"use client";
 
 // Products.jsx
-import React, { useState, useMemo, memo } from "react";
+import React, { useState, useEffect, useMemo, memo } from "react";
 import items from "./Items"; // Your fireworks data
 import { asset } from "@/lib/assetPath";
 import {
@@ -180,6 +180,13 @@ const Products = () => {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsTouchDevice(window.matchMedia("(hover: none)").matches);
+    }
+  }, []);
 
   const enhancedItems = useMemo(() => items.map((item) => ({
     ...item,
@@ -777,7 +784,7 @@ const Products = () => {
                 onMouseLeave={() => setHoveredId(null)}
               >
                 <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/20">
-                  {hoveredId === item.id && item.video ? (
+                  {hoveredId === item.id && !isTouchDevice && item.video ? (
                     <video
                       src={item.video}
                       autoPlay
