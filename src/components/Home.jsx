@@ -81,8 +81,11 @@ const Home = () => {
   }, [prefersReducedMotion]);
 
   // Parallax scroll tracking — uses refs + rAF to avoid React re-renders
+  // DISABLED on mobile touch devices to prevent scroll jank
   useEffect(() => {
     if (prefersReducedMotion) return;
+    const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+    if (isMobile) return;
     let ticking = false;
     const handleScroll = () => {
       scrollYRef.current = window.scrollY;
@@ -108,7 +111,7 @@ const Home = () => {
   }, [prefersReducedMotion]);
 
   return (
-    <div id="home" className="relative min-h-screen w-full overflow-hidden" role="banner">
+    <div id="home" className="relative w-full overflow-hidden" style={{ minHeight: '100dvh' }} role="banner">
       
       <Helmet>
         <title>South Lanka Fireworks | Best Fireworks & Pyrotechnics in Sri Lanka</title>
