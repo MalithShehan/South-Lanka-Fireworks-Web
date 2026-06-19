@@ -22,6 +22,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Prevent mobile pull-to-refresh / overscroll bounce */
+  overscroll-behavior-y: none;
 }
 
 /* ─── Custom Scrollbar ─── */
@@ -42,6 +44,7 @@ html {
 body {
   font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
+  min-height: 100dvh;
   background-color: var(--site-bg);
   background-image:
     radial-gradient(circle at 14% 16%, rgba(251, 191, 36, 0.18), transparent 28%),
@@ -50,9 +53,13 @@ body {
     radial-gradient(circle at 40% 90%, rgba(6, 182, 212, 0.14), transparent 24%),
     radial-gradient(circle at 20% 60%, rgba(59, 130, 246, 0.10), transparent 28%),
     linear-gradient(180deg, #080410 0%, #0a0612 18%, #12081a 54%, #08040e 100%);
-  background-attachment: fixed;
+  /* REMOVED background-attachment: fixed — causes severe mobile scroll jank/refresh */
   color: #f5f5f4;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+  /* Prevent accidental text-selection during scroll on mobile */
+  -webkit-tap-highlight-color: transparent;
 }
 
 body::before {
@@ -329,12 +336,18 @@ p {
   65%      { transform: translate(60px, -40px) scale(0.9); opacity: 0.5; }
 }
 
-/* Reduce orb sizes on mobile */
+/* Reduce orb sizes on mobile and DISABLE animations to prevent scroll jank */
 @media (max-width: 640px) {
-  .bg-orb--1 { width: 280px; height: 280px; }
-  .bg-orb--2 { width: 240px; height: 240px; }
-  .bg-orb--3 { width: 200px; height: 200px; }
-  .bg-orb--4 { width: 180px; height: 180px; }
+  .bg-orb--1 { width: 200px; height: 200px; animation: none !important; opacity: 0.35; }
+  .bg-orb--2 { width: 180px; height: 180px; animation: none !important; opacity: 0.3; }
+  .bg-orb--3 { width: 160px; height: 160px; animation: none !important; opacity: 0.25; }
+  .bg-orb--4 { width: 140px; height: 140px; animation: none !important; opacity: 0.2; }
+  
+  /* Disable sparkle particles on mobile — they cause GPU compositing overhead */
+  .bg-sparkle { display: none !important; }
+  
+  /* Disable animated background sweep on mobile */
+  .animated-bg::after { animation: none !important; opacity: 0; }
 }
 
 /* Sparkle particles — colorful */

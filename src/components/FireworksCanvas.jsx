@@ -20,6 +20,7 @@ const COLORS = [
 ];
 
 const MAX_PARTICLES = 500;
+const MAX_PARTICLES_MOBILE = 200;
 const MAX_ROCKETS = 5;
 
 class Particle {
@@ -58,9 +59,9 @@ class Particle {
 }
 
 class Rocket {
-  constructor(x, targetY, color) {
+  constructor(x, targetY, color, screenHeight) {
     this.x = x;
-    this.y = window.innerHeight + 10;
+    this.y = (screenHeight || window.innerHeight) + 10;
     this.targetY = targetY;
     this.color = color;
     this.speed = 3 + Math.random() * 3;
@@ -191,6 +192,9 @@ const FireworksCanvas = () => {
 
     let width = window.innerWidth;
     let height = window.innerHeight;
+
+    const particleCap = width < 768 ? MAX_PARTICLES_MOBILE : MAX_PARTICLES;
+
     canvas.width = width;
     canvas.height = height;
 
@@ -220,7 +224,7 @@ const FireworksCanvas = () => {
       const x = width * 0.15 + Math.random() * width * 0.7;
       const targetY = height * 0.1 + Math.random() * height * 0.35;
       const color = COLORS[Math.floor(Math.random() * COLORS.length)];
-      rockets.push(new Rocket(x, targetY, color));
+      rockets.push(new Rocket(x, targetY, color, height));
     };
 
     const animate = (timestamp) => {
@@ -254,7 +258,7 @@ const FireworksCanvas = () => {
         }
       }
       // Hard cap: drop oldest if over limit
-      while (particles.length > MAX_PARTICLES) particles.shift();
+      while (particles.length > particleCap) particles.shift();
 
       ctx.globalAlpha = 1; // Reset for next frame
 

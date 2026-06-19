@@ -120,9 +120,26 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent body scroll when mobile menu is open
+  // Prevent body scroll when mobile menu is open — save/restore scroll position
   useEffect(() => {
-    document.body.style.overflow = navOpen ? "hidden" : "";
+    if (navOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.overflow = 'hidden';
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.overflow = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+      }
+    }
   }, [navOpen]);
 
   // Close sidebar on clicking outside
@@ -224,9 +241,10 @@ const Navbar = () => {
           {/* Mobile Toggle */}
           <button
             onClick={toggleNav}
-            className="lg:hidden text-gray-200 p-2 focus:outline-none rounded-full border border-white/20 bg-white/5"
+            className="lg:hidden text-gray-200 p-2.5 focus:outline-none rounded-full border border-white/20 bg-white/5 active:bg-white/15 min-w-[44px] min-h-[44px] flex items-center justify-center"
             aria-label="Toggle menu"
             aria-expanded={navOpen}
+            style={{ touchAction: 'manipulation' }}
           >
             <AiOutlineMenu size={24} />
           </button>
