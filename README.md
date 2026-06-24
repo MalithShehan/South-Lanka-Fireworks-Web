@@ -14,7 +14,8 @@ Built with **React, Vite, and Tailwind CSS**, the platform delivers a fast, inte
 
 - 🎇 **Dynamic Product Showcase** – Display fireworks with images, descriptions, and video previews.  
 - 🎁 **Custom Package Builder** – Select items, sizes, and quantities with automatic total calculation.  
-- 📱 **Responsive Design** – Optimized for mobile, tablet, and desktop devices.  
+- 💎 **Premium Glassmorphism Style** – Translucent card containers with mouse-tracking glow spotlights, allowing background particles to show through.  
+- 📱 **Cross-Platform Readability** – Optimizations for iOS WebKit/Safari to resolve gradient text-clip and drop-shadow styling conflicts.  
 - 🗂️ **Category-Based Organization** – Products grouped into clear, structured categories.  
 - ✨ **Smooth Animations** – Enhanced interactivity using Framer Motion.  
 
