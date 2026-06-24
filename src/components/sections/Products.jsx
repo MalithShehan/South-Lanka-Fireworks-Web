@@ -1,7 +1,7 @@
 // Products.jsx
 import React, { useState, useMemo, memo } from "react";
-import items from "./Items"; // Your fireworks data
-import { asset } from "../lib/assetPath";
+import items from "../../data/items.js"; // Your fireworks data
+import { asset } from "../../lib/assetPath";
 import {
   ShoppingCart,
   Sparkles,

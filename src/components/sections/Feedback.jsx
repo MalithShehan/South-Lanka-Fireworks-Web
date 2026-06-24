@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaQuoteLeft, FaStar } from "react-icons/fa";
-import AnimatedSection from "./AnimatedSection";
-import AnimatedCounter from "./AnimatedCounter";
-import GlowCard from "./GlowCard";
+import AnimatedSection from "../ui/AnimatedSection";
+import AnimatedCounter from "../ui/AnimatedCounter";
+import GlowCard from "../ui/GlowCard";
 
 const defaultTestimonials = [
   {
@@ -55,7 +55,7 @@ const Feedback = () => {
     (async () => {
       try {
         const { collection, query, orderBy, onSnapshot } = await import("firebase/firestore");
-        const { getDb } = await import("../lib/firebase");
+        const { getDb } = await import("../../lib/firebase");
         const db = await getDb();
         if (cancelled) return;
         const feedbackRef = collection(db, "feedbackEntries");
@@ -99,7 +99,7 @@ const Feedback = () => {
     setFeedbackError("");
     try {
       const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
-      const { getDb } = await import("../lib/firebase");
+      const { getDb } = await import("../../lib/firebase");
       const db = await getDb();
       await addDoc(collection(db, "feedbackEntries"), {
         name: formData.name.trim(),

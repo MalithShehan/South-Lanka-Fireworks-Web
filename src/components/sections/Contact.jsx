@@ -2,8 +2,8 @@ import { useState, useRef, useEffect, memo } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { FaWhatsapp, FaFacebook, FaTiktok, FaInstagram } from "react-icons/fa";
-import AnimatedSection from "./AnimatedSection";
-import GlowCard from "./GlowCard";
+import AnimatedSection from "../ui/AnimatedSection";
+import GlowCard from "../ui/GlowCard";
 
 const LazyIframe = ({ src, title, ...props }) => {
   const [isVisible, setIsVisible] = useState(false);

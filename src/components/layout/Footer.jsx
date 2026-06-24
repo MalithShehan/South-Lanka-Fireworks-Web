@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Link } from "react-scroll";
 import { motion } from "framer-motion";
-import { asset } from "../lib/assetPath";
+import { asset } from "../../lib/assetPath";
 import {
   AiFillFacebook,
   AiFillInstagram,
@@ -9,7 +9,7 @@ import {
 import { SiTiktok } from "react-icons/si";
 import { FaWhatsapp } from "react-icons/fa";
 import { MapPin, Phone, Mail, Clock, Shield, Award, Sparkles } from "lucide-react";
-import AnimatedSection from "./AnimatedSection";
+import AnimatedSection from "../ui/AnimatedSection";
 
 const FOOTER_LINKS = [
   { label: "Home", to: "home" },

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { FiPhoneCall, FiMessageCircle } from "react-icons/fi";
 import { Link } from "react-scroll";
-import { asset } from "../lib/assetPath";
+import { asset } from "../../lib/assetPath";
 
 const MENU_ITEMS = [
   { name: "Home", to: "home", helper: "Signature hero + CTA" },

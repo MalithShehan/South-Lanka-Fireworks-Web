@@ -1,7 +1,7 @@
 import React, { useState, memo } from "react";
 import { motion } from "framer-motion";
 import { FaPlay, FaExternalLinkAlt } from "react-icons/fa";
-import { asset } from "../lib/assetPath";
+import { asset } from "../../lib/assetPath";
 
 const portfolioItems = [
   {

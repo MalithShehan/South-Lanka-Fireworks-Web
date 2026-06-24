@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { asset } from "../lib/assetPath";
-import TypewriterText from "./TypewriterText";
-import MagneticButton from "./MagneticButton";
+import { asset } from "../../lib/assetPath";
+import TypewriterText from "../ui/TypewriterText";
+import MagneticButton from "../ui/MagneticButton";
 import { Sparkles, ChevronDown } from "lucide-react";
 
 const HERO_MESSAGES = [

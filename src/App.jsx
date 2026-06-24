@@ -1,19 +1,19 @@
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
-import Navbar from "./components/NavBar.jsx";
-import Home from "./components/Home.jsx";
-import FloatingButtons from "./components/FloatingButtons.jsx";
-import LoadingSpinner from "./components/LoadingSpinner.jsx";
+import Navbar from "./components/layout/NavBar.jsx";
+import Home from "./components/sections/Home.jsx";
+import FloatingButtons from "./components/layout/FloatingButtons.jsx";
+import LoadingSpinner from "./components/ui/LoadingSpinner.jsx";
 
-const FireworksCanvas = lazy(() => import("./components/FireworksCanvas.jsx"));
-const TrustBadges = lazy(() => import("./components/TrustBadges.jsx"));
-const About = lazy(() => import("./components/About.jsx"));
-const Services = lazy(() => import("./components/Services.jsx"));
-const Products = lazy(() => import("./components/Products.jsx"));
-const Feedback = lazy(() => import("./components/Feedback.jsx"));
-const Portfolio = lazy(() => import("./components/Portfolio.jsx"));
-const Contact = lazy(() => import("./components/Contact.jsx"));
-const FAQ = lazy(() => import("./components/FAQ.jsx"));
-const Footer = lazy(() => import("./components/Footer.jsx"));
+const FireworksCanvas = lazy(() => import("./components/ui/FireworksCanvas.jsx"));
+const TrustBadges = lazy(() => import("./components/sections/TrustBadges.jsx"));
+const About = lazy(() => import("./components/sections/About.jsx"));
+const Services = lazy(() => import("./components/sections/Services.jsx"));
+const Products = lazy(() => import("./components/sections/Products.jsx"));
+const Feedback = lazy(() => import("./components/sections/Feedback.jsx"));
+const Portfolio = lazy(() => import("./components/sections/Portfolio.jsx"));
+const Contact = lazy(() => import("./components/sections/Contact.jsx"));
+const FAQ = lazy(() => import("./components/sections/FAQ.jsx"));
+const Footer = lazy(() => import("./components/layout/Footer.jsx"));
 
 /**
  * Renders children only when close to the viewport (800px lead).

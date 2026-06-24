@@ -2,8 +2,8 @@ import React, { memo } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { FaFire, FaGlobe, FaRocket, FaStar } from "react-icons/fa";
-import AnimatedSection from "./AnimatedSection";
-import GlowCard from "./GlowCard";
+import AnimatedSection from "../ui/AnimatedSection";
+import GlowCard from "../ui/GlowCard";
 
 const serviceBadges = [
   { text: "Tailored packages", border: "border-amber-400/20 text-amber-300 bg-amber-400/5 hover:border-amber-400/40 hover:bg-amber-400/10 hover:shadow-[0_0_12px_rgba(251,191,36,0.15)]" },

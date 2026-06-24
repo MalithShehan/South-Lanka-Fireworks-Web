@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import { AiFillFacebook, AiFillInstagram } from "react-icons/ai";
 import { SiTiktok } from "react-icons/si";
 import { CheckCircle2, MapPin, ShieldCheck, Sparkles } from "lucide-react";
-import AnimatedCounter from "./AnimatedCounter";
-import AnimatedSection from "./AnimatedSection";
-import GlowCard from "./GlowCard";
+import AnimatedCounter from "../ui/AnimatedCounter";
+import AnimatedSection from "../ui/AnimatedSection";
+import GlowCard from "../ui/GlowCard";
 
 const highlights = [
   {
