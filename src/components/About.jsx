@@ -187,7 +187,7 @@ const About = () => {
                   aria-label={social.label}
                   whileHover={{ y: -4, scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`inline-flex items-center justify-center rounded-2xl border border-white/10 bg-[#1a110d]/70 p-3 transition-all duration-300 ${social.hoverClass}`}
+                  className={`inline-flex items-center justify-center rounded-2xl border border-white/10 bg-[#1a110d]/50 p-3 transition-all duration-300 ${social.hoverClass}`}
                 >
                   <social.Icon />
                 </motion.a>

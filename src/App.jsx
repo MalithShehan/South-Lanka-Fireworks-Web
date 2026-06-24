@@ -82,11 +82,8 @@ function DeferredSection({ children, minHeight = 200, anchorId }) {
 export default function App() {
     const [showCanvas, setShowCanvas] = useState(false);
 
-    // Delay decorative canvas until after first paint
-    // Skip entirely on mobile for performance
+    // Delay decorative canvas until after first paint for performance
     useEffect(() => {
-        const isMobile = window.innerWidth < 768 || ('ontouchstart' in window && window.innerWidth < 1024);
-        if (isMobile) return; // Don't load canvas on mobile at all
         const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 2000));
         const id = idle(() => setShowCanvas(true), { timeout: 3000 });
         return () => {

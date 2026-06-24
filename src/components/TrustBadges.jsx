@@ -106,7 +106,7 @@ const TrustBadges = () => {
           {trustItems.map(({ Icon, title, description, color, bgColor, borderHover }, index) => (
             <div
               key={title}
-              className={`group rounded-2xl border border-white/10 bg-[#0d0818]/86 p-3 text-center shadow-lg shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 ${borderHover} sm:p-5 ${
+              className={`group rounded-2xl border border-white/10 bg-[#0d0818]/60 p-3 text-center shadow-lg shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 ${borderHover} sm:p-5 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
               }`}
               style={{

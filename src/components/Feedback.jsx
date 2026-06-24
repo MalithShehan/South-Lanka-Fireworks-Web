@@ -168,7 +168,7 @@ const Feedback = () => {
               key={stat.label}
               glowColor="rgba(251, 146, 60, 0.18)"
               delay={i * 0.1}
-              className="rounded-[1.75rem] border border-white/10 bg-[#17100d]/82 p-5 text-center shadow-lg backdrop-blur-sm"
+              className="rounded-[1.75rem] border border-white/10 bg-[#17100d]/60 p-5 text-center shadow-lg backdrop-blur-sm"
             >
               <p className={`text-sm uppercase tracking-[0.35em] ${stat.color}`}>
                 {stat.label}
@@ -191,7 +191,7 @@ const Feedback = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="rounded-[2rem] border border-white/10 bg-[#17100d]/86 p-6 shadow-2xl backdrop-blur-sm"
+            className="rounded-[2rem] border border-white/10 bg-[#17100d]/60 p-6 shadow-2xl backdrop-blur-sm"
           >
             <h3 className="text-2xl font-semibold text-white mb-4">
               Share Your Experience
@@ -300,7 +300,7 @@ const Feedback = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -50 }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#17100d]/86 p-6 shadow-xl backdrop-blur-sm"
+                  className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#17100d]/60 p-6 shadow-xl backdrop-blur-sm"
                 >
                   <div className="absolute top-0 right-0 h-32 w-32 rounded-bl-full bg-gradient-to-bl from-rose-400/10 via-violet-400/8 to-transparent" aria-hidden="true" />
                   <FaQuoteLeft className="mb-4 text-3xl text-amber-200 opacity-60" />
@@ -358,7 +358,7 @@ const Feedback = () => {
                   className={`text-left rounded-xl border p-3 transition-all duration-300 ${
                     index === activeTestimonial
                       ? "border-amber-200/30 bg-amber-300/10"
-                      : "border-white/10 bg-[#17100d]/70 hover:border-white/20"
+                      : "border-white/10 bg-[#17100d]/50 hover:border-white/20"
                   }`}
                 >
                   <div className="flex items-center justify-between">

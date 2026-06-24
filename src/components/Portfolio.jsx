@@ -110,7 +110,7 @@ const Portfolio = () => {
         {highlightStats.map((stat) => (
           <div
             key={stat.label}
-            className={`rounded-2xl border ${stat.border} bg-[#0d0818]/88 px-4 py-3 text-center shadow-lg shadow-black/20 sm:text-left`}
+            className={`rounded-2xl border ${stat.border} bg-[#0d0818]/60 px-4 py-3 text-center shadow-lg shadow-black/20 sm:text-left`}
           >
             <p className={`text-sm ${stat.color}`}>{stat.label}</p>
             <p className="text-2xl sm:text-3xl font-bold text-white mt-1">{stat.value}</p>
@@ -127,7 +127,7 @@ const Portfolio = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.2 }}
-            className="group overflow-hidden rounded-3xl border border-amber-200/10 bg-[#17100d]/88 shadow-xl shadow-black/20 transition-all hover:border-amber-200/20 hover:shadow-[0_24px_60px_rgba(249,115,22,0.16)]"
+            className="group overflow-hidden rounded-3xl border border-amber-200/10 bg-[#17100d]/60 shadow-xl shadow-black/20 transition-all hover:border-amber-200/20 hover:shadow-[0_24px_60px_rgba(249,115,22,0.16)]"
             onMouseEnter={() => setHoveredId(item.id)}
             onMouseLeave={() => setHoveredId(null)}
           >

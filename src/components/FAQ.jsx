@@ -57,7 +57,7 @@ const faqData = [
 ];
 
 const FAQItem = ({ faq, isOpen, onToggle, colorClass }) => (
-  <div className={`overflow-hidden rounded-[1.6rem] border border-white/10 border-l-[3px] ${colorClass} bg-[#0d0818]/86 shadow-md backdrop-blur-sm`}>
+  <div className={`overflow-hidden rounded-[1.6rem] border border-white/10 border-l-[3px] ${colorClass} bg-[#0d0818]/60 shadow-md backdrop-blur-sm`}>
     <button
       onClick={onToggle}
       className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition hover:bg-white/5"
@@ -141,7 +141,7 @@ const FAQ = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <div className="inline-flex flex-col items-center gap-4 rounded-[1.8rem] border border-white/10 bg-[#17100d]/86 px-4 py-6 shadow-lg backdrop-blur-sm sm:flex-row sm:px-8">
+          <div className="inline-flex flex-col items-center gap-4 rounded-[1.8rem] border border-white/10 bg-[#17100d]/60 px-4 py-6 shadow-lg backdrop-blur-sm sm:flex-row sm:px-8">
             <div className="text-center sm:text-left">
               <p className="font-semibold text-white">Still have questions?</p>
               <p className="text-sm text-stone-300">We're here to help you plan the perfect show.</p>

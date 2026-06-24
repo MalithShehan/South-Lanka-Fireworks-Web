@@ -172,39 +172,41 @@ const Home = () => {
         </motion.div>
 
         {/* Typewriter subtitle */}
-        <motion.div variants={itemVariants} className="mb-6 font-Kaushan min-h-[40px]">
+        <motion.div
+          variants={itemVariants}
+          className="mb-6 font-Kaushan min-h-[40px]"
+          style={{ filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.6))" }}
+        >
           <TypewriterText
             texts={HERO_MESSAGES}
             typingSpeed={70}
             deletingSpeed={35}
             pauseTime={2200}
-            className="text-2xl sm:text-3xl font-semibold bg-gradient-to-r from-amber-200 via-orange-300 to-rose-400 text-transparent bg-clip-text drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] opacity-90"
+            className="text-2xl sm:text-3xl font-semibold bg-gradient-to-r from-amber-200 via-orange-300 to-rose-400 text-transparent bg-clip-text opacity-90"
           />
         </motion.div>
 
         {/* Main heading with reveal animation */}
-        <motion.h1
-          variants={itemVariants}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight font-Kaushan max-w-5xl text-shine"
-          style={{
-            textShadow: '0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(251, 191, 36, 0.12)',
-            filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4))'
-          }}
-        >
-          <span className="sr-only">South Lanka Fireworks - </span>
-          We Create Magical
-          <br />
-          <span className="relative inline-block text-shine">
-            Firework Experiences in Sri Lanka
-            <motion.span
-              className="absolute -bottom-2 left-0 right-0 h-[3px] bg-gradient-to-r from-yellow-400 via-rose-500 to-cyan-400 rounded-full shadow-[0_0_20px_rgba(236,72,153,0.6)]"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ delay: 1.2, duration: 0.8, ease: "easeOut" }}
-              style={{ transformOrigin: "left" }}
-            />
-          </span>
-        </motion.h1>
+        <div style={{ filter: "drop-shadow(0 4px 12px rgba(0, 0, 0, 0.85))" }}>
+          <motion.h1
+            variants={itemVariants}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight font-Kaushan max-w-5xl text-white"
+          >
+            <span className="sr-only">South Lanka Fireworks - </span>
+            <span className="text-shine">We Create Magical</span>
+            <br />
+            <span className="relative inline-block text-shine">
+              Firework Experiences in Sri Lanka
+              <motion.span
+                className="absolute -bottom-2 left-0 right-0 h-[3px] bg-gradient-to-r from-yellow-400 via-rose-500 to-cyan-400 rounded-full shadow-[0_0_20px_rgba(236,72,153,0.6)]"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 1.2, duration: 0.8, ease: "easeOut" }}
+                style={{ transformOrigin: "left" }}
+              />
+            </span>
+          </motion.h1>
+        </div>
 
         <motion.p
           variants={itemVariants}

@@ -634,7 +634,7 @@ const Products = () => {
       {/* Floating Cart */}
       {cartCount > 0 && (
         <div
-          className="fixed top-20 right-3 z-50 flex cursor-pointer items-center gap-2 rounded-full border border-amber-200/20 bg-[#1a110d]/95 px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.3)] sm:right-5 sm:px-4"
+          className="fixed top-20 right-3 z-50 flex cursor-pointer items-center gap-2 rounded-full border border-amber-200/20 bg-[#1a110d]/75 px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.3)] sm:right-5 sm:px-4"
           onClick={() => {
             const section = document.getElementById("custom-package");
             if (section) section.scrollIntoView({ behavior: "smooth" });
@@ -670,7 +670,7 @@ const Products = () => {
 
       {/* Hero */}
       <div className="max-w-6xl mx-auto mb-16">
-        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#19110d]/84 px-4 py-8 shadow-2xl sm:rounded-[32px] sm:px-8 sm:py-10">
+        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#19110d]/60 px-4 py-8 shadow-2xl sm:rounded-[32px] sm:px-8 sm:py-10">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(251,191,36,0.14),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(249,115,22,0.12),transparent_28%)]" />
           <div className="relative inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-amber-200 mb-4">
             <Sparkles size={14} />
@@ -749,7 +749,7 @@ const Products = () => {
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
                   isActive
                     ? "border-transparent bg-gradient-to-r from-amber-400 to-orange-500 text-[#1a110d] shadow-lg shadow-orange-500/20"
-                    : "border-white/10 bg-[#1a110d]/70 text-stone-200 hover:border-amber-200/30 hover:bg-white/5"
+                    : "border-white/10 bg-[#1a110d]/50 text-stone-200 hover:border-amber-200/30 hover:bg-white/5"
                 }`}
               >
                 <Icon size={16} />
@@ -764,7 +764,7 @@ const Products = () => {
             return (
               <motion.div
                 key={item.id}
-                className={`group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#150f0c]/92 p-5 shadow-xl transition duration-300 hover:-translate-y-1 hover:border-amber-200/18 hover:shadow-2xl ${
+                className={`group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#150f0c]/60 p-5 shadow-xl transition duration-300 hover:-translate-y-1 hover:border-amber-200/18 hover:shadow-2xl ${
                   item.hoverColor || ""
                 }`}
                 variants={productVariants}
@@ -855,7 +855,7 @@ const Products = () => {
 
       {/* Custom Package */}
       <div
-        className="max-w-6xl mx-auto mb-16 rounded-2xl border border-white/10 bg-[#19110d]/86 p-4 shadow-2xl sm:rounded-[32px] sm:p-6 md:p-8"
+        className="max-w-6xl mx-auto mb-16 rounded-2xl border border-white/10 bg-[#19110d]/60 p-4 shadow-2xl sm:rounded-[32px] sm:p-6 md:p-8"
         id="custom-package"
       >
         <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
@@ -995,7 +995,7 @@ const Products = () => {
             return (
               <motion.div
                 key={pack.id}
-                className={`relative overflow-hidden rounded-[2rem] border ${theme.border} bg-[#19110d]/88 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl`}
+                className={`relative overflow-hidden rounded-[2rem] border ${theme.border} bg-[#19110d]/60 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl`}
                 variants={productVariants}
                 initial="hidden"
                 whileInView="visible"
