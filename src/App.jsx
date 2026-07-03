@@ -19,15 +19,19 @@ const Footer = lazy(() => import("./components/layout/Footer.jsx"));
  * Renders children only when close to the viewport (800px lead).
  * Keeps the placeholder height so layout doesn't shift.
  */
-function DeferredSection({ children, minHeight = 200, anchorId }) {
+function DeferredSection({ children, minHeight = 200, anchorId, subAnchorIds = [] }) {
   const ref = useRef(null);
-    const [visible, setVisible] = useState(() => {
-        if (typeof window === "undefined") return false;
-        return Boolean(window.location.hash) || Boolean(anchorId && window.location.hash?.slice(1) === anchorId);
-    });
+
+  // Become visible immediately if the current hash matches this section or any of its sub-anchors
+  const [visible, setVisible] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const hash = window.location.hash?.slice(1);
+    if (!hash) return false;
+    return hash === anchorId || subAnchorIds.includes(hash);
+  });
 
   useEffect(() => {
-        if (visible) return;
+    if (visible) return;
 
     const el = ref.current;
     if (!el) return;
@@ -42,34 +46,42 @@ function DeferredSection({ children, minHeight = 200, anchorId }) {
     );
     io.observe(el);
     return () => io.disconnect();
-    }, [anchorId, visible]);
+  }, [anchorId, subAnchorIds, visible]);
 
-    useEffect(() => {
-        if (!visible || typeof window === "undefined") return;
-        if (!anchorId || window.location.hash?.slice(1) !== anchorId) return;
+  // After becoming visible, scroll to whichever anchor is in the hash
+  useEffect(() => {
+    if (!visible || typeof window === "undefined") return;
+    const hash = window.location.hash?.slice(1);
+    if (!hash) return;
+    // Only handle if this section owns the hash (primary or sub-anchor)
+    const ownsHash = hash === anchorId || subAnchorIds.includes(hash);
+    if (!ownsHash) return;
 
-        const timeoutId = window.setTimeout(() => {
-            const el = ref.current;
-            if (!el) return;
+    const timeoutId = window.setTimeout(() => {
+      // Try the exact element first (sub-anchor), fall back to the section container
+      const target =
+        document.getElementById(hash) ||
+        (hash === anchorId ? ref.current : null);
+      if (!target) return;
 
-            const yOffset = -80;
-            const yPosition = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      const yOffset = -80;
+      const yPosition = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-            window.scrollTo({
-                top: Math.max(yPosition, 0),
-                behavior: "auto",
-            });
-        }, 120);
+      window.scrollTo({
+        top: Math.max(yPosition, 0),
+        behavior: "smooth",
+      });
+    }, 150);
 
-        return () => window.clearTimeout(timeoutId);
-    }, [anchorId, visible]);
+    return () => window.clearTimeout(timeoutId);
+  }, [anchorId, subAnchorIds, visible]);
 
   return (
-        <div
-            ref={ref}
-            data-section-anchor={anchorId}
-            style={{ minHeight: visible ? 'auto' : minHeight }}
-        >
+    <div
+      ref={ref}
+      data-section-anchor={anchorId}
+      style={{ minHeight: visible ? 'auto' : minHeight }}
+    >
       {visible ? (
         <Suspense fallback={<LoadingSpinner />}>
           {children}
@@ -101,9 +113,11 @@ export default function App() {
             const hash = window.location.hash?.slice(1);
             if (!hash) return true;
 
+            // Try direct ID match first, then data-section-anchor attribute
             const element =
                 document.getElementById(hash) ||
                 document.querySelector(`[data-section-anchor="${hash}"]`);
+
             if (!element) return false;
 
             const yOffset = -80;
@@ -122,13 +136,13 @@ export default function App() {
             window.clearTimeout(retryTimeout);
 
             let attempts = 0;
-            const maxAttempts = 10;
+            const maxAttempts = 20;
 
             const tryScroll = () => {
                 attempts += 1;
                 const done = scrollToHashTarget();
                 if (!done && attempts < maxAttempts) {
-                    retryTimeout = window.setTimeout(tryScroll, 150);
+                    retryTimeout = window.setTimeout(tryScroll, 200);
                 }
             };
 
@@ -187,7 +201,7 @@ export default function App() {
                 <DeferredSection minHeight={400} anchorId="services">
                     <Services />
                 </DeferredSection>
-                <DeferredSection minHeight={600} anchorId="products">
+                <DeferredSection minHeight={600} anchorId="products" subAnchorIds={["packages", "custom-package"]}>
                     <Products />
                 </DeferredSection>
                 <DeferredSection minHeight={400} anchorId="portfolio">

@@ -40,6 +40,24 @@ const Navbar = () => {
 
   const toggleNav = () => setNavOpen((prev) => !prev);
   const closeNav = () => setNavOpen(false);
+
+  // Scroll to a section by ID with retry fallback for lazy-loaded sections.
+  // react-scroll handles most cases, but if the element isn't in the DOM yet
+  // (e.g., Products/Packages are deferred), we update the hash so App.jsx's
+  // hashchange listener can retry with increasing patience.
+  const handleNavClick = (to) => {
+    updateHash(to);
+    // Give react-scroll a moment; if the element still isn't found, the
+    // hashchange event we already fired will trigger the App.jsx retry loop.
+    setTimeout(() => {
+      const el = document.getElementById(to);
+      if (!el) {
+        // Force hashchange so App.jsx retry loop kicks in
+        window.dispatchEvent(new HashChangeEvent("hashchange"));
+      }
+    }, 100);
+  };
+
   const updateHash = (target) => {
     if (typeof window === "undefined") return;
     window.history.replaceState(null, "", `#${target}`);
@@ -217,7 +235,7 @@ const Navbar = () => {
                     smooth
                     offset={-80}
                     duration={500}
-                    onClick={() => updateHash(to)}
+                    onClick={() => handleNavClick(to)}
                     className="group relative px-2 py-1 tracking-[0.08em] text-white hover:text-white transition"
                   >
                     <span className="relative z-10">{name}</span>
@@ -343,7 +361,7 @@ const Navbar = () => {
                   <Link
                     to={to}
                     onClick={() => {
-                      updateHash(to);
+                      handleNavClick(to);
                       closeNav();
                     }}
                     smooth
